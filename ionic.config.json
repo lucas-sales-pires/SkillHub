@@ -1,0 +1,7 @@
+{
+  "name": "Skillhub",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
