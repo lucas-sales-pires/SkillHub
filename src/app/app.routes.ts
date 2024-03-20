@@ -9,5 +9,10 @@ export const routes: Routes = [
     path: 'principal',
     loadComponent: () => import('./pages/principal/principal.page').then( m => m.PrincipalPage)
   },
+  {
+    path: 'quiz',
+    loadComponent: () => import('./pages/quiz/quiz.page').then( m => m.QuizPage)
+  },
+
 
 ];
