@@ -13,6 +13,10 @@ export const routes: Routes = [
     path: 'quiz',
     loadComponent: () => import('./pages/quiz/quiz.page').then( m => m.QuizPage)
   },
+  {
+    path: 'login',
+    loadComponent: () => import('./pages/login/login.page').then( m => m.LoginPage)
+  },
 
 
 ];

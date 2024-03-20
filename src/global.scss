@@ -38,19 +38,7 @@
   width: 100px;
   height: 100px;
 }
-
-ion-menu-button {
-  color: black;
-}
-ion-toolbar {
-  --background: white;
-  color: black;
-}
-ion-title {
-  color: black;
-}
-ion-content {
-  --background: white;
-  color: black;
+ion-item::part(native) {
+  background-color: white;
 }
 
