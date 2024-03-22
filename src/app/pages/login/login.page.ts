@@ -4,8 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import {NavbarComponent } from '../../components/navbar/navbar.component';
 import { addIcons } from 'ionicons';
-import { eye, lockClosed } from 'ionicons/icons';
-import { IonInput } from '@ionic/angular';
+import { eye, lockClosed,lockClosedOutline, eyeOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-login',
@@ -18,9 +17,9 @@ export class LoginPage implements OnInit {
 
   constructor() {
 
-    addIcons({ eye,lockClosed });
+    addIcons({ eye,lockClosed,lockClosedOutline, eyeOutline });
    }
-   mudarVisibilidade(verificar: IonInput) {
+   mudarVisibilidade(verificar: any) {
     const formato = verificar.type;
     verificar.type = (formato === 'password') ? 'text' : 'password';
   }
