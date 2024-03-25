@@ -16,14 +16,14 @@
         <ion-input labelPlacement="stacked" label="Senha" placeholder="Senha" type="password" #senhaInput [counter]="true" maxlength="6">
           <ion-icon slot="start" name="lock-closed-outline"></ion-icon>
           <ion-button fill="clear" slot="end" aria-label="Mostrar/Esconder" (click)="mudarVisibilidade(senhaInput)">
-            <ion-icon name="eye-outline" slot="end"></ion-icon>
+            <ion-icon name="{{valor}}" slot="end"></ion-icon>
           </ion-button>
         </ion-input>
 
         <ion-input labelPlacement="stacked" Label="Confirmar" placeholder="Confirmar Senha" type="password" #confirmar [counter]="true" maxlength="6" >
           <ion-icon slot="start" name="lock-closed-outline"></ion-icon>
           <ion-button fill="clear" slot="end" aria-label="Mostrar/Esconder" (click)="mudarVisibilidade(confirmar)">
-            <ion-icon name="eye-outline" slot="end"></ion-icon>
+            <ion-icon name="{{valor}}" slot="end"></ion-icon>
           </ion-button>
         </ion-input>
       <ion-button expand="block" color="primary">Login</ion-button>

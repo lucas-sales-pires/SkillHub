@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
 import { addIcons } from 'ionicons';
-import { eyeOutline, lockClosedOutline } from 'ionicons/icons';
+import { eyeOutline, lockClosedOutline,eyeOffOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-cadastro',
@@ -18,16 +18,17 @@ export class CadastroPage implements OnInit {
  
 
   constructor() {
-    addIcons({ eyeOutline, lockClosedOutline})
+    addIcons({ eyeOutline, lockClosedOutline,eyeOffOutline})
   }
+  valor: any = "eye-outline";
   
-  name: string = '';
   mudarVisibilidade(input:any){
     if(input.type == "password"){
       input.type = "text";
     }else{
       input.type = "password";
     }
+    this.valor = (input.type == "password") ? "eye-outline" : "eye-off-outline";
   }
 
   ngOnInit() {
