@@ -9,7 +9,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "gerar-app": "ionic build && ionic cap copy && ionic cap sync && ionic cap open android"
   },
   "private": true,
   "dependencies": {
@@ -17,10 +18,12 @@
     "@angular/common": "^17.0.2",
     "@angular/compiler": "^17.0.2",
     "@angular/core": "^17.0.2",
+    "@angular/fire": "^17.0.1",
     "@angular/forms": "^17.0.2",
     "@angular/platform-browser": "^17.0.2",
     "@angular/platform-browser-dynamic": "^17.0.2",
     "@angular/router": "^17.0.2",
+    "@capacitor/android": "5.7.3",
     "@capacitor/app": "5.0.7",
     "@capacitor/core": "5.7.3",
     "@capacitor/haptics": "5.0.7",
@@ -28,6 +31,7 @@
     "@capacitor/status-bar": "5.0.7",
     "@fortawesome/fontawesome-free": "^6.5.1",
     "@ionic/angular": "^7.5.0",
+    "firebase": "^10.9.0",
     "font-awesome": "^4.7.0",
     "ionicons": "^7.2.2",
     "rxjs": "~7.8.0",
