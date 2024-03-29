@@ -6,6 +6,7 @@ import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
 import { addIcons } from 'ionicons';
 import { eyeOutline, lockClosedOutline,eyeOffOutline } from 'ionicons/icons';
 
+
 @Component({
   selector: 'app-cadastro',
   templateUrl: './cadastro.page.html',
@@ -20,6 +21,9 @@ export class CadastroPage implements OnInit {
   constructor() {
     addIcons({ eyeOutline, lockClosedOutline,eyeOffOutline})
   }
+  nome: string = "";
+  email: string = "";
+  senha: string = "";
   valor: any = "eye-outline";
   
   mudarVisibilidade(input:any){
@@ -30,6 +34,7 @@ export class CadastroPage implements OnInit {
     }
     this.valor = (input.type == "password") ? "eye-outline" : "eye-off-outline";
   }
+
 
   ngOnInit() {
   }
