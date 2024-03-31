@@ -2,6 +2,10 @@ import { enableProdMode } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { RouteReuseStrategy, provideRouter } from '@angular/router';
 import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular/standalone';
+import {  importProvidersFrom } from '@angular/core';
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 
 import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
@@ -15,18 +19,17 @@ bootstrapApplication(AppComponent, {
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     provideIonicAngular(),
-    provideRouter(routes),
-    
+    provideRouter(routes), 
+    importProvidersFrom(
+            provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+            provideFirestore(() => getFirestore()),
+                  )
   ],
+}).then(() => {
+  console.log('Angular app bootstrapped');
+
 });
 
-// bootstrapApplication(YourComponent, {
-//   providers: [
-//     importProvidersFrom(
-//       provideFirebaseApp(() => initializeApp(environment.firebase))
-//     ),
-//     importProvidersFrom(
-//       provideFirestore(() => getFirestore())
-//     )
-//   ]
-// });
+
+
+

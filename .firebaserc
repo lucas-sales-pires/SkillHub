@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "skillhub-e98be": {
+      "hosting": {
+        "app": [
+          "skillhub-e98be"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "skillhub-e98be"
+  }
+}
