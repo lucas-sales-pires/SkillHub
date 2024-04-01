@@ -1,18 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
 import { addIcons } from 'ionicons';
 import { eyeOutline, lockClosedOutline,eyeOffOutline } from 'ionicons/icons';
-import { DataService } from '../../services/dados/dados.service';
+import { Dados } from '../../services/dados/dados.service';
 
 @Component({
   selector: 'app-cadastro',
   templateUrl: './cadastro.page.html',
   styleUrls: ['./cadastro.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, NavbarComponent]
+  imports: [IonicModule, FormsModule, NavbarComponent]
 })
 export class CadastroPage implements OnInit {
   nome: string = "";
@@ -20,7 +19,7 @@ export class CadastroPage implements OnInit {
   senha: string = "";
   
 
-  constructor(private cadastro: DataService) {
+  constructor(private cadastro: Dados) {
 
     
     addIcons({ eyeOutline, lockClosedOutline,eyeOffOutline})
@@ -35,9 +34,9 @@ export class CadastroPage implements OnInit {
     }
     this.valor = (input.type == "password") ? "eye-outline" : "eye-off-outline";
   }
-  createUser(): void {
-    const newUser = { nome: this.nome, email: this.email, senha: this.senha };
-    this.cadastro.createUser(newUser).subscribe(() => {
+  cadastrar(): void {
+    const novoUsuario = { nome: this.nome, email: this.email, senha: this.senha };
+    this.cadastro.CriarUsuario(novoUsuario).subscribe(() => {
         console.log('Usuário criado com sucesso!');
     });
   

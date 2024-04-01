@@ -1,0 +1,44 @@
+#circulo {
+  width: 20%;
+  aspect-ratio: 1;
+  background: #dcf8ff;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+#circulo::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: conic-gradient(
+    #41b8d5 calc(var(--value) * 1%),
+    skyblue 0
+  ); // 60% de azul e 40% de celeste
+  border-radius: 50%;
+  mask: radial-gradient(white 55%, transparent 0);
+  mask-mode: alpha;
+  -webkit-mask: radial-gradient(#0000 55%, #000 0);
+  -webkit-mask-mode: alpha;
+}
+#circulo::after {
+  content: "60%";
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 3.5vw;
+}
+
+#circulo {
+  margin-left: auto;
+  margin-right: auto;
+}
+ion-card{
+    background-color: #dcf8ff;
+    display: flex;
+}
+.progress-bar{
+  background-color: #ffee62;
+}
