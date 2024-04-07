@@ -1,13 +1,6 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>Perfil</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-navbar></app-navbar>
 
-<ion-content class="ion-padding">
+<ion-content class="ion-padding" id="main-content">
   <ion-card>
     <ion-card-header>
       <ion-card-title>Perfil</ion-card-title>
@@ -23,15 +16,15 @@
       </ion-item>
       <ion-item>
         <ion-label position="stacked">Cadastrado desde</ion-label>
-        <ion-input [(ngModel)]="cadastradoDesde" disabled></ion-input>
-
-      
+        <ion-input [(ngModel)]="cadastradoDesde" id="cadastradoDesdeInput" disabled></ion-input>
+      </ion-item>
+      <ion-item>
         <ion-label position="stacked">Senha</ion-label>
-        <ion-input [(ngModel)]="senha" disabled></ion-input>
+        <ion-input [(ngModel)]="senha" disabled type="password" #senhaInput [counter]="true" maxlength="6" minlength="6"></ion-input>
       </ion-item>
       
 
-      <ion-button expand="block" color="primary">Editar</ion-button>
+      <ion-button expand="block" color="primary" (click)="editarPerfil()">Editar</ion-button>
       <ion-button expand="block" color="danger" >Sair</ion-button>
       <ion-button expand="block" color="warning" >Excluir</ion-button>
     </ion-card-content>

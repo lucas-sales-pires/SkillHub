@@ -18,6 +18,7 @@ export class CadastroPage implements OnInit {
   nome: string = '';
   email: string = '';
   senha: string = '';
+  confirmarSenha: string = '';
   diaCadastro: string = ''; 
   mensagem: any = '';
 
@@ -37,17 +38,28 @@ export class CadastroPage implements OnInit {
   
   cadastrar() {
     const auth = getAuth();
+    if(this.nome === '' || this.email === '' || this.senha === '' || this.confirmarSenha === ''){
+        this.mensagem = 'Preencha todos os campos!';
+        setTimeout(() => {
+            this.mensagem = '';
+        }, 3000);
+        return;
+    }
+    if(this.senha !== this.confirmarSenha){
+        this.mensagem = 'As senhas não conferem!';
+        setTimeout(() => {
+            this.mensagem = '';
+        }, 3000);
+        return;
+    }
     createUserWithEmailAndPassword(auth, this.email, this.senha)
       .then((userCredential) => {
-        const user = userCredential.user;
-        console.log(user);
-  
+        const user = userCredential.user;  
         const novoUsuario = {
           nome: this.nome,
           email: this.email,
           diaCadastro: new Date().toLocaleDateString(),
         };
-        
         this.salvarInformacoesUsuario(novoUsuario);
         this.mensagem = 'Usuário criado com sucesso!';
         setTimeout(() => {
@@ -61,13 +73,13 @@ export class CadastroPage implements OnInit {
   
         if (errorCode === 'auth/email-already-in-use') {
           this.mensagem = 'O email já está cadastrado.';
-          setInterval(() => {
+          setTimeout(() => {
             this.mensagem = '';
           }, 3000);
         }
       });
   }
-  
+
   salvarInformacoesUsuario(novoUsuario:any) {
     this.cadastro.CriarUsuario(novoUsuario).then(
       () => {

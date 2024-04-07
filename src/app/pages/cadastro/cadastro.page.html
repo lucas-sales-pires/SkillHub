@@ -33,6 +33,7 @@
         #senhaInput
         [counter]="true"
         maxlength="6"
+        minlength="6"
         [(ngModel)]="senha"
       >
         <ion-icon slot="start" name="lock-closed-outline"></ion-icon>
@@ -54,6 +55,8 @@
         #confirmar
         [counter]="true"
         maxlength="6"
+        minlength="6"
+        [(ngModel)]="confirmarSenha"
       >
         <ion-icon slot="start" name="lock-closed-outline"></ion-icon>
         <ion-button

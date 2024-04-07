@@ -5,7 +5,12 @@
     </ion-toolbar>
     <ion-toolbar>
       <ion-list lines="none">
-        <ion-item routerLink="/login" lines="none" href="/login" routerDirection="forward">
+        <ion-item
+          routerLink="/login"
+          lines="none"
+          href="/login"
+          routerDirection="forward"
+        >
           <ion-icon name="person-circle-outline" slot="start"></ion-icon>
           <ion-label>Login</ion-label>
         </ion-item>
@@ -31,7 +36,7 @@
 </ion-menu>
 <ion-header>
   <ion-toolbar>
-    <ion-buttons>
+    <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
       <div class="logo-container">
         <ion-img
