@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonList, IonItem, IonLabel, IonRadioGroup, IonRadio, IonButton } from "@ionic/angular/standalone";
+import { IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonList, IonItem, IonLabel, IonRadioGroup, IonRadio, IonButton } from "@ionic/angular/standalone";7
+
 
 @Component({
   selector: 'app-perguntas',
@@ -9,8 +10,7 @@ import { IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonLi
   imports: [IonButton, IonRadio, IonRadioGroup, IonLabel, IonItem, IonList, IonCardContent, IonCardTitle, IonCardHeader, IonCard, IonContent]
 })
 export class PerguntasComponent  implements OnInit {
-  pergunta = "Qual é a capital do Brasil?";
-  constructor() { 
+  constructor( ) { 
     
 
   }

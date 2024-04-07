@@ -1,0 +1,45 @@
+{
+    "perguntas": [
+      {
+        "pergunta": "O que é HTML?",
+        "respostas": ["HTML é a linguagem de marcação padrão para criar páginas da web.", "HTML significa Hypertext Markup Language.", "HTML descreve a estrutura de uma página web usando elementos de marcação."]
+      },
+      {
+        "pergunta": "O que é CSS?",
+        "respostas": ["CSS é uma linguagem de estilo usada para estilizar elementos escritos em HTML.", "CSS significa Cascading Style Sheets.", "CSS permite que você altere a aparência e o layout de várias páginas da web de uma só vez."]
+      },
+      {
+        "pergunta": "O que é JavaScript?",
+        "respostas": ["JavaScript é uma linguagem de programação de alto nível.", "JavaScript é usada principalmente para criar conteúdo interativo em páginas da web.", "É uma das tecnologias fundamentais da web."]
+      },
+      {
+        "pergunta": "O que é uma variável?",
+        "respostas": ["Uma variável é um contêiner para armazenar dados.", "Em programação, uma variável é um nome associado a um valor.", "Variáveis ​​são usadas para armazenar informações que podem ser referenciadas e manipuladas em um programa."]
+      },
+      {
+        "pergunta": "O que é um loop?",
+        "respostas": ["Um loop é uma estrutura de controle que repete um bloco de código várias vezes.", "É usado para automatizar tarefas repetitivas.", "Existem diferentes tipos de loops em programação, como for, while e do-while."]
+      },
+      {
+        "pergunta": "O que é uma função?",
+        "respostas": ["Uma função é um bloco de código que pode ser chamado e executado em um programa.", "Funções são usadas para realizar tarefas específicas e reutilizáveis.", "Elas ajudam a organizar e modularizar o código."]
+      },
+      {
+        "pergunta": "O que é um array?",
+        "respostas": ["Um array é uma estrutura de dados que pode armazenar vários valores.", "Os valores em um array são acessados ​​por meio de índices.", "Arrays podem conter elementos do mesmo tipo ou de tipos diferentes."]
+      },
+      {
+        "pergunta": "O que é um objeto?",
+        "respostas": ["Um objeto é uma coleção de propriedades, onde cada propriedade tem um nome e um valor associado.", "Em JavaScript, objetos são usados ​​para modelar coisas do mundo real.", "Objetos podem conter métodos, que são funções associadas ao objeto."]
+      },
+      {
+        "pergunta": "O que é versionamento de código?",
+        "respostas": ["Versionamento de código é o gerenciamento das alterações feitas no código-fonte de um software.", "É usado para acompanhar as modificações ao longo do tempo e controlar as diferentes versões do código.", "Ferramentas de versionamento, como Git, são amplamente utilizadas para colaboração em equipe e para manter um histórico de alterações."]
+      },
+      {
+        "pergunta": "O que é um banco de dados?",
+        "respostas": ["Um banco de dados é um sistema de armazenamento organizado para gerenciar e manipular grandes volumes de dados.", "Ele permite que os dados sejam armazenados de forma estruturada e acessados eficientemente.", "Existem diferentes tipos de bancos de dados, como SQL, NoSQL e bancos de dados em memória."]
+      }
+    ]
+  }
+  

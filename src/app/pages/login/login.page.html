@@ -7,16 +7,17 @@
     </ion-card-header>
     <ion-card-content>
 
-        <ion-input labelPlacement="stacked" label="Email" placeholder="email@dominio.com">
+        <ion-input labelPlacement="stacked" label="Email" placeholder="email@dominio.com" [(ngModel)]="email">
         </ion-input>
 
-        <ion-input labelPlacement="stacked" label="Senha" placeholder="Senha" type="password" #senhaInput [counter]="true" maxlength="6">
+        <ion-input labelPlacement="stacked" label="Senha" placeholder="Senha" type="password" #senhaInput [counter]="true" maxlength="6" [(ngModel)]="senha">
           <ion-icon slot="start" name="lock-closed-outline"></ion-icon>
           <ion-button fill="clear" slot="end" aria-label="Mostrar/Esconder" (click)="mudarVisibilidade(senhaInput)">
             <ion-icon name="{{valor}}" slot="end"></ion-icon>
           </ion-button>
         </ion-input>
-      <ion-button expand="block" color="primary">Login</ion-button>
+      <ion-button expand="block" color="primary" (click)="logar()">Login</ion-button>
+      {{mensagem}}
     </ion-card-content>
   </ion-card>
 </ion-content>

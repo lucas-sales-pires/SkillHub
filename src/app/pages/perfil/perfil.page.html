@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Perfil</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="stacked">Nome</ion-label>
+        <ion-input [(ngModel)]="nome" disabled></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Email</ion-label>
+        <ion-input [(ngModel)]="email" disabled></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Cadastrado desde</ion-label>
+        <ion-input [(ngModel)]="cadastradoDesde" disabled></ion-input>
+
+      
+        <ion-label position="stacked">Senha</ion-label>
+        <ion-input [(ngModel)]="senha" disabled></ion-input>
+      </ion-item>
+      
+
+      <ion-button expand="block" color="primary" >Editar</ion-button>
+      <ion-button expand="block" color="danger" >Sair</ion-button>
+      <ion-button expand="block" color="warning" >Excluir</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+
