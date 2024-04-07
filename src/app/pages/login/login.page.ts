@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { addIcons } from 'ionicons';
 import {
@@ -13,13 +12,14 @@ import {
 } from 'ionicons/icons';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { Router } from '@angular/router';
+import { IonInput, IonButton, IonIcon, IonCardContent, IonCardTitle, IonContent, IonCard, IonCardHeader } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, NavbarComponent],
+  imports: [IonCardHeader, IonCard, IonContent, IonCardTitle, IonCardContent, IonIcon, IonButton,  CommonModule, FormsModule, NavbarComponent,IonInput],
 })
 export class LoginPage implements OnInit {
   email: string = '';
