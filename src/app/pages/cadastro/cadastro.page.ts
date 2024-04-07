@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
 import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
 import { addIcons } from 'ionicons';
 import { eyeOutline, lockClosedOutline, eyeOffOutline } from 'ionicons/icons';
 import { Dados } from '../../services/dados/dados.service';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { IonInput, IonButton, IonIcon, IonItem, IonLabel, IonCardContent, IonCardTitle, IonCardHeader, IonCard, IonContent } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-cadastro',
   templateUrl: './cadastro.page.html',
   styleUrls: ['./cadastro.page.scss'],
   standalone: true,
-  imports: [IonicModule, FormsModule, NavbarComponent],
+  imports: [IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonLabel, IonItem, IonIcon, IonButton,  FormsModule, NavbarComponent,IonInput],
 })
 export class CadastroPage implements OnInit {
   nome: string = '';
