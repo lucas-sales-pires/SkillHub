@@ -16,6 +16,7 @@ import {
   IonInput,
   IonIcon,
 } from '@ionic/angular/standalone';
+import { AuthService } from 'src/app/services/autenticacao/auth.service';
 
 @Component({
   selector: 'app-perfil',
@@ -39,42 +40,44 @@ import {
 })
 export class PerfilPage implements OnInit {
   nome: string = '';
-  email: any = '';
+  email: any  = '';
   cadastradoDesde: string = '';
+  editando: boolean = false;
 
-  constructor(private dados: Dados, private router: Router) {}
+
+
+  constructor(private dados: Dados, private router: Router,private service: AuthService) {}
 
   ngOnInit(): void {
-    this.carregarUsuario();
-  }
-  ngAfterViewInit(): void {
-    setInterval(() => {
-      if (this.nome == '') {
-        this.sairConta();
-      }
-    }, 2000);
-  }
 
-  async carregarUsuario() {
-    const auth = getAuth();
+    this.service.buscarUsuario().then((resultado: any) => {
+      this.email = resultado["email"];
+      this.carregarUsuario(this.email);
+    })
+  }
+  ionViewWillEnter() {
 
-    let currentUser = auth.currentUser;
-    if (currentUser !== null) {
-      this.email = currentUser.email;
-      const usuario = await this.dados.PegarUsuarioPorEmail(this.email);
+  }
+  
+ 
+
+  async carregarUsuario(email:any) {
+      const usuario = await this.dados.PegarUsuarioPorEmail(email);
       if (usuario) {
         this.nome = usuario['nome'];
         this.cadastradoDesde = usuario['diaCadastro'];
       }
-    } else {
-      this.sairConta();
-      return;
-    }
-  }
+      if(this.nome == ""){
+        this.carregarUsuario(email)
+      }
+    } 
+  
   async editarPerfil() {
     const auth = getAuth();
     let currentUser = auth.currentUser;
+    this.editando = true;
 
+    
     if (currentUser?.email === this.email) {
       const inputs = document.querySelectorAll('ion-input');
 
@@ -91,17 +94,21 @@ export class PerfilPage implements OnInit {
         })
         .subscribe(() => {
           console.log('Usuário atualizado com sucesso');
+          
         });
     } else {
       this.sairConta();
     }
   }
   async sairConta() {
-    const auth = getAuth();
-    auth.signOut().then(() => {
+    try {
+      const auth = getAuth();
+      await auth.signOut();
       console.log('Usuário desconectado');
       window.location.href = '/login';
-    });
+    } catch (error) {
+      console.error('Erro ao sair da conta:', error);
+    }
   }
   async deletarConta() {
     const auth = getAuth();

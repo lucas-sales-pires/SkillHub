@@ -1,5 +1,4 @@
 <app-navbar></app-navbar>
-
 <ion-content class="ion-padding" id="main-content">
   <ion-card>
     <ion-card-header>
@@ -18,9 +17,14 @@
         <ion-label position="stacked">Cadastrado desde</ion-label>
         @if({cadastradoDesde}){<ion-input [(ngModel)]="cadastradoDesde" id="cadastradoDesdeInput" disabled></ion-input>}
       </ion-item>
-
-
-      <ion-button expand="block" color="primary" (click)="editarPerfil()">Editar</ion-button>
+      
+     
+       
+      
+      <ion-button expand="block" color="primary" (click)="editarPerfil()">
+        {{ editando ? 'Pronto' : 'Editar' }}
+      </ion-button>
+      
       <ion-button expand="block" color="danger" (click)="sairConta()" >Sair</ion-button>
       <ion-button expand="block" color="warning" (click)="deletarConta()" >Excluir</ion-button>
     </ion-card-content>

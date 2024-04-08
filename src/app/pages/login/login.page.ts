@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { addIcons } from 'ionicons';
@@ -19,7 +18,7 @@ import { IonInput, IonButton, IonIcon, IonCardContent, IonCardTitle, IonContent,
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [IonCardHeader, IonCard, IonContent, IonCardTitle, IonCardContent, IonIcon, IonButton,  CommonModule, FormsModule, NavbarComponent,IonInput],
+  imports: [IonCardHeader, IonCard, IonContent, IonCardTitle, IonCardContent, IonIcon, IonButton, FormsModule, NavbarComponent,IonInput],
 })
 export class LoginPage implements OnInit {
   email: string = '';
@@ -38,7 +37,7 @@ export class LoginPage implements OnInit {
         this.mensagem = 'Usuário logado com sucesso.';
         setInterval(() => {
           this.mensagem = '';
-          this.router.navigate(['/perfil']);
+          this.router.navigate(['/perfil'] );
         }, 3000);
       })
 

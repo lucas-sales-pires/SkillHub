@@ -25,7 +25,7 @@ export class Dados {
         return !consulta.empty ? consulta.docs[0].id : undefined; // Retorna o documento se ele existir, senão retorna undefined
     }
     
-    public async PegarUsuarioPorEmail(email: string){
+    public async PegarUsuarioPorEmail(email: any){
         const dados = query(collection(this.db, "usuarios"), where("email", "==", email)); // Query para buscar um usuário com o email fornecido
         const consulta = await getDocs(dados); // Executa a query
         
