@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Dados } from 'src/app/services/dados/dados.service';
-import { getAuth } from 'firebase/auth';
+import { deleteUser, getAuth } from 'firebase/auth';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { Router } from '@angular/router';
 import { IonContent, IonCardHeader, IonCard, IonCardTitle, IonItem, IonCardContent, IonLabel, IonButton,IonInput } from "@ionic/angular/standalone";
@@ -76,7 +76,26 @@ export class PerfilPage implements OnInit {
         this.router.navigate(['/login']);
       });
     } else {
-      console.log('Nenhum usuário está atualmente logado');
+      this.router.navigate(['/login']);
     }
   }
+  async deletarConta() {
+    const auth = getAuth();
+    const currentUser = auth.currentUser;
+    if (currentUser) {
+      const id = (await this.dados.PegarIdPorEmail(this.email)) || '';
+      deleteUser(currentUser).then(() => {
+        console.log('Usuário deletado com sucesso no Autenthication'); 
+        this.dados.DeletarUsuario(id).subscribe(() => {
+        console.log('Usuário deletado com sucesso no Firestore');
+        this.router.navigate(['/login']);
+      }
+      );
+     
+      });
+    } else {
+      this.router.navigate(['/login']);
+    }
+  }
+  
 }

@@ -47,10 +47,7 @@ export class Dados {
         }
     }
 
-
-    
-
-    public AtualizarUsuario(userId: string, dadosUsuario: { nome?: string; email?: string; senha?: string }): Observable<void> { // Método para atualizar um usuário
+    public AtualizarUsuario(userId: string, dadosUsuario: { nome?: string; email?: string; }): Observable<void> { // Método para atualizar um usuário
         const docRef = doc(this.db, 'usuarios', userId); // Referência para o documento do usuário
         return from(setDoc(docRef, dadosUsuario, { merge: true })); // Atualiza o documento com os novos dados e retorna um Observable
     }
