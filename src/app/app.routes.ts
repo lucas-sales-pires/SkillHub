@@ -29,6 +29,10 @@ export const routes: Routes = [
     path: 'perfil',
     loadComponent: () => import('./pages/perfil/perfil.page').then( m => m.PerfilPage)
   },
+  {
+    path: 'recuperar-senha',
+    loadComponent: () => import('./pages/recuperar-senha/recuperar-senha.page').then( m => m.RecuperarSenhaPage)
+  },
 
 
 ];

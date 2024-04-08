@@ -1,0 +1,32 @@
+<app-navbar></app-navbar>
+<ion-content id="main-content">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">E-mail</ion-label>
+          <ion-input type="email" [(ngModel)]="email"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ion-button expand="full" (click)="recuperarSenha()" [disabled]="!email"
+          >Recuperar Senha</ion-button
+        >
+      </ion-col>
+    </ion-row>
+    @if({mensagem}){
+      <ion-row>
+      <ion-col size="12">
+        <ion-text color="success">{{ mensagem }}</ion-text>
+      </ion-col> </ion-row
+    >} @else if({erro}){
+    <ion-row >
+      <ion-col size="12">
+        <ion-text color="danger">{{ erro }}</ion-text>
+      </ion-col>
+    </ion-row>
+    }
+  </ion-grid>
+</ion-content>
