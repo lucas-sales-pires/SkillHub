@@ -33,19 +33,7 @@ export class LoginPage implements OnInit {
   async logar() {
     const auth = getAuth();
 
-    const usuarioAtual = auth.currentUser;
-
-
-    if (usuarioAtual) {
-      this.mensagem = 'Usuário já logado.';
-      setInterval(() => {
-        this.mensagem = '';
-        this.router.navigate(['/perfil']);
-
-      }, 3000);
-      return;
-    }
-    signInWithEmailAndPassword(auth, this.email, this.senha)
+    await signInWithEmailAndPassword(auth, this.email, this.senha)
       .then(() => {
         this.mensagem = 'Usuário logado com sucesso.';
         setInterval(() => {
@@ -81,5 +69,8 @@ export class LoginPage implements OnInit {
     verificar.type = formato === 'password' ? 'text' : 'password';
     this.valor = formato === 'password' ? 'eye-off-outline' : 'eye-outline';
   }
-  ngOnInit() {}
+  ngOnInit() {
+    this.email = '';
+    this.senha = '';
+  }
 }

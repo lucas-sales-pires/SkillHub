@@ -8,18 +8,15 @@
     <ion-card-content>
       <ion-item>
         <ion-label position="stacked">Nome</ion-label>
-        <ion-input [(ngModel)]="nome" disabled></ion-input>
+        @if({nome}){<ion-input [(ngModel)]="nome" disabled></ion-input>}
       </ion-item>
       <ion-item>
         <ion-label position="stacked">Email</ion-label>
-        <ion-input [(ngModel)]="email" disabled></ion-input>
-        @if (this.nome == "") {
-          {{carregarUsuario()}};
-        }
+        @if({email}){<ion-input [(ngModel)]="email" disabled></ion-input>}
       </ion-item>
       <ion-item>
         <ion-label position="stacked">Cadastrado desde</ion-label>
-        <ion-input [(ngModel)]="cadastradoDesde" id="cadastradoDesdeInput" disabled></ion-input>
+        @if({cadastradoDesde}){<ion-input [(ngModel)]="cadastradoDesde" id="cadastradoDesdeInput" disabled></ion-input>}
       </ion-item>
 
 
