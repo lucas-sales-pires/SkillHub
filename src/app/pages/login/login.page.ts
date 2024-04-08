@@ -41,14 +41,13 @@ export class LoginPage implements OnInit {
       setInterval(() => {
         this.mensagem = '';
         this.router.navigate(['/perfil']);
+
       }, 3000);
       return;
     }
     signInWithEmailAndPassword(auth, this.email, this.senha)
       .then(() => {
         this.mensagem = 'Usuário logado com sucesso.';
-        
-
         setInterval(() => {
           this.mensagem = '';
           this.router.navigate(['/perfil']);
