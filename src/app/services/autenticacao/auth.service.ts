@@ -6,7 +6,7 @@ import { Dados } from '../dados/dados.service';
   providedIn: 'root'
 })
 export class AuthService {
-  currentUser: User | null = null;
+  usuarioAtual: User | null = null;
 
   constructor(private dados: Dados) { }
 
@@ -15,13 +15,12 @@ export class AuthService {
       const auth = getAuth();
       auth.onAuthStateChanged(async (user) => {
         if (user) {
-          console.log('Usuário logado:', user.email);
           const usuario = await this.dados.PegarUsuarioPorEmail(user.email);
-          this.currentUser = user;
+          this.usuarioAtual = user;
           resolve(usuario);
         } else {
           console.log('Nenhum usuário logado.');
-          this.currentUser = null;
+          this.usuarioAtual = null;
         }
       }
     )})

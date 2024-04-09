@@ -74,11 +74,11 @@ export class PerfilPage implements OnInit {
   
   async editarPerfil() {
     const auth = getAuth();
-    let currentUser = auth.currentUser;
+    let usuarioAtual = auth.currentUser;
     this.editando = true;
 
     
-    if (currentUser?.email === this.email) {
+    if (usuarioAtual?.email === this.email) {
       const inputs = document.querySelectorAll('ion-input');
 
       inputs.forEach((element: HTMLIonInputElement) => {
@@ -112,10 +112,10 @@ export class PerfilPage implements OnInit {
   }
   async deletarConta() {
     const auth = getAuth();
-    let currentUser = auth.currentUser;
-    if (currentUser) {
+    let usuarioAtual = auth.currentUser;
+    if (usuarioAtual) {
       const id = (await this.dados.PegarIdPorEmail(this.email)) || '';
-      deleteUser(currentUser).then(() => {
+      deleteUser(usuarioAtual).then(() => {
         console.log('Usuário deletado com sucesso no Autenthication');
         this.dados.DeletarUsuario(id).subscribe(() => {
           console.log('Usuário deletado com sucesso no Firestore');

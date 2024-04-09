@@ -37,7 +37,7 @@ export class LoginPage implements OnInit {
         this.mensagem = 'Usuário logado com sucesso.';
         setInterval(() => {
           this.mensagem = '';
-          this.router.navigate(['/perfil'] );
+          window.location.href="/perfil"
         }, 3000);
       })
 
