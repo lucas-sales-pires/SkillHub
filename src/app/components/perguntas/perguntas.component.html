@@ -11,6 +11,12 @@
             <ion-radio value="a">a São Paulo</ion-radio>
             <ion-radio value="b">b Rio de Janeiro</ion-radio>
             <ion-radio value="c">c Brasília</ion-radio>
+            <ion-input [(ngModel)]="pergunta" type="text"></ion-input>
+            <ion-input [(ngModel)]="resposta1" type="text"></ion-input>
+            <ion-input [(ngModel)]="resposta2" type="text"></ion-input>
+            <ion-input [(ngModel)]="resposta3" type="text"></ion-input>
+            
+            <ion-button (click)="adicionarPergunta()">adicionar Pergunta</ion-button>
           </ion-radio-group>
         </ion-item>
       </ion-list>

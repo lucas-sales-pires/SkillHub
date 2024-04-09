@@ -55,11 +55,6 @@ export class PerfilPage implements OnInit {
       this.carregarUsuario(this.email);
     })
   }
-  ionViewWillEnter() {
-
-  }
-  
- 
 
   async carregarUsuario(email:any) {
       const usuario = await this.dados.PegarUsuarioPorEmail(email);
