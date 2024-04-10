@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IonContent,IonIcon, IonCard } from "@ionic/angular/standalone";
+import { IonContent,IonIcon, IonCard, IonRadioGroup, IonRadio, IonInput, IonButton } from "@ionic/angular/standalone";
 import { addIcons } from 'ionicons';
 import { closeOutline } from 'ionicons/icons';
 import { PerguntasComponent } from '../perguntas/perguntas.component';
@@ -12,7 +12,7 @@ import { PerguntasComponent } from '../perguntas/perguntas.component';
   templateUrl: './progress-bar.component.html',
   styleUrls: ['./progress-bar.component.scss'],
   standalone: true,
-  imports: [IonCard, IonContent, IonIcon,PerguntasComponent]
+  imports: [IonButton, IonInput, IonRadio, IonRadioGroup, IonCard, IonContent, IonIcon,PerguntasComponent]
 })
 export class ProgressBarComponent  implements OnInit {
 
