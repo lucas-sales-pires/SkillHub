@@ -1,5 +1,7 @@
 export interface Pergunta {
-  id: number;
+  id?: string;
+  categoria:string,
   pergunta: string;
   respostas: string[];
+  respostaCerta:string;
 }

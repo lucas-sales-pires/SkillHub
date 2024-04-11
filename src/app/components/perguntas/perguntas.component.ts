@@ -15,6 +15,8 @@ import {
 import { QuizService } from 'src/app/services/quiz/quiz.service';
 import { FormsModule } from '@angular/forms';
 import { Pergunta } from './interfacePerguntas';
+import { Router } from '@angular/router';
+import { PontuacaoService } from 'src/app/services/pontuacao/pontuacao.service';
 
 @Component({
   selector: 'app-perguntas',
@@ -39,6 +41,7 @@ import { Pergunta } from './interfacePerguntas';
 })
 export class PerguntasComponent implements OnInit {
   perguntaAtual:string = '';
+  categoria:string = '';
   pergunta: string = '';
   respostas0:string = ''
   respostas1:string = ''
@@ -46,57 +49,72 @@ export class PerguntasComponent implements OnInit {
   resposta1:string='';
   resposta2:string='';
   resposta3:string='';
+  respostacorreta:string= '';
   opcaoSelecionada:string='';
   indice:number = 0;
+  pontuacao:number = 0;
+
 
   
-  constructor(private quiz: QuizService) {}
+  constructor(private quiz: QuizService,private router:Router,private pontuacaoService: PontuacaoService) {}
 
-  ngOnInit() {}
-
-  adicionarPergunta() {
-    const novaPergunta: Pergunta = {
-      id:1,
-      pergunta: this.pergunta,
-      respostas: [this.resposta1, this.resposta2, this.resposta3]
-    };
-    this.quiz.adicionarPergunta(novaPergunta)
-    .then(() => {
-      console.log('Pergunta adicionada com sucesso!');
-      this.pergunta = '';
-      this.resposta1 = '';
-      this.resposta2 = '';
-      this.resposta3 = '';
-    })
-    .catch((error) => {
-      console.error('Erro ao adicionar pergunta:', error);
-    });
+  ngOnInit() {
+    this.obterperguntas()
   }
+
+
   async obterperguntas(){
-    let perguntas = await this.quiz.obterPerguntas()
-    this.perguntaAtual = perguntas[0]["pergunta"]
-    this.respostas0 = perguntas[0]["respostas"][0]
-    this.respostas1 = perguntas[0]["respostas"][1]
-    this.respostas2 = perguntas[0]["respostas"][2]
-    console.log(perguntas)
-  }
-  async proximaPergunta(){
-    this.indice = this.indice + 1
     let perguntas = await this.quiz.obterPerguntas()
     this.perguntaAtual = perguntas[this.indice]["pergunta"]
     this.respostas0 = perguntas[this.indice]["respostas"][0]
     this.respostas1 = perguntas[this.indice]["respostas"][1]
     this.respostas2 = perguntas[this.indice]["respostas"][2]
+    this.respostacorreta = perguntas[this.indice]["respostaCerta"]
+    console.log(perguntas)
+  }
+  async proximaPergunta(){
+    this.indice += 1
+    let perguntas = await this.quiz.obterPerguntas()
+    if (this.indice < perguntas.length) {
+      this.perguntaAtual = perguntas[this.indice]["pergunta"];
+      this.respostas0 = perguntas[this.indice]["respostas"][0];
+      this.respostas1 = perguntas[this.indice]["respostas"][1];
+      this.respostas2 = perguntas[this.indice]["respostas"][2];
+      this.respostacorreta = perguntas[this.indice]["respostaCerta"];
+    } else {
+      console.error("Índice excedeu o limite do array de perguntas.");
+      this.router.navigate(['/pagina-pontuacao-quiz']);
+
+    }
 
   }
- 
 
-  funcaoCheckBox(opcao: string) {
-    if (this.opcaoSelecionada === opcao) {
-      this.opcaoSelecionada = '';
-    } else {
-      this.opcaoSelecionada = opcao; 
+  async apenasUm(){
+    const checkboxs = document.querySelectorAll('ion-checkbox');
+    checkboxs.forEach((checkbox) => {
+      checkbox.addEventListener('ionChange', async (e) => {
+        const checkbox = e.target as HTMLIonCheckboxElement;
+        if (checkbox.checked) {
+          checkboxs.forEach((cb) => {
+            if (cb !== checkbox) {
+              cb.checked = false;
+            }
+          });
+          this.opcaoSelecionada = checkbox.value;
+   
+        }
+      });
+    });
+  }
+  verificarResposta(respostaSelecionada: string) {
+    if (respostaSelecionada === this.respostacorreta) {
+      console.log("Resposta correta");
+      this.pontuacaoService.setPontuacao(this.pontuacao += 1);
+    }
+    else{
+      console.log(respostaSelecionada)
     }
   }
+  
   
 }

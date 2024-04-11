@@ -1,0 +1,64 @@
+
+  <ion-button id="open-modal">
+    <ion-icon slot="start" name="add-circle-outline"></ion-icon>
+    Adicionar Pergunta
+  </ion-button>
+  
+  <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="cancel()">Cancelar</ion-button>
+          </ion-buttons>
+          <ion-title>Qual Será a Nova Questão ?</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="confirm()" [strong]="true">Pronto</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-item>
+          <ion-input label="Digite sua Pergunta" label-placement="floating" fill="outline" placeholder="Escreva aqui sua Pergunta" class="py-2" [(ngModel)]="pergunta"></ion-input>
+        </ion-item>
+        <ion-list class="py-2">
+          <ion-item>
+            <ion-label position="stacked">Categoria</ion-label>
+            <ion-select placeholder="Selecione a categoria" [(ngModel)]="categoria">
+              <ion-select-option value="historia">História</ion-select-option>
+              <ion-select-option value="programacao">Programação</ion-select-option>
+              <ion-select-option value="geografia">Geografia</ion-select-option>
+            </ion-select>
+            
+          </ion-item>
+          <ion-item>
+            <ion-input label="Resposta A" placeholder="Resposta1" [(ngModel)]="resposta1"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input label="Resposta B" placeholder="Resposta2" [(ngModel)]="resposta2"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input label="Resposta C" placeholder="Resposta3" [(ngModel)]="resposta3"></ion-input>
+          </ion-item>
+
+          @if(categoria != '' && resposta1 && resposta2 && resposta3){<ion-item>
+            <ion-label position="stacked">Resposta Certa</ion-label>
+          
+            <ion-select placeholder="Selecione a Resposta Correta" [(ngModel)]="respostaCerta">
+              <ion-select-option value = "{{resposta1}}">{{resposta1}}</ion-select-option>
+              <ion-select-option value = "{{resposta2}}">{{resposta2}}</ion-select-option>
+              <ion-select-option value = "{{resposta3}}">{{resposta3}}</ion-select-option>
+            </ion-select>
+          
+          </ion-item>
+        }
+          
+          @if(categoria && respostaCerta){<ion-item>
+            <ion-button (click)="adicionarPergunta()" expand="full">Adicionar Pergunta</ion-button>
+          </ion-item>}
+
+      
+        </ion-list>
+      </ion-content>
+    </ng-template>
+  </ion-modal>

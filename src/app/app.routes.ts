@@ -33,6 +33,18 @@ export const routes: Routes = [
     path: 'recuperar-senha',
     loadComponent: () => import('./pages/recuperar-senha/recuperar-senha.page').then( m => m.RecuperarSenhaPage)
   },
+  {
+    path: 'escolha',
+    loadComponent: () => import('./pages/escolha/escolha.page').then( m => m.EscolhaPage)
+  },
+  {
+    path: 'gerenciar-perguntas',
+    loadComponent: () => import('./pages/gerenciar-perguntas/gerenciar-perguntas.page').then( m => m.GerenciarPerguntasPage)
+  },
+  {
+    path: 'pagina-pontuacao-quiz',
+    loadComponent: () => import('./pages/pagina-pontuacao-quiz/pagina-pontuacao-quiz.page').then( m => m.PaginaPontuacaoQuizPage)
+  },
 
 
 ];

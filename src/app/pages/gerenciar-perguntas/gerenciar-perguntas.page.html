@@ -1,0 +1,38 @@
+<app-navbar></app-navbar>
+
+<ion-content class="ion-padding w-100" id="main-content">
+  <ion-card>
+    <ion-card-content>
+      <ion-title class="text-white">Gerenciar Perguntas</ion-title>
+      <ion-card-subtitle class="text-white">Aqui você pode Adicionar e Remover Perguntas Cadastradas</ion-card-subtitle>
+      
+      <ion-item>
+        <ion-label>Selecione a Categoria</ion-label>
+        <ion-select>
+          <ion-select-option value="1">Categoria 1</ion-select-option>
+          <ion-select-option value="2">Categoria 2</ion-select-option>
+          <ion-select-option value="3">Categoria 3</ion-select-option>
+        </ion-select>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label>Selecione a Pergunta</ion-label>
+        <ion-select>
+          <ion-select-option value="1">Pergunta 1</ion-select-option>
+          <ion-select-option value="2">Pergunta 2</ion-select-option>
+          <ion-select-option value="3">Pergunta 3</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <app-modal></app-modal>
+      <ion-button>
+      
+
+      
+      <ion-icon slot="start" name="trash-outline"></ion-icon>Remover Pergunta
+      </ion-button>
+      
+      
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+

@@ -4,35 +4,26 @@
       <h1 class="ion-text-center text-white">{{perguntaAtual}}</h1>
     </ion-card-title>
   </ion-card-header>
-  <ion-card-content>
+  <ion-card-content id="main-content">
     <ion-list>
       <ion-item>
-        <ion-checkbox (ionChange)="funcaoCheckBox('a')" [checked]="opcaoSelecionada === 'a'">
-          <ion-label>A - {{respostas0}} </ion-label>
+        <ion-checkbox (ionChange)="apenasUm()" (ionChange)="verificarResposta(respostas0)">
+          <ion-label >A - {{respostas0}} </ion-label>
         </ion-checkbox>
       </ion-item>
       <ion-item>
-        <ion-checkbox (ionChange)="funcaoCheckBox('b')" [checked]="opcaoSelecionada === 'b'">
-          <ion-label>B - {{respostas1}} </ion-label>
+        <ion-checkbox (ionChange)="apenasUm()" (ionChange)="verificarResposta(respostas1)">
+          <ion-label >B - {{respostas1}} </ion-label>
         </ion-checkbox>
       </ion-item>
       <ion-item>
-        <ion-checkbox (ionChange)="funcaoCheckBox('c')" [checked]="opcaoSelecionada === 'c'">
-          <ion-label>C - {{respostas2}}</ion-label>
+        <ion-checkbox (ionChange)="apenasUm()" (ionChange)="verificarResposta(respostas2)">
+          <ion-label >C - {{respostas2}}</ion-label>
         </ion-checkbox>
       </ion-item>
-      <ion-item>
-        <ion-button (click)="adicionarPergunta()">Adicionar Perguntas</ion-button>
-        <ion-button (click)="obterperguntas()">Obter Perguntas</ion-button>
-        <ion-button (click)="proximaPergunta()">Próxima Pergunta</ion-button>
-      </ion-item>
-      <ion-input [(ngModel)]="pergunta" type="text"></ion-input>
-      <ion-input [(ngModel)]="resposta1" type="text"></ion-input>
-      <ion-input [(ngModel)]="resposta2" type="text"></ion-input>
-      <ion-input [(ngModel)]="resposta3" type="text"></ion-input>
     </ion-list>
     
     
-    <ion-button expand="block">Próximo</ion-button>
+    <ion-button expand="block" (click)="proximaPergunta()">Próximo</ion-button>
   </ion-card-content>
 </ion-card>
