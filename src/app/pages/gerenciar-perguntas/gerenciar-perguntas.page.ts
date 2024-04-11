@@ -22,6 +22,11 @@ export class GerenciarPerguntasPage implements OnInit {
   resposta1:string='';
   resposta2:string='';
   resposta3:string='';
+  categoria1:string='';
+  categoria2:string='';
+  categoria3:string='';
+  categorias:string[] = [];
+  perguntas:any[] = [];
   
 
   constructor(private quiz:QuizService) { 
@@ -29,6 +34,23 @@ export class GerenciarPerguntasPage implements OnInit {
   }
 
   ngOnInit() {
+    this.carregarCategorias();
+    this.carregarPerguntas();
+  }
+  async carregarCategorias(){
+    const perguntas = await this.quiz.obterPerguntas();
+    perguntas.forEach(pergunta => {
+      this.categorias.push(pergunta.categoria)
+    })
+    this.categorias  = this.categorias.filter((item,index) => this.categorias.indexOf(item) === index)  
+  }
+  async carregarPerguntas(){
+    const perguntas = await this.quiz.obterPerguntas();
+    perguntas.forEach(pergunta => {
+      this.perguntas.push(pergunta.pergunta)
+    }
+    )
+    this.perguntas = this.perguntas.filter((item,index) => this.perguntas.indexOf(item) === index)
   }
   
   

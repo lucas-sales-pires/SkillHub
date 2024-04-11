@@ -7,21 +7,26 @@
       <ion-card-subtitle class="text-white">Aqui você pode Adicionar e Remover Perguntas Cadastradas</ion-card-subtitle>
       
       <ion-item>
-        <ion-label>Selecione a Categoria</ion-label>
+          @if(categorias.length > 0 ){<ion-label >Selecione a Categoria</ion-label>
+      
         <ion-select>
-          <ion-select-option value="1">Categoria 1</ion-select-option>
-          <ion-select-option value="2">Categoria 2</ion-select-option>
-          <ion-select-option value="3">Categoria 3</ion-select-option>
+          @for (item of categorias; track item) {<ion-select-option value="{{item}}">{{item}}</ion-select-option>
+        }
         </ion-select>
+      }
       </ion-item>
       
       <ion-item>
+        @if(perguntas.length > 0){
         <ion-label>Selecione a Pergunta</ion-label>
+
         <ion-select>
-          <ion-select-option value="1">Pergunta 1</ion-select-option>
-          <ion-select-option value="2">Pergunta 2</ion-select-option>
-          <ion-select-option value="3">Pergunta 3</ion-select-option>
+          @for(item of perguntas; track item){
+          <ion-select-option value="{{item}}">{{item}}</ion-select-option>}
+        
+        
         </ion-select>
+      }
       </ion-item>
       <app-modal></app-modal>
       <ion-button>
