@@ -16,7 +16,6 @@ import { ModalComponent } from "../../components/modal/modal.component";
     imports: [IonToolbar, IonHeader, IonCardHeader, IonCardTitle, IonInput, IonIcon, IonCard, IonCardContent, IonCardSubtitle, IonTitle, IonLabel, IonItem, IonContent, IonButton, CommonModule, FormsModule, NavbarComponent, IonSelect, IonSelectOption, ModalComponent]
 })
 export class GerenciarPerguntasPage implements OnInit {
-
   categoria:string = '';
   pergunta: string = '';
   resposta1:string='';
@@ -28,6 +27,8 @@ export class GerenciarPerguntasPage implements OnInit {
   categorias:string[] = [];
   perguntas:any[] = [];
   selecionada: string = '';
+  catSelecionada:string = '';
+  dados:any[] = [];
   
 
   constructor(private quiz:QuizService) { 
@@ -44,14 +45,14 @@ export class GerenciarPerguntasPage implements OnInit {
       this.categorias.push(pergunta.categoria)
     })
     this.categorias  = this.categorias.filter((item,index) => this.categorias.indexOf(item) === index)  
+    
   }
   async carregarPerguntas(){
     const perguntas = await this.quiz.obterPerguntas();
-    perguntas.forEach(pergunta => {
-      this.perguntas.push(pergunta.pergunta)
-    }
-    )
-    this.perguntas = this.perguntas.filter((item,index) => this.perguntas.indexOf(item) === index)
+
+    this.perguntas = perguntas
+
+    
   }
   async removerPerguntas(selecionada:string){
     const id = await this.quiz.pegarIdDaPergunta(selecionada);
