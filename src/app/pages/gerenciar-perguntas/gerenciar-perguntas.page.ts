@@ -27,6 +27,7 @@ export class GerenciarPerguntasPage implements OnInit {
   categoria3:string='';
   categorias:string[] = [];
   perguntas:any[] = [];
+  selecionada: string = '';
   
 
   constructor(private quiz:QuizService) { 
@@ -52,6 +53,11 @@ export class GerenciarPerguntasPage implements OnInit {
     )
     this.perguntas = this.perguntas.filter((item,index) => this.perguntas.indexOf(item) === index)
   }
-  
+  async removerPerguntas(selecionada:string){
+    const id = await this.quiz.pegarIdDaPergunta(selecionada);
+    this.quiz.removerPergunta(id!);
+    this.perguntas = this.perguntas.filter(pergunta => pergunta !== selecionada);
+    console.log(this.perguntas) 
+  }
   
 }

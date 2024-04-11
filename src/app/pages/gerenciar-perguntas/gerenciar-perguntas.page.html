@@ -20,7 +20,7 @@
         @if(perguntas.length > 0){
         <ion-label>Selecione a Pergunta</ion-label>
 
-        <ion-select>
+        <ion-select [(ngModel)]="selecionada">
           @for(item of perguntas; track item){
           <ion-select-option value="{{item}}">{{item}}</ion-select-option>}
         
@@ -29,11 +29,11 @@
       }
       </ion-item>
       <app-modal></app-modal>
-      <ion-button>
+      <ion-button (click)="removerPerguntas(selecionada)">
       
 
       
-      <ion-icon slot="start" name="trash-outline"></ion-icon>Remover Pergunta
+      <ion-icon slot="start" name="trash-outline" ></ion-icon>Remover Pergunta
       </ion-button>
       
       
