@@ -8,17 +8,7 @@ import { Observable, from } from 'rxjs';
 })
 export class Dados {
     constructor(private db: Firestore) {}
-    
 
-    public PegarTodosUsuarios(): Observable<any[]> { // Método para pegar todos os usuários
-        const collectionRef = collection(this.db, 'usuarios'); // Referência para a coleção 'usuarios'
-        return collectionData(collectionRef, { idField: 'id' }); // Retorna um Observable com os dados da coleção
-    }
-
-    public PegarUsuarioPorId(userId: string): Observable<any> { // Método para pegar um usuário específico
-        const docRef = doc(this.db, 'usuarios', userId); // Referência para o documento do usuário
-        return docData(docRef, { idField: 'id' }); // Retorna um Observable com os dados do documento
-    }
     public async PegarIdPorEmail(email: string) { // Método para pegar um usuário por email
         const dados = query(collection(this.db, "usuarios"), where("email", "==", email)); // Query para buscar um usuário com o email fornecido
         const consulta = await getDocs(dados); // Executa a query
@@ -47,13 +37,13 @@ export class Dados {
         }
     }
 
-    public AtualizarUsuario(userId: string, dadosUsuario: { nome?: string; email?: string; }): Observable<void> { // Método para atualizar um usuário
-        const docRef = doc(this.db, 'usuarios', userId); // Referência para o documento do usuário
+    public AtualizarUsuario(id: string, dadosUsuario: { nome?: string; email?: string; }): Observable<void> { // Método para atualizar um usuário
+        const docRef = doc(this.db, 'usuarios', id); // Referência para o documento do usuário
         return from(setDoc(docRef, dadosUsuario, { merge: true })); // Atualiza o documento com os novos dados e retorna um Observable
     }
 
-    public DeletarUsuario(userId: string): Observable<void> { // Método para deletar um usuário
-        const docRef = doc(this.db, 'usuarios', userId); // Referência para o documento do usuário
+    public DeletarUsuario(id: string): Observable<void> { // Método para deletar um usuário
+        const docRef = doc(this.db, 'usuarios', id); // Referência para o documento do usuário
         return from(deleteDoc(docRef)); // Deleta o documento e retorna um Observable
     }
 }

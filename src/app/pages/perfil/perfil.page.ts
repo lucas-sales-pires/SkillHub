@@ -45,15 +45,21 @@ export class PerfilPage implements OnInit {
   editando: boolean = false;
 
 
-
   constructor(private dados: Dados, private router: Router,private service: AuthService) {}
 
   ngOnInit(): void {
 
-    this.service.buscarUsuario().then((resultado: any) => {
-      this.email = resultado["email"];
-      this.carregarUsuario(this.email);
-    })
+    this.service.buscarUsuario().subscribe((usuario) => {
+      if (usuario) {
+        this.email = usuario.email;
+        this.carregarUsuario(this.email);
+      } else {
+        this.service.deslogar();
+        window.location.href = '/login';
+
+      }
+    }
+    );
   }
 
   async carregarUsuario(email:any) {

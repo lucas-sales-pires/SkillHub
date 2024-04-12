@@ -1,29 +1,32 @@
 import { Injectable } from '@angular/core';
 import { getAuth, User } from 'firebase/auth';
-import { Dados } from '../dados/dados.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  usuarioAtual: User | null = null;
 
-  constructor(private dados: Dados) { }
+  constructor() { }
 
-  async buscarUsuario() {
-    return new Promise((resolve) => {
+  buscarUsuario(): Observable<User | null> { // Método que retorna um observável que emite um novo valor toda vez que o estado de autenticação do usuário muda.
+    return new Observable((observer) => {
       const auth = getAuth();
-      auth.onAuthStateChanged(async (user) => {
-        if (user) {
-          const usuario = await this.dados.PegarUsuarioPorEmail(user.email);
-          this.usuarioAtual = user;
-          resolve(usuario);
+      const unsubscribe = auth.onAuthStateChanged((usuario) => { // onAuthStateChanged é um método que retorna um observável que emite um novo valor toda vez que o estado de autenticação do usuário muda.
+        if (usuario) {
+          observer.next(usuario); 
         } else {
-          console.log('Nenhum usuário logado.');
-          this.usuarioAtual = null;
+          observer.next(null); 
         }
-      }
-    )})
+      });
+  
+      return () => unsubscribe(); // Retorna uma função que cancela a inscrição no observável.
+    });
   }
+  deslogar(){
+    const auth = getAuth();
+    auth.signOut();
+  }
+  
 }
 
