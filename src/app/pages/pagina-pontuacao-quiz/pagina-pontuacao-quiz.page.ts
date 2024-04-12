@@ -25,7 +25,10 @@ export class PaginaPontuacaoQuizPage implements OnInit {
     this.service.buscarUsuario().subscribe((usuario) => {
       if (usuario) {
         this.pontuacao = this.pontuacaoService.getPontuacao();
-        this.quantidade =  this.pontuacaoService.getQuantidadePerguntas();
+         this.pontuacaoService.getQuantidadePerguntas().then((quantidade) => {
+          this.quantidade = quantidade;
+         })
+        
       } else {
         window.location.href = '/login';
       }

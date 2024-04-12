@@ -62,6 +62,7 @@ export class CadastroPage implements OnInit {
         };
         this.salvarInformacoesUsuario(novoUsuario);
         this.mensagem = 'Usuário criado com sucesso!';
+        window.location.href = '/login';
         setTimeout(() => {
           this.mensagem = '';
         }, 3000);
