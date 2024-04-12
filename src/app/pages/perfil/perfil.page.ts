@@ -48,18 +48,10 @@ export class PerfilPage implements OnInit {
   constructor(private dados: Dados, private router: Router,private service: AuthService) {}
 
   ngOnInit(): void {
-
-    this.service.buscarUsuario().subscribe((usuario) => {
-      if (usuario) {
-        this.email = usuario.email;
-        this.carregarUsuario(this.email);
-      } else {
-        this.service.deslogar();
-        window.location.href = '/login';
-
-      }
-    }
-    );
+    this.service.buscarUsuario().then((resultado: any) => {
+      this.email = resultado["email"];
+      this.carregarUsuario(this.email);
+    })
   }
 
   async carregarUsuario(email:any) {
@@ -98,19 +90,13 @@ export class PerfilPage implements OnInit {
           
         });
     } else {
-      this.sairConta();
+      this.service.deslogar();
     }
   }
-  async sairConta() {
-    try {
-      const auth = getAuth();
-      await auth.signOut();
-      console.log('Usuário desconectado');
-      window.location.href = '/login';
-    } catch (error) {
-      console.error('Erro ao sair da conta:', error);
-    }
+  async sairDaConta(){
+    this.service.deslogar();
   }
+
   async deletarConta() {
     const auth = getAuth();
     let usuarioAtual = auth.currentUser;
@@ -120,11 +106,11 @@ export class PerfilPage implements OnInit {
         console.log('Usuário deletado com sucesso no Autenthication');
         this.dados.DeletarUsuario(id).subscribe(() => {
           console.log('Usuário deletado com sucesso no Firestore');
-          this.sairConta();
+          this.service.deslogar();
         });
       });
     } else {
-      this.sairConta();
+      this.service.deslogar();
     }
   }
 }

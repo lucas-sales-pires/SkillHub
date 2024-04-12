@@ -31,7 +31,6 @@ export class LoginPage implements OnInit {
   }
   async logar() {
     const auth = getAuth();
-
     await signInWithEmailAndPassword(auth, this.email, this.senha)
       .then(() => {
         this.mensagem = 'Usuário logado com sucesso.';
@@ -45,7 +44,13 @@ export class LoginPage implements OnInit {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorMessage, errorCode);
-
+        if(errorCode === 'auth/invalid-email'){
+          this.mensagem = 'E-mail ou Senha inválido.';
+          setInterval(() => {
+            this.mensagem = '';
+          }, 3000);
+        }
+  
         if (errorCode === 'auth/invalid-credential') {
           this.mensagem =
             'Credenciais inválidas. Verifique seu e-mail e senha.';
@@ -59,6 +64,7 @@ export class LoginPage implements OnInit {
           }, 3000);
         }
       });
+
   }
 
   valor: any = 'eye-outline';
