@@ -20,6 +20,7 @@ export class AuthService {
           resolve(usuario);
         } else {
           console.log('Nenhum usuário logado.');
+          this.deslogar();
           this.usuarioAtual = null;
         }
       }
