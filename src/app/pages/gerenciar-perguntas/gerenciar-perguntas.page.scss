@@ -1,0 +1,15 @@
+@media (min-width: 768px) {
+    .ion-card {
+      width: 50%;
+      margin: 0 auto;
+    }
+  
+    .ion-item {
+      flex: 1;
+    }  .item-native {
+      /* Apply styles to break the element */
+      display: flex;
+      flex-wrap: wrap; /* Wrap content on smaller screens */
+    }
+  }
+  

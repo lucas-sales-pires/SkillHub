@@ -39,6 +39,7 @@ export class GerenciarPerguntasPage implements OnInit {
     this.carregarCategorias();
     this.carregarPerguntas();
   }
+  
   async carregarCategorias(){
     const perguntas = await this.quiz.obterPerguntas();
     perguntas.forEach(pergunta => {
@@ -49,16 +50,14 @@ export class GerenciarPerguntasPage implements OnInit {
   }
   async carregarPerguntas(){
     const perguntas = await this.quiz.obterPerguntas();
-
     this.perguntas = perguntas
-
-    
   }
+  
   async removerPerguntas(selecionada:string){
     const id = await this.quiz.pegarIdDaPergunta(selecionada);
     this.quiz.removerPergunta(id!);
     this.perguntas = this.perguntas.filter(pergunta => pergunta !== selecionada);
-    console.log(this.perguntas) 
+    this.carregarPerguntas();
   }
   
 }

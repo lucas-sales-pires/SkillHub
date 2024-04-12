@@ -6,6 +6,7 @@ import { addIcons } from 'ionicons';
 import { addCircleOutline } from 'ionicons/icons';
 import { QuizService } from 'src/app/services/quiz/quiz.service';
 import { Pergunta } from '../perguntas/interfacePerguntas';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.component.html',
@@ -28,7 +29,7 @@ export class ModalComponent  implements OnInit {
   @ViewChild(IonModal) 
   modal!: IonModal;
 
-  constructor(private quiz:QuizService) {
+  constructor(private quiz:QuizService,private router:Router) {
     addIcons({addCircleOutline});
    }
 
@@ -64,10 +65,12 @@ export class ModalComponent  implements OnInit {
     .then(() => {
       console.log('Pergunta adicionada com sucesso!');
       console.log(this.categoria)
+      window.location.href = '/gerenciar-perguntas';
     })
     .catch((error) => {
       console.error('Erro ao adicionar pergunta:', error);
     });
+    
   }
   
   funcaoCheckBox(opcao: string) {

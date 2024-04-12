@@ -30,6 +30,7 @@ export class QuizService {
         respostaCerta: doc.data()['respostaCerta']
       };
       perguntas.push(pergunta);
+      
     });
   
     return perguntas;

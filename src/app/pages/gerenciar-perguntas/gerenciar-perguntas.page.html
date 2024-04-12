@@ -41,27 +41,21 @@
     <ion-card>
       @if(pergunta != null  && catSelecionada != '' ){
         
-      <ion-card-content>
-        <ion-title class="text-white">Perguntas</ion-title>
-        @for(item of perguntas; track item){
-          @if(item.categoria == catSelecionada){
-        <ion-item>
-          <ion-label position="stack">Pergunta</ion-label>
-          <ion-input [(ngModel)]="pergunta" type="text" disabled
-            >{{item.pergunta}}</ion-input
-          >
-
-            <ion-item>
-              <ion-label position="stack">Categoria</ion-label>
-              <ion-input [(ngModel)]="categoria" type="text" disabled
-                >{{item.categoria}}</ion-input
-              >
-            </ion-item>
-          
-        </ion-item>
-      }
-        }
-      </ion-card-content>
+        <ion-card-content>
+          <ion-title class="text-white">Perguntas</ion-title>
+          @for(item of perguntas; track item) {
+            @if(item.categoria == catSelecionada) {
+              <ion-item>
+                <ion-label position="stacked">Pergunta</ion-label>
+                <ion-input [(ngModel)]="pergunta" type="text" disabled>{{item.pergunta}}</ion-input>
+        
+                <ion-label position="stacked">Categoria</ion-label>
+                <ion-input [(ngModel)]="categoria" type="text" disabled>{{item.categoria}}</ion-input>
+              </ion-item>
+            }
+          }
+        </ion-card-content>
+        
 
       }
     </ion-card>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IonHeader, IonButton,IonMenu,IonToolbar,IonTitle, IonContent,IonButtons,IonMenuButton,IonImg, IonIcon, IonSearchbar, IonItem, IonInput, IonLabel, IonGrid, IonRow, IonCol, IonList } from "@ionic/angular/standalone";
 import { addIcons } from 'ionicons';
-import { search,personCircleOutline,personAddOutline,tabletLandscapeOutline,homeOutline,trophyOutline,settingsOutline,helpOutline,personOutline } from 'ionicons/icons';
+import { search,personCircleOutline,personAddOutline,tabletLandscapeOutline,homeOutline,trophyOutline,settingsOutline,helpOutline,personOutline,informationCircleOutline } from 'ionicons/icons';
 
 
 @Component({
@@ -18,7 +18,7 @@ export class NavbarComponent  implements OnInit {
 
   constructor() {
     
-    addIcons({ search,personCircleOutline,personAddOutline, tabletLandscapeOutline,homeOutline,trophyOutline,settingsOutline,helpOutline,personOutline });
+    addIcons({ search,personCircleOutline,personAddOutline, tabletLandscapeOutline,homeOutline,trophyOutline,settingsOutline,helpOutline,personOutline,informationCircleOutline });
     
    }
 
