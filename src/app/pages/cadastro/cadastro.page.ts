@@ -54,7 +54,6 @@ export class CadastroPage implements OnInit {
     }
     createUserWithEmailAndPassword(auth, this.email, this.senha)
       .then((userCredential) => {
-        const user = userCredential.user;  
         const novoUsuario = {
           nome: this.nome,
           email: this.email,
