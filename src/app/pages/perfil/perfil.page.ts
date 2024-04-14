@@ -45,7 +45,7 @@ export class PerfilPage implements OnInit {
   editando: boolean = false;
 
 
-  constructor(private dados: Dados, private router: Router,private service: AuthService) {}
+  constructor(private dados: Dados, private service: AuthService) {}
 
   ngOnInit(): void {
     this.service.buscarUsuario().then((resultado: any) => {
