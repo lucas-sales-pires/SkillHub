@@ -14,7 +14,7 @@ import { IonInput, IonButton, IonIcon, IonItem, IonLabel, IonCardContent, IonCar
   standalone: true,
   imports: [IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonLabel, IonItem, IonIcon, IonButton,  FormsModule, NavbarComponent,IonInput],
 })
-export class CadastroPage implements OnInit {
+export class CadastroPage  {
   nome: string = '';
   email: string = '';
   senha: string = '';
@@ -93,5 +93,5 @@ export class CadastroPage implements OnInit {
   
   
 
-  ngOnInit() {}
+
 }
