@@ -1,5 +1,4 @@
 import { Component, ViewChild,OnInit} from '@angular/core';
-import {  OverlayEventDetail } from '@ionic/core/components';
 import { IonHeader, IonToolbar, IonContent, IonItem, IonButton,IonModal, IonButtons, IonTitle, IonInput, IonLabel, IonIcon, IonList, IonRadio, IonRadioGroup,IonSelectOption, IonCheckbox, IonSelect } from "@ionic/angular/standalone";
 import { FormsModule } from '@angular/forms';
 import { addIcons } from 'ionicons';
@@ -26,8 +25,10 @@ export class ModalComponent  implements OnInit {
   respostaCerta:string= '';
 
   
-  @ViewChild(IonModal) 
-  modal!: IonModal;
+  @ViewChild(IonModal) //@ViewChild: Essa anotação indica ao Angular que você deseja buscar um elemento específico na sua visualização. No caso, IonModal é o tipo de elemento que você deseja acessar.
+
+
+  modal!: IonModal; //O sinal de exclamação (!) indica ao Angular que a variável modal não pode ser nula. Isso significa que você tem certeza de que o elemento modal estará presente na sua visualização.
 
   constructor(private quiz:QuizService,private router:Router) {
     addIcons({addCircleOutline});
@@ -35,36 +36,24 @@ export class ModalComponent  implements OnInit {
 
   ngOnInit() {}
 
-
-
-  message = 'This modal example uses triggers to automatically open a modal when the button is clicked.';
   name: string = '';
 
-  cancel() {
-    this.modal.dismiss(null, 'cancel');
-  }
 
   confirm() {
     this.modal.dismiss(this.name, 'confirm');
   }
 
-  onWillDismiss(event: Event) {
-    const ev = event as CustomEvent<OverlayEventDetail<string>>;
-    if (ev.detail.role === 'confirm') {
-      this.message = `Hello, ${ev.detail.data}!`;
-    }
-  }
+
   adicionarPergunta() {
-    const novaPergunta: Pergunta = {
+    const novaPergunta: Pergunta = { // A nova pergunta é do tipo intergace Pergunta
       categoria:this.categoria,
       pergunta: this.pergunta,
       respostas: [this.resposta1, this.resposta2, this.resposta3],
       respostaCerta: this.respostaCerta
     };
-    this.quiz.adicionarPergunta(novaPergunta)
+    this.quiz.adicionarPergunta(novaPergunta) // Utilizo a funcao do service quiz para adicionar a nova pergunta
     .then(() => {
       console.log('Pergunta adicionada com sucesso!');
-      console.log(this.categoria)
       window.location.href = '/gerenciar-perguntas';
     })
     .catch((error) => {
@@ -72,15 +61,4 @@ export class ModalComponent  implements OnInit {
     });
     
   }
-  
-  funcaoCheckBox(opcao: string) {
-    if (this.respostaCerta === opcao) {
-      this.respostaCerta = '';
-    } else {
-      this.respostaCerta = opcao; 
-    }
-  }
-
-
-  
 }

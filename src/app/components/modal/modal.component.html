@@ -4,13 +4,10 @@
     Adicionar Pergunta
   </ion-button>
   
-  <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
+  <ion-modal trigger="open-modal" >
     <ng-template>
       <ion-header>
         <ion-toolbar>
-          <ion-buttons slot="start">
-            <ion-button (click)="cancel()">Cancelar</ion-button>
-          </ion-buttons>
           <ion-title>Qual Será a Nova Questão ?</ion-title>
           <ion-buttons slot="end">
             <ion-button (click)="confirm()" [strong]="true">Pronto</ion-button>

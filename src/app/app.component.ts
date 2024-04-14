@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
-import {  inject } from '@angular/core';
+import { inject } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
 
 

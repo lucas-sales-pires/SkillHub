@@ -14,7 +14,6 @@ import {
   IonInput, IonCheckbox } from '@ionic/angular/standalone';
 import { QuizService } from 'src/app/services/quiz/quiz.service';
 import { FormsModule } from '@angular/forms';
-import { Pergunta } from './interfacePerguntas';
 import { Router } from '@angular/router';
 import { PontuacaoService } from 'src/app/services/pontuacao/pontuacao.service';
 
