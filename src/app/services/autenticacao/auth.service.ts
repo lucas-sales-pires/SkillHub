@@ -10,18 +10,17 @@ export class AuthService {
 
   constructor(private dados: Dados) { }
 
-  async buscarUsuario() {
-    return new Promise((resolve) => {
-      const auth = getAuth();
-      auth.onAuthStateChanged(async (user) => {
-        if (user) {
-          const usuario = await this.dados.PegarUsuarioPorEmail(user.email);
-          this.usuarioAtual = user;
-          resolve(usuario);
+  async buscarUsuario() { 
+    return new Promise((resolve) => { // Uma nova promessa que espera resolver algo
+      const auth = getAuth(); // Pega os dados do usuário autenticado
+      auth.onAuthStateChanged(async (user) => { // Fica observando cada alteração no status do usuário(login,logout etc)
+        if (user) { // Se eu tenho o usuario
+          const usuario = await this.dados.PegarUsuarioPorEmail(user.email); // A constante usuario recebe os dados do usuário que vem do PegarUsuarioPorEmail
+          this.usuarioAtual = user; // O usuario atual recebe o usuario 
+          resolve(usuario); // A promessa resolvida me retorna o usuario com seus dados
         } else {
-          console.log('Nenhum usuário logado.');
-          this.deslogar();
-          this.usuarioAtual = null;
+          this.deslogar(); // Deslogo o usuario 
+          this.usuarioAtual = null; // E o meu usuarioAtual recebe um null
         }
       }
     )})

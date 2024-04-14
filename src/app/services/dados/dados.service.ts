@@ -12,7 +12,7 @@ export class Dados {
     public async PegarIdPorEmail(email: string) { // Método para pegar um usuário por email
         const dados = query(collection(this.db, "usuarios"), where("email", "==", email)); // Query para buscar um usuário com o email fornecido
         const consulta = await getDocs(dados); // Executa a query
-        return !consulta.empty ? consulta.docs[0].id : undefined; // Retorna o documento se ele existir, senão retorna undefined
+        return !consulta.empty ? consulta.docs[0].id : undefined; // Retorna o documento se ele existir com id, senão retorna undefined
     }
     
     public async PegarUsuarioPorEmail(email: any){
@@ -27,7 +27,7 @@ export class Dados {
     }
     
     
-    public async CriarUsuario(dadosUsuario: { nome: string; email: string; senha: string; diaCadastro:string }): Promise<DocumentReference<DocumentData>> { // Método para criar um usuário
+    public async CriarUsuario(dadosUsuario: { nome: string; email: string; senha: string; diaCadastro:string }) { // Método para criar um usuário
         const usuarioExistente = await this.PegarUsuarioPorEmail(dadosUsuario.email);  // Verifica se o email já está cadastrado
         if (usuarioExistente) { // Se o email já estiver cadastrado
             throw new Error('O email já está cadastrado.'); // Lança um erro se o email já estiver cadastrado

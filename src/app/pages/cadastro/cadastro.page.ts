@@ -59,14 +59,12 @@ export class CadastroPage implements OnInit {
           nome: this.nome,
           email: this.email,
           diaCadastro: new Date().toLocaleDateString(),
-          
         };
-
         this.salvarInformacoesUsuario(novoUsuario);
         this.mensagem = 'Usuário criado com sucesso!';
-        window.location.href = '/login';
         setTimeout(() => {
           this.mensagem = '';
+          window.location.href = "/login"
         }, 3000);
       })
       .catch((error) => {

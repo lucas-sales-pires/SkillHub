@@ -10,7 +10,7 @@
       >
 
       <ion-item>
-        @if(categorias.length > 0 ){
+      
           <ion-label>Selecione a Categoria</ion-label>
 
         <ion-select [(ngModel)]="catSelecionada">
@@ -18,9 +18,13 @@
             value="{{item}}"
             >{{item}}</ion-select-option
           >
+          }@empty {
+            <ion-select-option value="Nenhuma Categoria Cadastrada"
+              >Nenhuma Categoria Cadastrada</ion-select-option
+            >
           }
         </ion-select>
-        }
+        
       </ion-item>
 
       <ion-item>

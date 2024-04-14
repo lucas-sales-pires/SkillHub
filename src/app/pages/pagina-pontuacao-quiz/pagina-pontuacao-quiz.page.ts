@@ -24,11 +24,12 @@ export class PaginaPontuacaoQuizPage implements OnInit {
   async ngOnInit() {
     this.service.buscarUsuario()
         this.pontuacao = this.pontuacaoService.getPontuacao();
-         this.pontuacaoService.getQuantidadePerguntas().then((quantidade) => {
+        this.pontuacaoService.getQuantidadePerguntas().then((quantidade) => {
           this.quantidade = quantidade;
          })
+
         
       
     }
-    ;
-  }
+    ;}
+  
