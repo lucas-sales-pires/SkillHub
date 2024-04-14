@@ -3,7 +3,6 @@ import { FormsModule } from '@angular/forms';
 import { Dados } from 'src/app/services/dados/dados.service';
 import { deleteUser, getAuth } from 'firebase/auth';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
-import { Router } from '@angular/router';
 import {
   IonContent,
   IonCardHeader,
@@ -60,51 +59,55 @@ export class PerfilPage implements OnInit {
         this.nome = usuario['nome']; // Preenche o nome dele 
         this.cadastradoDesde = usuario['diaCadastro'];// Preenche a data de cadastro
       }
+      else{
+        this.service.deslogar(); // Utiliza a função de deslogar
+      }
    
     } 
   
   async editarPerfil() {
-    const auth = getAuth();
-    let usuarioAtual = auth.currentUser;
-    this.editando = true;
+    const auth = getAuth();  
+    let usuarioAtual = auth.currentUser; // Usuário Atual
+    this.editando = true; // A variável editando == true que sera utilizado no perfil.page.html
 
     
-    if (usuarioAtual?.email === this.email) {
-      const inputs = document.querySelectorAll('ion-input');
+    if (usuarioAtual?.email === this.email) { // Se o usuárioAtual.email for igual ao this.email
+      const inputs = document.querySelectorAll('ion-input'); // Pego todos os ion-input
 
-      inputs.forEach((element: HTMLIonInputElement) => {
-        if (element.id !== 'cadastradoDesdeInput') {
-          element.removeAttribute('disabled');
+      inputs.forEach((input) => { // Pega cada input 
+        if (input.id !== 'cadastradoDesdeInput') { // Menos o que tem o id de cadastradoDesdeInput
+          input.removeAttribute('disabled'); // Remove o atributo disabled e fica disponivel pra editar
         }
       });
-      const id = (await this.dados.PegarIdPorEmail(this.email)) || '';
-      this.dados
-        .AtualizarUsuario(id, {
+      const id = (await this.dados.PegarIdPorEmail(this.email)) || ''; // Pego o ID do usuario
+      this.dados 
+        .AtualizarUsuario(id, { // Utilizo a função para atualizar o Usuário 
           nome: this.nome,
           email: this.email,
         })
-        .subscribe(() => {
+        .subscribe(() => { // Como é um Observable utilizo o subscribe para emitir a mensagem de usuário atualizado
           console.log('Usuário atualizado com sucesso');
           
         });
     } else {
-      this.service.deslogar();
+      this.service.deslogar();// Deslogo, pois o usuario não está conectado
     }
   }
-  async sairDaConta(){
-    this.service.deslogar();
+  async Sair(){
+    this.service.deslogar()
   }
+
 
   async deletarConta() {
     const auth = getAuth();
     let usuarioAtual = auth.currentUser;
     if (usuarioAtual) {
       const id = (await this.dados.PegarIdPorEmail(this.email)) || '';
-      deleteUser(usuarioAtual).then(() => {
+      deleteUser(usuarioAtual).then(() => { // Deleto o usuário atual do Firebaase Autenthication
         console.log('Usuário deletado com sucesso no Autenthication');
-        this.dados.DeletarUsuario(id).subscribe(() => {
+        this.dados.DeletarUsuario(id).subscribe(() => { // Utilizo a função criado no service para deletar o usuário no firestore
           console.log('Usuário deletado com sucesso no Firestore');
-          this.service.deslogar();
+          this.service.deslogar(); // Deslogo, pois este usuário foi excluido
         });
       });
     } else {
