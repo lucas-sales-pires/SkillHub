@@ -53,7 +53,7 @@ export class CadastroPage  {
         return;
     }
     createUserWithEmailAndPassword(auth, this.email, this.senha)
-      .then((userCredential) => {
+      .then(() => {
         const novoUsuario = {
           nome: this.nome,
           email: this.email,
