@@ -40,7 +40,7 @@ import { AuthService } from 'src/app/services/autenticacao/auth.service';
 })
 export class PerfilPage implements OnInit {
   nome: string = '';
-  email: any  = '';
+  email: string  = '';
   cadastradoDesde: string = '';
   editando: boolean = false;
 
@@ -48,21 +48,19 @@ export class PerfilPage implements OnInit {
   constructor(private dados: Dados, private service: AuthService) {}
 
   ngOnInit(): void {
-    this.service.buscarUsuario().then((resultado: any) => {
-      this.email = resultado["email"];
-      this.carregarUsuario(this.email);
+    this.service.buscarUsuario().then((resultado: any) => { // buscarUsuário retorna os dados do usuário atual 
+      this.email = resultado["email"]; // Atribui ao this.email o email dele
+      this.carregarUsuario(this.email); //A função carregarUsuario precisa do email do usuário para ser executada
     })
   }
 
-  async carregarUsuario(email:any) {
-      const usuario = await this.dados.PegarUsuarioPorEmail(email);
-      if (usuario) {
-        this.nome = usuario['nome'];
-        this.cadastradoDesde = usuario['diaCadastro'];
+  async carregarUsuario(email:string) {
+      const usuario = await this.dados.PegarUsuarioPorEmail(email); // Usuário recebe uma requisição assincrona pra pegar os dados do usuário baseado no email
+      if (usuario) { // Se existir este usuário 
+        this.nome = usuario['nome']; // Preenche o nome dele 
+        this.cadastradoDesde = usuario['diaCadastro'];// Preenche a data de cadastro
       }
-      if(this.nome == ""){
-        this.carregarUsuario(email)
-      }
+   
     } 
   
   async editarPerfil() {
