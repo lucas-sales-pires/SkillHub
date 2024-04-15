@@ -59,6 +59,10 @@ export class PerguntasComponent implements OnInit {
 
   ngOnInit() {
     this.obterperguntas() //Assim que inicia já carrega esta função
+    
+    this.pontuacaoService.regredir30segundos() // Inicia o regredir de 30 segundos
+    this.pontuacaoService.contador30segundos() // Inicia o contador de 30 segundos
+
   }
 
 
@@ -69,6 +73,8 @@ export class PerguntasComponent implements OnInit {
     this.respostas1 = perguntas[this.indice]["respostas"][1]
     this.respostas2 = perguntas[this.indice]["respostas"][2]
     this.respostacorreta = perguntas[this.indice]["respostaCerta"] 
+
+
   }
   async proximaPergunta(){
     this.indice += 1 // Quando apertar em proxima pergunta o indice aumenta um para ir para proxima pergunta e respostas
@@ -79,6 +85,11 @@ export class PerguntasComponent implements OnInit {
       this.respostas1 = perguntas[this.indice]["respostas"][1];
       this.respostas2 = perguntas[this.indice]["respostas"][2];
       this.respostacorreta = perguntas[this.indice]["respostaCerta"];
+      this.pontuacaoService.setValorAtual(this.indice); // Seto o valor atual do indice
+      this.pontuacaoService.contador30segundos() // Inicia o contador de 30 segundos
+      this.pontuacaoService.regredir30segundos() // Inicia o regredir de 30 segundos
+
+      
       
     } else {
       this.router.navigate(['/pagina-pontuacao-quiz']);

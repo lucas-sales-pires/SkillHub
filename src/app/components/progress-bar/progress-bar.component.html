@@ -8,12 +8,12 @@
     aria-valuemin="0"
     aria-valuemax="100"
     >
-    <div class="progress-bar w-75"><span class="text-black">7/10</span></div> <!-- 75% carregado-->
+    <div class="progress-bar w-{{porcentagem}}"><span class="text-black">{{valorAtual}}/{{qntPerguntas}}</span></div> <!-- 75% carregado-->
   </div>
-  <ion-content >
+  <ion-content>
     <ion-card style="display: flex; flex-direction: column;">
-      <div id="circulo"  style="--value:60"></div> <!--Alterar com js progresso-->
-      <app-perguntas></app-perguntas>
+      <div id="circulo"  style="--value: {{cronometro}}">{{regredir}}</div> <!--Alterar com js progresso-->
+      <app-perguntas ></app-perguntas>
     </ion-card>
   </ion-content>
 </ion-content>

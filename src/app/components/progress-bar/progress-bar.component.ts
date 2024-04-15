@@ -1,11 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,effect } from '@angular/core';
 import { IonContent,IonIcon, IonCard, IonRadioGroup, IonRadio, IonInput, IonButton } from "@ionic/angular/standalone";
 import { addIcons } from 'ionicons';
 import { closeOutline } from 'ionicons/icons';
 import { PerguntasComponent } from '../perguntas/perguntas.component';
-
-
-
+import { PontuacaoService } from 'src/app/services/pontuacao/pontuacao.service';
 
 @Component({
   selector: 'app-progress-bar',
@@ -15,12 +13,29 @@ import { PerguntasComponent } from '../perguntas/perguntas.component';
   imports: [IonButton, IonInput, IonRadio, IonRadioGroup, IonCard, IonContent, IonIcon,PerguntasComponent]
 })
 export class ProgressBarComponent  implements OnInit {
+  valorAtual:any 
+  qntPerguntas:number = 0;
+  porcentagem :number=0;
+  cronometro:any 
+  regredir:any
+  ;
 
-  constructor() { addIcons({closeOutline})
 
+  constructor(private pontuacao:PontuacaoService) { 
+    addIcons({closeOutline})
+    effect(()=>{
+      this.valorAtual = this.pontuacao.valorAtual() // valor atual
+      this.porcentagem = (this.valorAtual / this.qntPerguntas) * 100 // porcentagem da barra
+      this.cronometro = this.pontuacao.cronometro() // cronometro recebe o valor do cronometro que esta no service
+      this.regredir = this.pontuacao.regredir() // regredir recebe o valor do regredir que esta no service
+    })
+  }
+  
+  
+  
+  ngOnInit() {
+    this.pontuacao.getQuantidadePerguntas().then(perguntas =>  this.qntPerguntas = perguntas ) // pega a quantidade de perguntas
 
-   }
-
-  ngOnInit() {}
+  }
 
 }
