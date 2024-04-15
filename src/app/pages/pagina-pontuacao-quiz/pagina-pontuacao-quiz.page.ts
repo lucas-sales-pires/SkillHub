@@ -19,12 +19,12 @@ export class PaginaPontuacaoQuizPage implements OnInit {
   quantidade: any;
   
   
-  constructor(private pontuacaoService: PontuacaoService,private service:AuthService,private router:Router) { }
+  constructor(private pontuacaoService: PontuacaoService,private service:AuthService) { }
   
   async ngOnInit() {
-    this.service.buscarUsuario()
-        this.pontuacao = this.pontuacaoService.getPontuacao();
-        this.pontuacaoService.getQuantidadePerguntas().then((quantidade) => {
+    this.service.buscarUsuario() // Busco o usuário
+        this.pontuacao = this.pontuacaoService.getPontuacao(); // Pego a pontuacao
+        this.pontuacaoService.getQuantidadePerguntas().then((quantidade) => { // Pego a quantidade
           this.quantidade = quantidade;
          })
 

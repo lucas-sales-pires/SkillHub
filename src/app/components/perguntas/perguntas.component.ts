@@ -58,30 +58,29 @@ export class PerguntasComponent implements OnInit {
   constructor(private quiz: QuizService,private router:Router,private pontuacaoService: PontuacaoService) {}
 
   ngOnInit() {
-    this.obterperguntas()
+    this.obterperguntas() //Assim que inicia já carrega esta função
   }
 
 
   async obterperguntas(){
-    let perguntas = await this.quiz.obterPerguntas()
-    this.perguntaAtual = perguntas[this.indice]["pergunta"]
+    let perguntas = await this.quiz.obterPerguntas() // Espera obter as perguntas
+    this.perguntaAtual = perguntas[this.indice]["pergunta"] // Depois que carrega os dados, pega a pergunta e os demais dados
     this.respostas0 = perguntas[this.indice]["respostas"][0]
     this.respostas1 = perguntas[this.indice]["respostas"][1]
     this.respostas2 = perguntas[this.indice]["respostas"][2]
-    this.respostacorreta = perguntas[this.indice]["respostaCerta"]
-    console.log(perguntas)
+    this.respostacorreta = perguntas[this.indice]["respostaCerta"] 
   }
   async proximaPergunta(){
-    this.indice += 1
-    let perguntas = await this.quiz.obterPerguntas()
-    if (this.indice < perguntas.length) {
-      this.perguntaAtual = perguntas[this.indice]["pergunta"];
+    this.indice += 1 // Quando apertar em proxima pergunta o indice aumenta um para ir para proxima pergunta e respostas
+    let perguntas = await this.quiz.obterPerguntas() // Obtem as perguntas de novo
+    if (this.indice < perguntas.length) { // Se o indice for menor que o tamanho da lista
+      this.perguntaAtual = perguntas[this.indice]["pergunta"]; // Prossigo em buscar os dados 
       this.respostas0 = perguntas[this.indice]["respostas"][0];
       this.respostas1 = perguntas[this.indice]["respostas"][1];
       this.respostas2 = perguntas[this.indice]["respostas"][2];
       this.respostacorreta = perguntas[this.indice]["respostaCerta"];
+      
     } else {
-      console.error("Índice excedeu o limite do array de perguntas.");
       this.router.navigate(['/pagina-pontuacao-quiz']);
 
     }
@@ -89,26 +88,25 @@ export class PerguntasComponent implements OnInit {
   }
 
   async apenasUm(){
-    const checkboxs = document.querySelectorAll('ion-checkbox');
-    checkboxs.forEach((checkbox) => {
-      checkbox.addEventListener('ionChange', async (e) => {
-        const checkbox = e.target as HTMLIonCheckboxElement;
-        if (checkbox.checked) {
-          checkboxs.forEach((cb) => {
-            if (cb !== checkbox) {
-              cb.checked = false;
+    const checkboxs = document.querySelectorAll('ion-checkbox'); // Pega todos os ion-checkbox
+    checkboxs.forEach((checkbox) => { // Para cada checkbox
+      checkbox.addEventListener('ionChange', async (e) => { // Adiciona o event IonChange
+        const checkbox = e.target; // Pega o target dele
+        if (checkbox.checked) { // Se ele estiver Marcado
+          checkboxs.forEach((cb) => { //Aqui, estamos iterando sobre todos os checkboxes novamente para desmarcar todos
+            if (cb !== checkbox) {//  exceto o que foi marcado recentemente.
+              cb.checked = false; 
             }
           });
-          this.opcaoSelecionada = checkbox.value;
+          this.opcaoSelecionada = checkbox.value;// Opcao selecionada recebe o valor do checkbox
    
         }
       });
     });
   }
   verificarResposta(respostaSelecionada: string) {
-    if (respostaSelecionada === this.respostacorreta) {
-      console.log("Resposta correta");
-      this.pontuacaoService.setPontuacao(this.pontuacao += 1);
+    if (respostaSelecionada === this.respostacorreta) { // Se a resposta selecionada for igual a resposta correta
+      this.pontuacaoService.setPontuacao(this.pontuacao += 1); // Eu seto a pontuacao com mais 1
     }
     else{
       console.log(respostaSelecionada)

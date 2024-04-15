@@ -12,7 +12,7 @@ export class QuizService {
     
   }
   public async adicionarPergunta(pergunta:Pergunta) {
-    const colecao  = collection(this.db,"quiz")
+    const colecao  = collection(this.db,"quiz") 
     return addDoc(colecao,pergunta)
     
   }
@@ -21,7 +21,7 @@ export class QuizService {
     const perguntas: Pergunta[] = [];
   
     const querySnapshot = await getDocs(colecao);
-     querySnapshot.forEach((doc) => {
+     querySnapshot.forEach((doc) => { // Para cada pergunta pego todos os dados 
       const pergunta: Pergunta = {
         id: doc.id,
         categoria:doc.data()['categoria'],

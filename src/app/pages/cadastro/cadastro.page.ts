@@ -52,14 +52,14 @@ export class CadastroPage  {
         }, 3000);
         return;
     }
-    createUserWithEmailAndPassword(auth, this.email, this.senha)
+    createUserWithEmailAndPassword(auth, this.email, this.senha) // Método proprio do firebase
       .then(() => {
-        const novoUsuario = {
+        const novoUsuario = { // Pego estes dados do usuario
           nome: this.nome,
           email: this.email,
           diaCadastro: new Date().toLocaleDateString(),
         };
-        this.salvarInformacoesUsuario(novoUsuario);
+        this.salvarInformacoesUsuario(novoUsuario); // Utilizo o metodo criado para salvar o usuário no firebasae
         this.mensagem = 'Usuário criado com sucesso!';
         setTimeout(() => {
           this.mensagem = '';
@@ -81,7 +81,7 @@ export class CadastroPage  {
   }
 
   salvarInformacoesUsuario(novoUsuario:any) {
-    this.cadastro.CriarUsuario(novoUsuario).then(
+    this.cadastro.CriarUsuario(novoUsuario).then( 
       () => {
         console.log('Informações do usuário salvas com sucesso!');
       },
