@@ -5,7 +5,7 @@
     </ion-toolbar>
     <ion-toolbar>
       <ion-list lines="none">
-        @if(autenticado == false ){
+        @if(!autenticado){
                 <ion-item
           routerLink="/login"
           lines="none"
@@ -25,7 +25,7 @@
           <ion-icon name="home-outline" slot="start"></ion-icon>
           <ion-label>Principal</ion-label>
         </ion-item>
-        @if(autenticado == true){
+        @if(autenticado){
 
       
         <ion-item routerLink="/perfil" lines="none" href="/perfil">
