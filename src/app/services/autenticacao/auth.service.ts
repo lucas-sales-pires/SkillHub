@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { getAuth, User } from 'firebase/auth';
 import { Dados } from '../dados/dados.service';
 
@@ -7,6 +7,7 @@ import { Dados } from '../dados/dados.service';
 })
 export class AuthService {
   usuarioAtual: User | null = null;
+  public autenticado = signal(false);
 
   constructor(private dados: Dados) { }
 
@@ -25,10 +26,20 @@ export class AuthService {
       }
     )})
   }
-  async deslogar(){
-    const auth = getAuth();
-    await auth.signOut();
-    window.location.href = '/login';
+  setAutenticado(autenticado: boolean) {
+    this.autenticado.set(autenticado);
+  }
+  getAutenticado() {
+    return this.autenticado();
+  }
+  async deslogar() {
+    try {
+      const auth = getAuth();
+      await auth.signOut();
+      window.location.href = "/login";
+    } catch (error) {
+      console.error('Erro ao deslogar:', error);
+    }
   }
 }
 

@@ -12,6 +12,7 @@ import {
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { Router } from '@angular/router';
 import { IonInput, IonButton, IonIcon, IonCardContent, IonCardTitle, IonContent, IonCard, IonCardHeader } from '@ionic/angular/standalone';
+import { AuthService } from 'src/app/services/autenticacao/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -24,10 +25,11 @@ export class LoginPage implements OnInit {
   email: string = '';
   senha: string = '';
   mensagem: string = '';
-  
 
-  constructor(private router: Router) {
-    addIcons({ eye, lockClosed, lockClosedOutline, eyeOutline, eyeOffOutline });
+  
+  constructor(private autenticado: AuthService) {
+    addIcons({ eye, lockClosed, lockClosedOutline, eyeOutline, eyeOffOutline }); 
+    
   }
   async logar() {
     const auth = getAuth();

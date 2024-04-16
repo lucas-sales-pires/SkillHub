@@ -7,6 +7,9 @@
   overflow: hidden;
   display: grid;
   place-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: calc(1rem + 1vw);
 }
 #circulo::before {
   content: "";
@@ -25,15 +28,8 @@
   -webkit-mask: radial-gradient(#0000 55%, #000 0);
   -webkit-mask-mode: alpha;
 }
-#circulo::after {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 3.5vw;
-}
 
-#circulo {
-  margin-left: auto;
-  margin-right: auto;
-}
+
 ion-card{
     background-color: #dcf8ff;
     display: flex;

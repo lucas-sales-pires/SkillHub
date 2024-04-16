@@ -27,9 +27,9 @@ export class PaginaPontuacaoQuizPage implements OnInit {
         this.pontuacaoService.getQuantidadePerguntas().then((quantidade) => { // Pego a quantidade
           this.quantidade = quantidade;
          })
-
-        
       
-    }
+        }
+        
     ;}
+    
   
