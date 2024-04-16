@@ -1,5 +1,5 @@
-<ion-content class="ion-padding w-100 ion-margin-horizontal "
-  ><span><ion-icon name="close-outline"></ion-icon></span>
+<ion-content class="ion-padding w-100 ion-margin-horizontal"
+  ><ion-button href="/pagina-pre-quiz"><ion-icon name="close-outline"></ion-icon></ion-button>
   <div  
     class="progress w-50 mx-auto d-flex"
     role="progressbar"
@@ -8,11 +8,11 @@
     aria-valuemin="0"
     aria-valuemax="100"
     >
-    <div class="progress-bar w-{{porcentagem}}"><span class="text-black">{{valorAtual}}/{{qntPerguntas}}</span></div> <!-- 75% carregado-->
+    <div class="progress-bar w-{{porcentagem}}"><span class="text-black">{{valorAtual}}/{{qntPerguntas}}</span></div>
   </div>
   <ion-content>
     <ion-card style="display: flex; flex-direction: column;">
-      <div id="circulo"  style="--value: {{cronometro}}">{{regredir}}</div> <!--Alterar com js progresso-->
+      <div id="circulo"  style="--value: {{cronometro}}">{{regredir}}</div> 
       <app-perguntas ></app-perguntas>
     </ion-card>
   </ion-content>

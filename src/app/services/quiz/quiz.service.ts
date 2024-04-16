@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore,collection,addDoc, getDocs, deleteDoc, doc } from '@angular/fire/firestore';
+import { Firestore,collection,addDoc, getDocs, deleteDoc, doc, where, query } from '@angular/fire/firestore';
 import { from, Observable } from 'rxjs';
 import { Pergunta } from 'src/app/components/perguntas/interfacePerguntas';
 
@@ -35,6 +35,26 @@ export class QuizService {
   
     return perguntas;
   }
+  async obterPerguntasPorCategoria(categoriaDesejada: string): Promise<Pergunta[]> {
+    const colecao = collection(this.db, "quiz");
+    const perguntas: Pergunta[] = [];
+  
+    const querySnapshot = await getDocs(query(collection(this.db, "quiz"), where("categoria", "==", categoriaDesejada)));
+  
+    querySnapshot.forEach((doc) => { // Para cada pergunta pego todos os dados 
+      const pergunta: Pergunta = {
+        id: doc.id,
+        categoria: doc.data()['categoria'],
+        pergunta: doc.data()['pergunta'],
+        respostas: doc.data()['respostas'],
+        respostaCerta: doc.data()['respostaCerta']
+      };
+      perguntas.push(pergunta);
+    });
+  
+    return perguntas;
+  }
+  
   async pegarIdDaPergunta(pergunta: string) {
     // Obtém a lista de perguntas
     const perguntas = await this.obterPerguntas();

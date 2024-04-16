@@ -16,27 +16,27 @@ import { QuizService } from 'src/app/services/quiz/quiz.service';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PontuacaoService } from 'src/app/services/pontuacao/pontuacao.service';
+import { NavbarComponent } from "../navbar/navbar.component";
 
 @Component({
-  selector: 'app-perguntas',
-  templateUrl: './perguntas.component.html',
-  styleUrls: ['./perguntas.component.scss'],
-  standalone: true,
-  imports: [IonCheckbox, 
-    IonInput,
-    IonButton,
-    IonRadio,
-    IonRadioGroup,
-    IonLabel,
-    IonItem,
-    IonList,
-    IonCardContent,
-    IonCardTitle,
-    IonCardHeader,
-    IonCard,
-    IonContent,
-    FormsModule
-  ],
+    selector: 'app-perguntas',
+    templateUrl: './perguntas.component.html',
+    styleUrls: ['./perguntas.component.scss'],
+    standalone: true,
+    imports: [IonCheckbox,
+        IonInput,
+        IonButton,
+        IonRadio,
+        IonRadioGroup,
+        IonLabel,
+        IonItem,
+        IonList,
+        IonCardContent,
+        IonCardTitle,
+        IonCardHeader,
+        IonCard,
+        IonContent,
+        FormsModule, NavbarComponent]
 })
 export class PerguntasComponent implements OnInit {
   perguntaAtual:string = '';
