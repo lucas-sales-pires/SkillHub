@@ -14,20 +14,21 @@ export class PontuacaoService {
   
   constructor(private quiz:QuizService) { }
   
-  
-  contador30segundos(){
+  contador30segundos() {
     let contador = 0;
+    const incremento = 100 / 30; // Incremento necessário para chegar a 100 em 30 segundos
     clearInterval(this.intervalo); // Cancela o intervalo anterior, se houver
 
     this.intervalo = setInterval(() => {
-        contador++;
-        this.cronometro.set(contador);
-        if (contador >= 30) {
-            clearInterval(this.intervalo); // Cancela o intervalo após 30 segundos
-            alert("acabou o tempo")
+        contador += incremento;
+        this.cronometro.set(Math.round(contador)); // Arredonda o contador para o número inteiro mais próximo
+        if (contador >= 100) { // Verifica se o contador atingiu 100 isso pra preencher o círculo
+            clearInterval(this.intervalo); // Cancela o intervalo
+            alert("Acabou o tempo!.");
         }
     }, 1000); // Chama a função a cada segundo
-  }
+}
+
   regredir30segundos(){
     let contador = 30;
     clearInterval(this.intervalo2); // Cancela o intervalo anterior, se houver
