@@ -31,6 +31,7 @@ import {
   helpOutline,
   personOutline,
   informationCircleOutline,
+  arrowUndoOutline,
 } from 'ionicons/icons';
 import { AuthService } from 'src/app/services/autenticacao/auth.service';
 
@@ -58,6 +59,7 @@ import { AuthService } from 'src/app/services/autenticacao/auth.service';
     IonButtons,
     IonMenuButton,
     IonImg,
+    
   ],
 })
 export class NavbarComponent implements OnInit {
@@ -79,8 +81,13 @@ export class NavbarComponent implements OnInit {
       helpOutline,
       personOutline,
       informationCircleOutline,
+      arrowUndoOutline,
     });
   }
 
   ngOnInit() {}
+
+  deslogar(){
+    this.autenticacao.deslogar();
+  }
 }

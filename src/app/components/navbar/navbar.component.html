@@ -33,11 +33,6 @@
           <ion-label>Perfil</ion-label>
         </ion-item>
         
-        <ion-item routerLink="/quiz" lines="none" href="/quiz">
-          <ion-icon name="help-outline" slot="start"></ion-icon>
-          <ion-label>Quiz</ion-label>
-        </ion-item>
-        
         <ion-item routerLink="/gerenciar-perguntas" lines="none" href="/gerenciar-perguntas">
           <ion-icon name="settings-outline" slot="start"></ion-icon>
           <ion-label>Gerenciar Perguntas</ion-label>
@@ -46,6 +41,11 @@
         <ion-item routerLink="/pagina-pre-quiz" lines="none" href="/pagina-pre-quiz">
           <ion-icon name="information-circle-outline" slot="start"></ion-icon>
           <ion-label>Escolha a Categoria</ion-label>
+        </ion-item>
+
+        <ion-item routerLink="/login" lines="none" href="/login" (click)="deslogar()">
+          <ion-icon name="arrow-undo-outline" slot="start"></ion-icon>
+          <ion-label>Sair</ion-label>
         </ion-item>
       }
 
