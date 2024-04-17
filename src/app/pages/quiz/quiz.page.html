@@ -1,4 +1,21 @@
-<ion-content>
-  <app-progress-bar/>
-</ion-content>
+@if(categoria != 'vazio'){
 
+  <ion-content>
+    <app-progress-bar/>
+  </ion-content>
+}
+
+@else {
+
+    <ion-card>
+      <ion-card-header>
+      <ion-card-title>
+        <h1 class="ion-text-center">Ops! não temos perguntas nesta categoria</h1>
+        <ion-button expand="block" (click)="voltar()">Voltar</ion-button>
+      </ion-card-title>
+    </ion-card-header>
+    </ion-card>
+    
+    
+    
+}

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { Firestore,collection,addDoc, getDocs, deleteDoc, doc, where, query } from '@angular/fire/firestore';
 import { from, Observable } from 'rxjs';
 import { Pergunta } from 'src/app/components/perguntas/interfacePerguntas';
@@ -7,9 +7,16 @@ import { Pergunta } from 'src/app/components/perguntas/interfacePerguntas';
   providedIn: 'root'
 })
 export class QuizService {
+  public categoria = signal("vazio")
 
   constructor(private db:Firestore) {
     
+  }
+  setCategoria(categoria: string) {
+    this.categoria.set(categoria)
+  }
+  getCategoria(){
+    return this.categoria()
   }
   public async adicionarPergunta(pergunta:Pergunta) {
     const colecao  = collection(this.db,"quiz") 
@@ -35,8 +42,7 @@ export class QuizService {
   
     return perguntas;
   }
-  async obterPerguntasPorCategoria(categoriaDesejada: string): Promise<Pergunta[]> {
-    const colecao = collection(this.db, "quiz");
+  async obterPerguntasPorCategoria(categoriaDesejada:any): Promise<Pergunta[]> {
     const perguntas: Pergunta[] = [];
   
     const querySnapshot = await getDocs(query(collection(this.db, "quiz"), where("categoria", "==", categoriaDesejada)));

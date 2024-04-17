@@ -5,6 +5,7 @@ import { closeOutline } from 'ionicons/icons';
 import { PerguntasComponent } from '../perguntas/perguntas.component';
 import { PontuacaoService } from 'src/app/services/pontuacao/pontuacao.service';
 import { NavbarComponent } from "../navbar/navbar.component";
+import { QuizService } from 'src/app/services/quiz/quiz.service';
 
 @Component({
     selector: 'app-progress-bar',
@@ -14,15 +15,14 @@ import { NavbarComponent } from "../navbar/navbar.component";
     imports: [IonButton, IonInput, IonRadio, IonRadioGroup, IonCard, IonContent, IonIcon, PerguntasComponent, NavbarComponent]
 })
 export class ProgressBarComponent  implements OnInit {
-  valorAtual:any 
+  valorAtual:any; 
   qntPerguntas:number = 0;
   porcentagem :number=0;
-  cronometro:any 
-  regredir:any
-  ;
+  cronometro:any; 
+  regredir:any;
 
 
-  constructor(private pontuacao:PontuacaoService) { 
+  constructor(private pontuacao:PontuacaoService,private quiz:QuizService) { 
     addIcons({closeOutline})
     effect(()=>{
       this.valorAtual = this.pontuacao.valorAtual() // valor atual
@@ -30,6 +30,9 @@ export class ProgressBarComponent  implements OnInit {
       this.cronometro = this.pontuacao.cronometro() // cronometro recebe o valor do cronometro que esta no service
       this.regredir = this.pontuacao.regredir() // regredir recebe o valor do regredir que esta no service
     })
+  }
+  voltar(){
+    this.quiz.setCategoria('vazio')
   }
   
   
