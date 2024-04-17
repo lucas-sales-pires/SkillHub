@@ -8,6 +8,7 @@ import { Pergunta } from 'src/app/components/perguntas/interfacePerguntas';
 })
 export class QuizService {
   public categoria = signal("vazio")
+  public quantidadePerguntas = signal(0)
 
   constructor(private db:Firestore) {
     
@@ -18,6 +19,7 @@ export class QuizService {
   getCategoria(){
     return this.categoria()
   }
+
   public async adicionarPergunta(pergunta:Pergunta) {
     const colecao  = collection(this.db,"quiz") 
     return addDoc(colecao,pergunta)
