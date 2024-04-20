@@ -59,6 +59,10 @@ export class QuizService {
       };
       perguntas.push(pergunta);
     });
+    for (let i = perguntas.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [perguntas[i], perguntas[j]] = [perguntas[j], perguntas[i]];
+    }
   
     return perguntas;
   }

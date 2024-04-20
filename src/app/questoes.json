@@ -1,0 +1,27 @@
+[
+    {
+      "name": "quiz/question1",
+      "fields": {
+        "question": { "stringValue": "Qual é a capital do Brasil?" },
+        "answers": { "arrayValue": { "values": [{ "stringValue": "Rio de Janeiro" }, { "stringValue": "São Paulo" }, { "stringValue": "Brasília" }, { "stringValue": "Salvador" }] }},
+        "correct_answer": { "stringValue": "Brasília" }
+      }
+    },
+    {
+      "name": "quiz/question2",
+      "fields": {
+        "question": { "stringValue": "Quem escreveu 'Dom Quixote'?" },
+        "answers": { "arrayValue": { "values": [{ "stringValue": "Machado de Assis" }, { "stringValue": "Miguel de Cervantes" }, { "stringValue": "Gabriel García Márquez" }, { "stringValue": "Jorge Luis Borges" }] }},
+        "correct_answer": { "stringValue": "Miguel de Cervantes" }
+      }
+    },
+    {
+      "name": "quiz/question3",
+      "fields": {
+        "question": { "stringValue": "Qual é o maior planeta do Sistema Solar?" },
+        "answers": { "arrayValue": { "values": [{ "stringValue": "Júpiter" }, { "stringValue": "Vênus" }, { "stringValue": "Terra" }, { "stringValue": "Saturno" }] }},
+        "correct_answer": { "stringValue": "Júpiter" }
+      }
+    }
+  ]
+  

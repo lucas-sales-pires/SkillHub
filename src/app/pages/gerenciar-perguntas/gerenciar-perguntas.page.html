@@ -38,9 +38,12 @@
         }
       </ion-item>
       <app-modal></app-modal>
-      <ion-button (click)="removerPerguntas(selecionada)">
+      @if(selecionada){
+         <ion-button (click)="removerPerguntas(selecionada)">
         <ion-icon slot="start" name="trash-outline"></ion-icon>Remover Pergunta
       </ion-button>
+      }
+     
     </ion-card-content>
     <ion-card>
       @if(pergunta != null  && catSelecionada != '' ){
