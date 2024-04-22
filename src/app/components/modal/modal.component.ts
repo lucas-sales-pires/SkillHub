@@ -54,11 +54,45 @@ export class ModalComponent  implements OnInit {
     this.quiz.adicionarPergunta(novaPergunta) // Utilizo a funcao do service quiz para adicionar a nova pergunta
     .then(() => {
       console.log('Pergunta adicionada com sucesso!');
-      window.location.href = '/gerenciar-perguntas';
+      this.router.navigateByUrl('/gerenciar-perguntas');
     })
     .catch((error) => {
       console.error('Erro ao adicionar pergunta:', error);
     });
     
   }
+  onFileChange(event: any) {
+    const file = event.target.files[0]; // O arquivo é o primeiro arquivo selecionado pelo usuário
+    const reader = new FileReader(); // FileReader é uma classe que permite que o JavaScript leia arquivos ou blobs de dados (como imagens) armazenados no computador do usuário.
+  
+    reader.onload = (e: any) => { // O evento onload é acionado quando o arquivo é carregado com sucesso
+      const jsonConteudo = e.target.result; // O conteúdo do arquivo é armazenado na variável jsonConteudo
+      try {
+        // Analisar o JSON
+        const perguntas: Pergunta[] = JSON.parse(jsonConteudo); // O conteúdo do arquivo é analisado como um array de perguntas
+        
+        // Iterar sobre cada pergunta e adicioná-la ao Firestore
+        perguntas.forEach((pergunta, index) => {
+          // Adicionar a pergunta ao serviço Quiz
+          this.quiz.adicionarPergunta(pergunta)
+            .then(() => {
+              console.log(`Pergunta ${index + 1} adicionada com sucesso!`);
+              if (index === perguntas.length - 1) {
+                //Quer dizer que chegou a última pergunta
+                // Navegar para a página de gerenciamento de perguntas após adicionar todas as perguntas
+                this.router.navigateByUrl('/gerenciar-perguntas');
+              }
+            })
+            .catch((error) => {
+              console.error(`Erro ao adicionar pergunta ${index + 1}:`, error);
+            });
+        });
+      } catch (error) {
+        console.error('Erro ao analisar o arquivo JSON:', error);
+      }
+    };
+  
+    reader.readAsText(file);
+  }
+  
 }

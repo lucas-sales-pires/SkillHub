@@ -1,0 +1,33 @@
+[
+    {
+      "categoria": "historia",
+      "pergunta": "Quem foi o primeiro presidente do Brasil?",
+      "respostas": ["Getúlio Vargas", "Juscelino Kubitschek", "Deodoro da Fonseca"],
+      "respostaCerta": "Deodoro da Fonseca"
+    },
+    {
+      "categoria": "historia",
+      "pergunta": "Qual evento marcou o início da Segunda Guerra Mundial?",
+      "respostas": ["Bombardeio de Pearl Harbor", "Assassinato de Franz Ferdinand", "Invasão da Polônia"],
+      "respostaCerta": "Invasão da Polônia"
+    },
+    {
+      "categoria": "historia",
+      "pergunta": "Quem foi o líder da Revolução Cubana em 1959?",
+      "respostas": ["Fidel Castro", "Che Guevara", "Raúl Castro"],
+      "respostaCerta": "Fidel Castro"
+    },
+    {
+      "categoria": "historia",
+      "pergunta": "Qual foi o último imperador do Brasil?",
+      "respostas": ["Dom Pedro II", "Dom João VI", "Dom Pedro I"],
+      "respostaCerta": "Dom Pedro II"
+    },
+    {
+      "categoria": "historia",
+      "pergunta": "Qual foi a primeira guerra mundial da história?",
+      "respostas": ["Guerra do Peloponeso", "Guerra Franco-Prussiana", "Guerra dos Cem Anos"],
+      "respostaCerta": "Guerra do Peloponeso"
+    }
+  ]
+  

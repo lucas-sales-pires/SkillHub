@@ -57,6 +57,11 @@
 
       
         </ion-list>
+
+        <ion-item>
+          <ion-label>Importar JSON</ion-label>
+          <input type="file" (change)="onFileChange($event)">
+        </ion-item>
       </ion-content>
     </ng-template>
   </ion-modal>
