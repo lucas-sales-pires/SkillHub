@@ -60,7 +60,8 @@
 
         <ion-item>
           <ion-label>Importar JSON</ion-label>
-          <input type="file" (change)="onFileChange($event)">
+          <input type="file" (change)="selecionarArquivo($event)">
+          <ion-button type="submit" (click)="enviarJson()" >Enviar</ion-button>
         </ion-item>
       </ion-content>
     </ng-template>

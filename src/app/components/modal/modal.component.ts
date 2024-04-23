@@ -23,7 +23,8 @@ export class ModalComponent  implements OnInit {
   resposta2:string='';
   resposta3:string='';
   respostaCerta:string= '';
-
+  perguntasCadastradas :any;
+  arquivoSelecionado: any;
   
   @ViewChild(IonModal) //@ViewChild: Essa anotação indica ao Angular que você deseja buscar um elemento específico na sua visualização. No caso, IonModal é o tipo de elemento que você deseja acessar.
 
@@ -61,18 +62,35 @@ export class ModalComponent  implements OnInit {
     });
     
   }
-  onFileChange(event: any) {
-    const file = event.target.files[0]; // O arquivo é o primeiro arquivo selecionado pelo usuário
-    const reader = new FileReader(); // FileReader é uma classe que permite que o JavaScript leia arquivos ou blobs de dados (como imagens) armazenados no computador do usuário.
+  selecionarArquivo(event: any) {
+    this.arquivoSelecionado = event.target.files[0]; // Salva o arquivo selecionado em uma variável de classe
+    
+  }
   
+
+  async enviarJson() {
+    if(!this.arquivoSelecionado) {
+      alert("Selecione um arquivo JSON!");
+      return;
+    }
+    const arquivo = this.arquivoSelecionado; // O arquivo é o primeiro arquivo selecionado pelo usuário
+    const reader = new FileReader(); // FileReader é uma classe que permite que o JavaScript leia arquivos ou blobs de dados (como imagens) armazenados no computador do usuário.
+    this.perguntasCadastradas = (await this.quiz.obterPerguntas()).map(p => p.pergunta); // Obtém as perguntas cadastradas no Firestore
     reader.onload = (e: any) => { // O evento onload é acionado quando o arquivo é carregado com sucesso
       const jsonConteudo = e.target.result; // O conteúdo do arquivo é armazenado na variável jsonConteudo
       try {
         // Analisar o JSON
         const perguntas: Pergunta[] = JSON.parse(jsonConteudo); // O conteúdo do arquivo é analisado como um array de perguntas
+         // Obtém as perguntas cadastradas no Firestore
+        
         
         // Iterar sobre cada pergunta e adicioná-la ao Firestore
         perguntas.forEach((pergunta, index) => {
+          if(this.perguntasCadastradas.includes(pergunta.pergunta)){
+            console.log(`Pergunta ${index + 1} já cadastrada!`);
+            return;
+          }
+
           // Adicionar a pergunta ao serviço Quiz
           this.quiz.adicionarPergunta(pergunta)
             .then(() => {
@@ -92,7 +110,7 @@ export class ModalComponent  implements OnInit {
       }
     };
   
-    reader.readAsText(file);
+    reader.readAsText(arquivo);
   }
   
 }
