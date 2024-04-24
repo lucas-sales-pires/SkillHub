@@ -113,6 +113,7 @@ export class PerguntasComponent implements OnInit {
     } else {
       this.router.navigate(['/pagina-pontuacao-quiz']);
     }
+    console.log(this.pontuacaoService.getValorAtual()); // Pego o valor atual do indice
   }
 
   async apenasUm() {

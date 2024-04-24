@@ -49,7 +49,8 @@ export class PontuacaoService {
   }
 
   setValorAtual(valor: number) {
-    this.valorAtual.set(valor+1);
+    valor += 1
+    this.valorAtual.set(valor);
   }
 
   setPontuacao(pontuacao: number) {
@@ -63,4 +64,5 @@ export class PontuacaoService {
     const perguntas = await this.quiz.obterPerguntasPorCategoria(this.quiz.getCategoria());
     return perguntas.length;
   }
+  
 }

@@ -17,7 +17,7 @@ import { QuizService } from 'src/app/services/quiz/quiz.service';
 export class ProgressBarComponent  implements OnInit {
   valorAtual:any; 
   qntPerguntas:number = 0;
-  porcentagem :number=0;
+  porcentagem :number = 0;
   cronometro:any; 
   regredir:any;
 
@@ -26,20 +26,23 @@ export class ProgressBarComponent  implements OnInit {
     addIcons({closeOutline})
     effect(()=>{
       this.valorAtual = this.pontuacao.valorAtual() // valor atual
-      this.porcentagem = (this.valorAtual / this.qntPerguntas) * 100 // porcentagem da barra
+      this.porcentagem = this.qntPerguntas === 0 ? 0 : Math.round((this.valorAtual / this.qntPerguntas) * 100);
       this.cronometro = this.pontuacao.cronometro() // cronometro recebe o valor do cronometro que esta no service
       this.regredir = this.pontuacao.regredir() // regredir recebe o valor do regredir que esta no service
+      console.log("valor atual" + this.valorAtual)
+      console.log("porcentagem" + this.porcentagem)
+      console.log("cronometro" + this.cronometro)
+      console.log("regredir" + this.regredir)
     })
+  
   }
+
   voltar(){
     this.quiz.setCategoria('vazio')
   }
   
-  
-  
   ngOnInit() {
-    this.pontuacao.getQuantidadePerguntas().then(perguntas =>  this.qntPerguntas = perguntas ) // pega a quantidade de perguntas
-
+    this.pontuacao.getQuantidadePerguntas().then(perguntas =>  this.qntPerguntas = perguntas) // pega a quantidade de perguntas
   }
 
 }
