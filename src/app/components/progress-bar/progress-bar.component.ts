@@ -1,4 +1,4 @@
-import { Component, OnInit,effect } from '@angular/core';
+import { Component, OnInit,effect, signal } from '@angular/core';
 import { IonContent,IonIcon, IonCard, IonRadioGroup, IonRadio, IonInput, IonButton } from "@ionic/angular/standalone";
 import { addIcons } from 'ionicons';
 import { closeOutline } from 'ionicons/icons';
@@ -21,18 +21,14 @@ export class ProgressBarComponent  implements OnInit {
   cronometro:any; 
   regredir:any;
 
-
   constructor(private pontuacao:PontuacaoService,private quiz:QuizService) { 
     addIcons({closeOutline})
     effect(()=>{
       this.valorAtual = this.pontuacao.valorAtual() // valor atual
-      this.porcentagem = this.qntPerguntas === 0 ? 0 : Math.round((this.valorAtual / this.qntPerguntas) * 100);
+      this.porcentagem = this.qntPerguntas === 0 ? 0 : Math.floor((this.valorAtual / this.qntPerguntas) * 100);
       this.cronometro = this.pontuacao.cronometro() // cronometro recebe o valor do cronometro que esta no service
       this.regredir = this.pontuacao.regredir() // regredir recebe o valor do regredir que esta no service
-      console.log("valor atual" + this.valorAtual)
-      console.log("porcentagem" + this.porcentagem)
-      console.log("cronometro" + this.cronometro)
-      console.log("regredir" + this.regredir)
+      
     })
   
   }
