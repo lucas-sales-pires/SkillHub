@@ -53,8 +53,8 @@ export class PontuacaoService {
     this.valorAtual.set(valor);
   }
 
-  setPontuacao(pontuacao: number) {
-    this.pontuacao = pontuacao;
+  setPontuacao() {
+    this.pontuacao += 1;
   }
 
   getPontuacao(): number {

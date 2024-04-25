@@ -58,6 +58,7 @@ export class PerguntasComponent implements OnInit {
   indice: number = 0;
   pontuacao: number = 0;
   categoriaEscolhida: any;
+  respostaSelecionada: string = '';
 
   constructor(
     private quiz: QuizService,
@@ -79,6 +80,9 @@ export class PerguntasComponent implements OnInit {
   }
 
   async obterperguntas() {
+    if(this.respostaSelecionada == this.respostacorreta){
+      this.pontuacaoService.setPontuacao(); // Soma 1 na pontuacao
+    }
     let perguntas = await this.quiz.obterPerguntasPorCategoria(
       this.quiz.getCategoria()
     ); // Espera obter as perguntas
@@ -87,15 +91,20 @@ export class PerguntasComponent implements OnInit {
       this.quiz.setCategoria('vazio');
       return;
     }
+ 
     this.perguntaAtual = perguntas[this.indice]['pergunta']; // Depois que carrega os dados, pega a pergunta e os demais dados
     this.respostas0 = perguntas[this.indice]['respostas'][0];
     this.respostas1 = perguntas[this.indice]['respostas'][1];
     this.respostas2 = perguntas[this.indice]['respostas'][2];
     this.respostacorreta = perguntas[this.indice]['respostaCerta'];
+    
     this.pontuacaoService.regredir30segundos(); // Inicia o regredir de 30 segundos
     this.pontuacaoService.contador30segundos(); // Inicia o contador de 30 segundos
   }
   async proximaPergunta() {
+    if(this.respostaSelecionada == this.respostacorreta){
+      this.pontuacaoService.setPontuacao(); // Soma 1 na pontuacao
+    }
     this.indice += 1; // Quando apertar em proxima pergunta o indice aumenta um para ir para proxima pergunta e respostas
     let perguntas = await this.quiz.obterPerguntasPorCategoria(
       this.quiz.getCategoria()
@@ -110,6 +119,7 @@ export class PerguntasComponent implements OnInit {
       this.pontuacaoService.setValorAtual(this.indice); // Seto o valor atual do indice
       this.pontuacaoService.contador30segundos(); // Inicia o contador de 30 segundos
       this.pontuacaoService.regredir30segundos(); // Inicia o regredir de 30 segundos
+      
     } else {
       this.router.navigate(['/pagina-pontuacao-quiz']);
     }
@@ -137,12 +147,11 @@ export class PerguntasComponent implements OnInit {
       });
     });
   }
-  verificarResposta(respostaSelecionada: string) {
-    if (respostaSelecionada === this.respostacorreta) {
-      // Se a resposta selecionada for igual a resposta correta
-      this.pontuacaoService.setPontuacao((this.pontuacao += 1)); // Eu seto a pontuacao com mais 1
-    } else {
-      console.log(respostaSelecionada);
-    }
-  }
+
+verificarResposta(respostaSelecionada: string) {
+  this.respostaSelecionada = respostaSelecionada;
+  console.log(this.respostaSelecionada);
+  console.log(this.pontuacaoService.getPontuacao());
+
+}
 }
