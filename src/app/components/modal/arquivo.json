@@ -1,33 +1,428 @@
 [
-    {
-      "categoria": "historia",
-      "pergunta": "Quem foi o primeiro presidente do Brasil?",
-      "respostas": ["Getúlio Vargas", "Juscelino Kubitschek", "Deodoro da Fonseca"],
-      "respostaCerta": "Deodoro da Fonseca"
-    },
-    {
-      "categoria": "historia",
-      "pergunta": "Qual evento marcou o início da Segunda Guerra Mundial?",
-      "respostas": ["Bombardeio de Pearl Harbor", "Assassinato de Franz Ferdinand", "Invasão da Polônia"],
-      "respostaCerta": "Invasão da Polônia"
-    },
-    {
-      "categoria": "historia",
-      "pergunta": "Quem foi o líder da Revolução Cubana em 1959?",
-      "respostas": ["Fidel Castro", "Che Guevara", "Raúl Castro"],
-      "respostaCerta": "Fidel Castro"
-    },
-    {
-      "categoria": "historia",
-      "pergunta": "Qual foi o último imperador do Brasil?",
-      "respostas": ["Dom Pedro II", "Dom João VI", "Dom Pedro I"],
-      "respostaCerta": "Dom Pedro II"
-    },
-    {
-      "categoria": "historia",
-      "pergunta": "Qual foi a primeira guerra mundial da história?",
-      "respostas": ["Guerra do Peloponeso", "Guerra Franco-Prussiana", "Guerra dos Cem Anos"],
-      "respostaCerta": "Guerra do Peloponeso"
-    }
-  ]
-  
+  {
+    "categoria": "programação",
+    "pergunta": "O que é programação orientada a objetos?",
+    "respostas": ["Paradigma de programação que organiza o código em objetos interativos", "Método de programação baseado em algoritmos simples", "Linguagem de programação específica para objetos"],
+    "respostaCerta": "Paradigma de programação que organiza o código em objetos interativos"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "Qual é a diferença entre uma linguagem de programação interpretada e compilada?",
+    "respostas": ["Uma linguagem interpretada é traduzida linha por linha durante a execução, enquanto uma linguagem compilada é traduzida inteiramente antes da execução", "Uma linguagem interpretada é mais rápida que uma linguagem compilada", "Uma linguagem compilada é mais fácil de depurar que uma linguagem interpretada"],
+    "respostaCerta": "Uma linguagem interpretada é traduzida linha por linha durante a execução, enquanto uma linguagem compilada é traduzida inteiramente antes da execução"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é Git?",
+    "respostas": ["Sistema de controle de versão usado para rastrear alterações no código-fonte durante o desenvolvimento de software", "Linguagem de programação amplamente utilizada para desenvolvimento web", "Plataforma de hospedagem de código-fonte"],
+    "respostaCerta": "Sistema de controle de versão usado para rastrear alterações no código-fonte durante o desenvolvimento de software"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é uma variável em programação?",
+    "respostas": ["Um espaço de armazenamento que contém um valor", "Um bloco de código que executa uma tarefa específica", "Um tipo de dado usado para realizar operações matemáticas"],
+    "respostaCerta": "Um espaço de armazenamento que contém um valor"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é um loop em programação?",
+    "respostas": ["Uma estrutura que permite a execução repetida de um bloco de código", "Uma mensagem de erro durante a compilação de um programa", "Uma função que retorna um valor específico"],
+    "respostaCerta": "Uma estrutura que permite a execução repetida de um bloco de código"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é uma função em programação?",
+    "respostas": ["Um bloco de código que realiza uma tarefa específica e pode ser chamado várias vezes", "Um comentário no código que explica sua funcionalidade", "Um tipo de dado usado para armazenar informações"],
+    "respostaCerta": "Um bloco de código que realiza uma tarefa específica e pode ser chamado várias vezes"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é um algoritmo?",
+    "respostas": ["Um conjunto de instruções para resolver um problema", "Um tipo de linguagem de programação", "Um software de edição de código"],
+    "respostaCerta": "Um conjunto de instruções para resolver um problema"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "Qual é a diferença entre uma função síncrona e uma função assíncrona?",
+    "respostas": ["Uma função síncrona espera a conclusão de uma operação antes de continuar, enquanto uma função assíncrona não espera e continua a execução", "Uma função assíncrona é mais rápida que uma função síncrona", "Uma função síncrona é mais complexa que uma função assíncrona"],
+    "respostaCerta": "Uma função síncrona espera a conclusão de uma operação antes de continuar, enquanto uma função assíncrona não espera e continua a execução"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é uma estrutura de dados em programação?",
+    "respostas": ["Uma forma de organizar e armazenar dados para facilitar o acesso e a manipulação", "Um tipo de comentário usado para documentar o código", "Um tipo de linguagem de programação orientada a objetos"],
+    "respostaCerta": "Uma forma de organizar e armazenar dados para facilitar o acesso e a manipulação"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é um array em programação?",
+    "respostas": ["Uma estrutura de dados que armazena uma coleção de elementos do mesmo tipo", "Um tipo de operador lógico utilizado em expressões condicionais", "Uma função que retorna um valor específico"],
+    "respostaCerta": "Uma estrutura de dados que armazena uma coleção de elementos do mesmo tipo"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é uma API?",
+    "respostas": ["Interface de Programação de Aplicativos, que define como diferentes softwares podem interagir entre si", "Um tipo de linguagem de programação utilizada para desenvolvimento web", "Um formato de arquivo utilizado para armazenar dados de configuração"],
+    "respostaCerta": "Interface de Programação de Aplicativos, que define como diferentes softwares podem interagir entre si"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é a recursividade em programação?",
+    "respostas": ["Um conceito onde uma função chama a si mesma para resolver um problema", "Um tipo de estrutura de dados utilizada para armazenar informações hierárquicas", "Um método de organização de código em módulos independentes"],
+    "respostaCerta": "Um conceito onde uma função chama a si mesma para resolver um problema"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é um banco de dados?",
+    "respostas": ["Um sistema de armazenamento de dados que permite a organização e recuperação eficiente de informações", "Um tipo de linguagem de programação utilizada para consultas complexas", "Um tipo de estrutura de dados que armazena dados em tabelas"],
+    "respostaCerta": "Um sistema de armazenamento de dados que permite a organização e recuperação eficiente de informações"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é MVC?",
+    "respostas": ["Model-View-Controller, um padrão de arquitetura de software que separa a aplicação em três componentes: modelo, visão e controlador", "Método de Verificação de Código, utilizado para garantir a qualidade do software", "Modelo de Visualização de Código, utilizado para criar interfaces de usuário"],
+    "respostaCerta": "Model-View-Controller, um padrão de arquitetura de software que separa a aplicação em três componentes: modelo, visão e controlador"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é um framework?",
+    "respostas": ["Um conjunto de bibliotecas e ferramentas que facilitam o desenvolvimento de software em uma determinada linguagem", "Um tipo de linguagem de programação utilizada para criar interfaces de usuário", "Um formato de arquivo utilizado para armazenar dados de configuração"],
+    "respostaCerta": "Um conjunto de bibliotecas e ferramentas que facilitam o desenvolvimento de software em uma determinada linguagem"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é uma classe em programação orientada a objetos?",
+    "respostas": ["Um modelo para criar objetos que possuem atributos e métodos", "Uma estrutura de dados que armazena uma coleção de elementos do mesmo tipo", "Um tipo de variável utilizada para armazenar valores inteiros"],
+    "respostaCerta": "Um modelo para criar objetos que possuem atributos e métodos"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é um método em programação orientada a objetos?",
+    "respostas": ["Uma função associada a um objeto que define seu comportamento", "Um tipo de estrutura de dados utilizada para armazenar informações hierárquicas", "Um tipo de operador lógico utilizado em expressões condicionais"],
+    "respostaCerta": "Uma função associada a um objeto que define seu comportamento"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é a herança em programação orientada a objetos?",
+    "respostas": ["Um conceito onde uma classe pode herdar atributos e métodos de outra classe", "Um tipo de erro comum durante a compilação de um programa", "Um método de organização de código em módulos independentes"],
+    "respostaCerta": "Um conceito onde uma classe pode herdar atributos e métodos de outra classe"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é o polimorfismo em programação orientada a objetos?",
+    "respostas": ["Um conceito onde objetos de diferentes classes podem ser tratados de forma semelhante", "Um tipo de linguagem de programação utilizada para desenvolvimento web", "Um método de organização de código em módulos independentes"],
+    "respostaCerta": "Um conceito onde objetos de diferentes classes podem ser tratados de forma semelhante"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é a encapsulação em programação orientada a objetos?",
+    "respostas": ["Um conceito onde os detalhes internos de um objeto são ocultados", "Um tipo de linguagem de programação utilizada para desenvolvimento web", "Um método de organização de código em módulos independentes"],
+    "respostaCerta": "Um conceito onde os detalhes internos de um objeto são ocultados"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é uma exceção em programação?",
+    "respostas": ["Um erro que ocorre durante a execução de um programa e interrompe seu fluxo normal", "Um tipo de estrutura de dados utilizada para armazenar informações hierárquicas", "Um método de organização de código em módulos independentes"],
+    "respostaCerta": "Um erro que ocorre durante a execução de um programa e interrompe seu fluxo normal"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é um método construtor em programação orientada a objetos?",
+    "respostas": ["Um método especial que é executado automaticamente quando um objeto é criado", "Um tipo de função utilizada para realizar operações matemáticas", "Um tipo de estrutura de dados que armazena uma coleção de elementos do mesmo tipo"],
+    "respostaCerta": "Um método especial que é executado automaticamente quando um objeto é criado"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é o DRY em programação?",
+    "respostas": ["Princípio de programação que significa Don't Repeat Yourself, que incentiva a reutilização de código", "Um tipo de linguagem de programação utilizada para desenvolvimento web", "Um formato de arquivo utilizado para armazenar dados de configuração"],
+    "respostaCerta": "Princípio de programação que significa Don't Repeat Yourself, que incentiva a reutilização de código"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é um teste unitário?",
+    "respostas": ["Um tipo de teste que verifica o funcionamento de uma unidade de código isoladamente", "Um tipo de estrutura de dados utilizada para armazenar informações hierárquicas", "Um método de organização de código em módulos independentes"],
+    "respostaCerta": "Um tipo de teste que verifica o funcionamento de uma unidade de código isoladamente"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é o SOLID em programação?",
+    "respostas": ["Princípios de design de software que visam criar código mais limpo e modular", "Um tipo de linguagem de programação utilizada para desenvolvimento web", "Um formato de arquivo utilizado para armazenar dados de configuração"],
+    "respostaCerta": "Princípios de design de software que visam criar código mais limpo e modular"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é um método estático em programação?",
+    "respostas": ["Um método que pode ser chamado diretamente na classe, sem a necessidade de criar um objeto", "Um tipo de estrutura de dados que armazena uma coleção de elementos do mesmo tipo", "Um tipo de variável utilizada para armazenar valores inteiros"],
+    "respostaCerta": "Um método que pode ser chamado diretamente na classe, sem a necessidade de criar um objeto"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é o REST em programação?",
+    "respostas": ["Estilo arquitetural que define um conjunto de restrições para criar serviços web", "Um tipo de linguagem de programação utilizada para desenvolvimento web", "Um formato de arquivo utilizado para armazenar dados de configuração"],
+    "respostaCerta": "Estilo arquitetural que define um conjunto de restrições para criar serviços web"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é o TDD?",
+    "respostas": ["Desenvolvimento Orientado a Testes, uma abordagem onde os testes são escritos antes do código de produção", "Um tipo de linguagem de programação utilizada para desenvolvimento web", "Um formato de arquivo utilizado para armazenar dados de configuração"],
+    "respostaCerta": "Desenvolvimento Orientado a Testes, uma abordagem onde os testes são escritos antes do código de produção"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é um ORM?",
+    "respostas": ["Mapeamento Objeto-Relacional, uma técnica que mapeia objetos para tabelas de banco de dados", "Um tipo de linguagem de programação utilizada para desenvolvimento web", "Um formato de arquivo utilizado para armazenar dados de configuração"],
+    "respostaCerta": "Mapeamento Objeto-Relacional, uma técnica que mapeia objetos para tabelas de banco de dados"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é a injeção de dependência?",
+    "respostas": ["Padrão de design onde as dependências de um objeto são injetadas em sua construção", "Um tipo de erro comum durante a compilação de um programa", "Um método de organização de código em módulos independentes"],
+    "respostaCerta": "Padrão de design onde as dependências de um objeto são injetadas em sua construção"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é o TypeScript?",
+    "respostas": ["Linguagem de programação que adiciona tipagem estática ao JavaScript", "Um tipo de linguagem de programação utilizada para desenvolvimento web", "Um formato de arquivo utilizado para armazenar dados de configuração"],
+    "respostaCerta": "Linguagem de programação que adiciona tipagem estática ao JavaScript"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é o Python?",
+    "respostas": ["Linguagem de programação de alto nível, interpretada e de propósito geral", "Um tipo de linguagem de programação utilizada para desenvolvimento web", "Um formato de arquivo utilizado para armazenar dados de configuração"],
+    "respostaCerta": "Linguagem de programação de alto nível, interpretada e de propósito geral"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é o Java?",
+    "respostas": ["Linguagem de programação de propósito geral, orientada a objetos e fortemente tipada", "Um tipo de linguagem de programação utilizada para desenvolvimento web", "Um formato de arquivo utilizado para armazenar dados de configuração"],
+    "respostaCerta": "Linguagem de programação de propósito geral, orientada a objetos e fortemente tipada"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é o C++?",
+    "respostas": ["Linguagem de programação de propósito geral, baseada em C e com suporte a programação orientada a objetos", "Um tipo de linguagem de programação utilizada para desenvolvimento web", "Um formato de arquivo utilizado para armazenar dados de configuração"],
+    "respostaCerta": "Linguagem de programação de propósito geral, baseada em C e com suporte a programação orientada a objetos"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é o HTML?",
+    "respostas": ["Linguagem de marcação utilizada para criar páginas web", "Um tipo de linguagem de programação utilizada para desenvolvimento web", "Um formato de arquivo utilizado para armazenar dados de configuração"],
+    "respostaCerta": "Linguagem de marcação utilizada para criar páginas web"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é o CSS?",
+    "respostas": ["Linguagem de estilo utilizada para estilizar páginas web", "Um tipo de linguagem de programação utilizada para desenvolvimento web", "Um formato de arquivo utilizado para armazenar dados de configuração"],
+    "respostaCerta": "Linguagem de estilo utilizada para estilizar páginas web"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é o JavaScript?",
+    "respostas": ["Linguagem de programação de alto nível, interpretada e de propósito geral, amplamente utilizada para desenvolvimento web", "Um tipo de linguagem de programação utilizada para desenvolvimento web", "Um formato de arquivo utilizado para armazenar dados de configuração"],
+    "respostaCerta": "Linguagem de programação de alto nível, interpretada e de propósito geral, amplamente utilizada para desenvolvimento web"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é um IDE?",
+    "respostas": ["Ambiente de Desenvolvimento Integrado, uma ferramenta que combina editor de código, compilador e depurador", "Um tipo de linguagem de programação utilizada para desenvolvimento web", "Um formato de arquivo utilizado para armazenar dados de configuração"],
+    "respostaCerta": "Ambiente de Desenvolvimento Integrado, uma ferramenta que combina editor de código, compilador e depurador"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é um framework front-end?",
+    "respostas": ["Conjunto de ferramentas e bibliotecas utilizadas para desenvolver a interface de usuário de um aplicativo web", "Um tipo de linguagem de programação utilizada para desenvolvimento web", "Um formato de arquivo utilizado para armazenar dados de configuração"],
+    "respostaCerta": "Conjunto de ferramentas e bibliotecas utilizadas para desenvolver a interface de usuário de um aplicativo web"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é um framework back-end?",
+    "respostas": ["Conjunto de ferramentas e bibliotecas utilizadas para desenvolver a lógica de negócios de um aplicativo web", "Um tipo de linguagem de programação utilizada para desenvolvimento web", "Um formato de arquivo utilizado para armazenar dados de configuração"],
+    "respostaCerta": "Conjunto de ferramentas e bibliotecas utilizadas para desenvolver a lógica de negócios de um aplicativo web"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é o HTTP?",
+    "respostas": ["Protocolo de Transferência de Hipertexto, utilizado para transferir dados na web", "Um tipo de linguagem de programação utilizada para desenvolvimento web", "Um formato de arquivo utilizado para armazenar dados de configuração"],
+    "respostaCerta": "Protocolo de Transferência de Hipertexto, utilizado para transferir dados na web"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é o HTTPS?",
+    "respostas": ["Protocolo de Transferência de Hipertexto Seguro, uma versão segura do HTTP que utiliza criptografia", "Um tipo de linguagem de programação utilizada para desenvolvimento web", "Um formato de arquivo utilizado para armazenar dados de configuração"],
+    "respostaCerta": "Protocolo de Transferência de Hipertexto Seguro, uma versão segura do HTTP que utiliza criptografia"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é uma URL?",
+    "respostas": ["Localizador Uniforme de Recursos, uma sequência de caracteres que especifica o endereço de um recurso na web", "Um tipo de linguagem de programação utilizada para desenvolvimento web", "Um formato de arquivo utilizado para armazenar dados de configuração"],
+    "respostaCerta": "Localizador Uniforme de Recursos, uma sequência de caracteres que especifica o endereço de um recurso na web"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é um cookie?",
+    "respostas": ["Pequeno arquivo de texto armazenado no navegador do usuário, utilizado para rastrear informações sobre sua atividade na web", "Um tipo de linguagem de programação utilizada para desenvolvimento web", "Um formato de arquivo utilizado para armazenar dados de configuração"],
+    "respostaCerta": "Pequeno arquivo de texto armazenado no navegador do usuário, utilizado para rastrear informações sobre sua atividade na web"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é um servidor web?",
+    "respostas": ["Software responsável por receber solicitações HTTP de clientes e enviar páginas web como resposta", "Um tipo de linguagem de programação utilizada para desenvolvimento web", "Um formato de arquivo utilizado para armazenar dados de configuração"],
+    "respostaCerta": "Software responsável por receber solicitações HTTP de clientes e enviar páginas web como resposta"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é uma requisição HTTP?",
+    "respostas": ["Pedido feito pelo cliente a um servidor web para obter um recurso específico", "Um tipo de linguagem de programação utilizada para desenvolvimento web", "Um formato de arquivo utilizado para armazenar dados de configuração"],
+    "respostaCerta": "Pedido feito pelo cliente a um servidor web para obter um recurso específico"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é uma resposta HTTP?",
+    "respostas": ["Resposta enviada pelo servidor web ao cliente após receber uma requisição, contendo o recurso solicitado ou informações sobre o status da requisição", "Um tipo de linguagem de programação utilizada para desenvolvimento web", "Um formato de arquivo utilizado para armazenar dados de configuração"],
+    "respostaCerta": "Resposta enviada pelo servidor web ao cliente após receber uma requisição, contendo o recurso solicitado ou informações sobre o status da requisição"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é o DOM?",
+    "respostas": ["Modelo de Objeto de Documento, uma representação em árvore dos elementos HTML de uma página web", "Um tipo de linguagem de programação utilizada para desenvolvimento web", "Um formato de arquivo utilizado para armazenar dados de configuração"],
+    "respostaCerta": "Modelo de Objeto de Documento, uma representação em árvore dos elementos HTML de uma página web"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é o AJAX?",
+    "respostas": ["Tecnologia que permite atualizar partes de uma página web sem recarregá-la completamente", "Um tipo de linguagem de programação utilizada para desenvolvimento web", "Um formato de arquivo utilizado para armazenar dados de configuração"],
+    "respostaCerta": "Tecnologia que permite atualizar partes de uma página web sem recarregá-la completamente"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é o JSON?",
+    "respostas": ["Formato de dados leve e de fácil leitura utilizado para troca de informações entre sistemas", "Um tipo de linguagem de programação utilizada para desenvolvimento web", "Um formato de arquivo utilizado para armazenar dados de configuração"],
+    "respostaCerta": "Formato de dados leve e de fácil leitura utilizado para troca de informações entre sistemas"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é o XML?",
+    "respostas": ["Linguagem de marcação utilizada para representar dados de forma estruturada e legível por máquina", "Um tipo de linguagem de programação utilizada para desenvolvimento web", "Um formato de arquivo utilizado para armazenar dados de configuração"],
+    "respostaCerta": "Linguagem de marcação utilizada para representar dados de forma estruturada e legível por máquina"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é o SQL?",
+    "respostas": ["Structured Query Language, uma linguagem utilizada para realizar consultas em bancos de dados relacionais", "Um tipo de linguagem de programação utilizada para desenvolvimento web", "Um formato de arquivo utilizado para armazenar dados de configuração"],
+    "respostaCerta": "Structured Query Language, uma linguagem utilizada para realizar consultas em bancos de dados relacionais"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é o SSL?",
+    "respostas": ["Secure Sockets Layer, um protocolo de segurança que garante a comunicação segura na internet", "Um tipo de linguagem de programação utilizada para desenvolvimento web", "Um formato de arquivo utilizado para armazenar dados de configuração"],
+    "respostaCerta": "Secure Sockets Layer, um protocolo de segurança que garante a comunicação segura na internet"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é o JWT?",
+    "respostas": ["JSON Web Token, um método compacto e seguro para transmitir informações entre partes como um objeto JSON", "Um tipo de linguagem de programação utilizada para desenvolvimento web", "Um formato de arquivo utilizado para armazenar dados de configuração"],
+    "respostaCerta": "JSON Web Token, um método compacto e seguro para transmitir informações entre partes como um objeto JSON"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é o Docker?",
+    "respostas": ["Plataforma de software que permite a criação, o teste e a implantação de aplicativos em contêineres", "Um tipo de linguagem de programação utilizada para desenvolvimento web", "Um formato de arquivo utilizado para armazenar dados de configuração"],
+    "respostaCerta": "Plataforma de software que permite a criação, o teste e a implantação de aplicativos em contêineres"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é o Kubernetes?",
+    "respostas": ["Sistema de código aberto para automação, implantação, escalonamento e operação de aplicativos em contêineres", "Um tipo de linguagem de programação utilizada para desenvolvimento web", "Um formato de arquivo utilizado para armazenar dados de configuração"],
+    "respostaCerta": "Sistema de código aberto para automação, implantação, escalonamento e operação de aplicativos em contêineres"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é o Agile?",
+    "respostas": ["Metodologia de desenvolvimento de software que prioriza a colaboração, a adaptação rápida e a entrega incremental", "Um tipo de linguagem de programação utilizada para desenvolvimento web", "Um formato de arquivo utilizado para armazenar dados de configuração"],
+    "respostaCerta": "Metodologia de desenvolvimento de software que prioriza a colaboração, a adaptação rápida e a entrega incremental"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é o Scrum?",
+    "respostas": ["Metodologia ágil de gerenciamento de projetos que divide o trabalho em ciclos curtos chamados de sprints", "Um tipo de linguagem de programação utilizada para desenvolvimento web", "Um formato de arquivo utilizado para armazenar dados de configuração"],
+    "respostaCerta": "Metodologia ágil de gerenciamento de projetos que divide o trabalho em ciclos curtos chamados de sprints"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é o Kanban?",
+    "respostas": ["Sistema de gestão visual que permite controlar o fluxo de trabalho de forma eficiente", "Um tipo de linguagem de programação utilizada para desenvolvimento web", "Um formato de arquivo utilizado para armazenar dados de configuração"],
+    "respostaCerta": "Sistema de gestão visual que permite controlar o fluxo de trabalho de forma eficiente"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é um bug?",
+    "respostas": ["Um erro no código que causa um comportamento inesperado no programa", "Um tipo de linguagem de programação utilizada para desenvolvimento web", "Um formato de arquivo utilizado para armazenar dados de configuração"],
+    "respostaCerta": "Um erro no código que causa um comportamento inesperado no programa"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é refatoração?",
+    "respostas": ["Processo de reestruturação do código-fonte sem alterar seu comportamento externo", "Um tipo de linguagem de programação utilizada para desenvolvimento web", "Um formato de arquivo utilizado para armazenar dados de configuração"],
+    "respostaCerta": "Processo de reestruturação do código-fonte sem alterar seu comportamento externo"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é o versionamento de software?",
+    "respostas": ["Prática de controlar e gerenciar as diferentes versões de um software ao longo do tempo", "Um tipo de linguagem de programação utilizada para desenvolvimento web", "Um formato de arquivo utilizado para armazenar dados de configuração"],
+    "respostaCerta": "Prática de controlar e gerenciar as diferentes versões de um software ao longo do tempo"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é a integração contínua?",
+    "respostas": ["Prática de integrar e testar o código frequentemente durante o desenvolvimento de software", "Um tipo de linguagem de programação utilizada para desenvolvimento web", "Um formato de arquivo utilizado para armazenar dados de configuração"],
+    "respostaCerta": "Prática de integrar e testar o código frequentemente durante o desenvolvimento de software"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é um framework de testes?",
+    "respostas": ["Conjunto de ferramentas e bibliotecas utilizadas para automatizar e facilitar o processo de teste de software", "Um tipo de linguagem de programação utilizada para desenvolvimento web", "Um formato de arquivo utilizado para armazenar dados de configuração"],
+    "respostaCerta": "Conjunto de ferramentas e bibliotecas utilizadas para automatizar e facilitar o processo de teste de software"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é uma API RESTful?",
+    "respostas": ["Uma API que segue os princípios do REST, utilizando métodos HTTP e URLs para acessar e manipular recursos", "Um tipo de linguagem de programação utilizada para desenvolvimento web", "Um formato de arquivo utilizado para armazenar dados de configuração"],
+    "respostaCerta": "Uma API que segue os princípios do REST, utilizando métodos HTTP e URLs para acessar e manipular recursos"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é um ambiente de desenvolvimento local?",
+    "respostas": ["Um ambiente de desenvolvimento configurado no computador do desenvolvedor, que replica as condições do servidor de produção", "Um tipo de linguagem de programação utilizada para desenvolvimento web", "Um formato de arquivo utilizado para armazenar dados de configuração"],
+    "respostaCerta": "Um ambiente de desenvolvimento configurado no computador do desenvolvedor, que replica as condições do servidor de produção"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é um código legado?",
+    "respostas": ["Código antigo ou obsoleto que continua em uso, geralmente difícil de entender e modificar", "Um tipo de linguagem de programação utilizada para desenvolvimento web", "Um formato de arquivo utilizado para armazenar dados de configuração"],
+    "respostaCerta": "Código antigo ou obsoleto que continua em uso, geralmente difícil de entender e modificar"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é a escalabilidade em software?",
+    "respostas": ["Capacidade de um sistema de lidar com um aumento na quantidade de usuários, tráfego ou dados sem comprometer o desempenho", "Um tipo de erro comum durante a compilação de um programa", "Um método de organização de código em módulos independentes"],
+    "respostaCerta": "Capacidade de um sistema de lidar com um aumento na quantidade de usuários, tráfego ou dados sem comprometer o desempenho"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é a manutenção de software?",
+    "respostas": ["Processo de atualização, correção de bugs e melhoria de um software após sua entrega inicial", "Um tipo de erro comum durante a compilação de um programa", "Um método de organização de código em módulos independentes"],
+    "respostaCerta": "Processo de atualização, correção de bugs e melhoria de um software após sua entrega inicial"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é o Padrão de Projeto Singleton?",
+    "respostas": ["Padrão de design que garante que uma classe tenha apenas uma instância e fornece um ponto de acesso global a essa instância", "Um tipo de erro comum durante a compilação de um programa", "Um método de organização de código em módulos independentes"],
+    "respostaCerta": "Padrão de design que garante que uma classe tenha apenas uma instância e fornece um ponto de acesso global a essa instância"
+  },
+  {
+    "categoria": "programação",
+    "pergunta": "O que é o Padrão de Projeto Factory?",
+    "respostas": ["Padrão de design que encapsula a criação de objetos, permitindo a criação de objetos de uma família sem precisar especificar a classe concreta", "Um tipo de erro comum durante a compilação de um programa", "Um método de organização de código em módulos independentes"],
+    "respostaCerta": "Padrão de design que encapsula a criação de objetos, permitindo a criação de objetos de uma família sem precisar especificar a classe concreta"
+  }
+]

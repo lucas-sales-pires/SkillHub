@@ -80,9 +80,7 @@ export class PerguntasComponent implements OnInit {
   }
 
   async obterperguntas() {
-    if(this.respostaSelecionada == this.respostacorreta){
-      this.pontuacaoService.setPontuacao(); // Soma 1 na pontuacao
-    }
+ 
     let perguntas = await this.quiz.obterPerguntasPorCategoria(
       this.quiz.getCategoria()
     ); // Espera obter as perguntas
