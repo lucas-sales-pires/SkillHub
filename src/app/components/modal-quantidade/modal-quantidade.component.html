@@ -1,5 +1,10 @@
-<ion-card-content>
-  <ion-card-title class="text-center">Quantidade de perguntas</ion-card-title>
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="text-center">Quantidade de perguntas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
   <ion-list>
     <ion-radio-group [(ngModel)]="valor">
       <ion-item>
@@ -20,7 +25,8 @@
       </ion-item>
     </ion-radio-group>
   </ion-list>
-</ion-card-content>
+</ion-content>
+
 <ion-footer>
   <ion-toolbar>
     <ion-buttons slot="end">

@@ -22,6 +22,7 @@ import {
 import { FormsModule } from '@angular/forms';
 import { QuizService } from 'src/app/services/quiz/quiz.service';
 import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-modal-quantidade',
@@ -56,16 +57,18 @@ export class ModalQuantidadeComponent implements OnInit {
   @ViewChild(IonModal) //@ViewChild: Essa anotação indica ao Angular que você deseja buscar um elemento específico na sua visualização. No caso, IonModal é o tipo de elemento que você deseja acessar.
   modal!: IonModal; //O sinal de exclamação (!) indica ao Angular que a variável modal não pode ser nula. Isso significa que você tem certeza de que o elemento modal estará presente na sua visualização.
 
-  constructor(private service: QuizService, private router: Router) {
+  constructor(private service: QuizService, private router: Router, private modalController: ModalController) {
   }
 
   async confirmar() {
-    this.router.navigate(['/quiz']);
     this.service.quantidadePerguntasPorCategoria.set(this.valor);
+    this.modalController.dismiss(this.valor);
+    this.router.navigate(['/quiz']); // Redireciona para o quiz
   }
+  
 
   fecharModal() {
-    this.modal.dismiss();
+    this.modalController.dismiss();
   }
   ngOnInit() {}
 }
