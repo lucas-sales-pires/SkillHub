@@ -25,8 +25,12 @@ export class Dados {
             return undefined; // Retorna undefined se nenhum usuário for encontrado com o email fornecido
         }
     }
-    
-    
+
+    public async EnviarFeedBack(feedback: { nome: string; email: string; feedback: string; diaFeedback:string }) { // Método para criar um feedback
+        const collectionRef = collection(this.db, 'feedbacks'); // Referência para a coleção 'feedbacks'
+        return addDoc(collectionRef, feedback); // Adiciona um novo documento com os dados do feedback e retorna uma Promise
+    }
+
     public async CriarUsuario(dadosUsuario: { nome: string; email: string; senha: string; diaCadastro:string }) { // Método para criar um usuário
         const usuarioExistente = await this.PegarUsuarioPorEmail(dadosUsuario.email);  // Verifica se o email já está cadastrado
         if (usuarioExistente) { // Se o email já estiver cadastrado

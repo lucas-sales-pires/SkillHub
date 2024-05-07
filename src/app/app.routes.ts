@@ -44,7 +44,13 @@ export const routes: Routes = [
   {
     path: 'pagina-pre-quiz',
     loadComponent: () => import('./pages/pagina-pre-quiz/pagina-pre-quiz.page').then( m => m.PaginaPreQuizPage)
-  }
+  },
+  {
+    path: 'acordo',
+    loadComponent: () => import('./pages/acordo/acordo.page').then( m => m.AcordoPage)
+  },
+
+
 
 
 ];

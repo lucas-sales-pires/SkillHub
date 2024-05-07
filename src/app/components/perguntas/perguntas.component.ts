@@ -148,8 +148,6 @@ export class PerguntasComponent implements OnInit {
 
 verificarResposta(respostaSelecionada: string) {
   this.respostaSelecionada = respostaSelecionada;
-  console.log(this.respostaSelecionada);
-  console.log(this.pontuacaoService.getPontuacao());
 
 }
 }

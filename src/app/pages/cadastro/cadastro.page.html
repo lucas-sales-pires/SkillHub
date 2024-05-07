@@ -70,9 +70,13 @@
           <ion-icon name="{{valor}}" slot="end"></ion-icon>
         </ion-button>
       </ion-input>
-      <ion-button expand="block" color="primary" (click)="cadastrar()"
-        >Cadastro</ion-button
-      >
+      @if(this.nome === '' || this.email === '' || this.senha === '' || this.confirmarSenha === ''){
+        <ion-button expand="block" color="danger" disabled>Cadastro</ion-button>
+      }@else {
+        <ion-button expand="block" color="primary" (click)="cadastrar()">Cadastro</ion-button>
+      }
+  
+      <app-modal-acordo/>
       
       {{ mensagem }}
       

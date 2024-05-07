@@ -16,26 +16,28 @@ import {
   IonIcon,
 } from '@ionic/angular/standalone';
 import { AuthService } from 'src/app/services/autenticacao/auth.service';
+import { FeedbackComponent } from "../../components/feedback/feedback.component";
 
 @Component({
-  selector: 'app-perfil',
-  templateUrl: './perfil.page.html',
-  styleUrls: ['./perfil.page.scss'],
-  standalone: true,
-  imports: [
-    IonIcon,
-    IonButton,
-    IonLabel,
-    IonCardContent,
-    IonItem,
-    IonCardTitle,
-    IonCard,
-    IonCardHeader,
-    IonContent,
-    FormsModule,
-    NavbarComponent,
-    IonInput,
-  ],
+    selector: 'app-perfil',
+    templateUrl: './perfil.page.html',
+    styleUrls: ['./perfil.page.scss'],
+    standalone: true,
+    imports: [
+        IonIcon,
+        IonButton,
+        IonLabel,
+        IonCardContent,
+        IonItem,
+        IonCardTitle,
+        IonCard,
+        IonCardHeader,
+        IonContent,
+        FormsModule,
+        NavbarComponent,
+        IonInput,
+        FeedbackComponent
+    ]
 })
 export class PerfilPage implements OnInit {
   nome: string = '';

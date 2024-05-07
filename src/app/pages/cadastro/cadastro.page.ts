@@ -1,18 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, effect } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
 import { addIcons } from 'ionicons';
 import { eyeOutline, lockClosedOutline, eyeOffOutline } from 'ionicons/icons';
 import { Dados } from '../../services/dados/dados.service';
+import { AcordoService } from '../../services/acordo/acordo.service';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { IonInput, IonButton, IonIcon, IonItem, IonLabel, IonCardContent, IonCardTitle, IonCardHeader, IonCard, IonContent } from '@ionic/angular/standalone';
+import { ModalAcordoComponent } from "../../components/modal-acordo/modal-acordo.component";
 
 @Component({
-  selector: 'app-cadastro',
-  templateUrl: './cadastro.page.html',
-  styleUrls: ['./cadastro.page.scss'],
-  standalone: true,
-  imports: [IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonLabel, IonItem, IonIcon, IonButton,  FormsModule, NavbarComponent,IonInput],
+    selector: 'app-cadastro',
+    templateUrl: './cadastro.page.html',
+    styleUrls: ['./cadastro.page.scss'],
+    standalone: true,
+    imports: [IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonLabel, IonItem, IonIcon, IonButton, FormsModule, NavbarComponent, IonInput, ModalAcordoComponent]
 })
 export class CadastroPage  {
   nome: string = '';
@@ -21,9 +23,13 @@ export class CadastroPage  {
   confirmarSenha: string = '';
   diaCadastro: string = ''; 
   mensagem: any = '';
+  termo:any;
 
-  constructor(private cadastro: Dados) {
+  constructor(private cadastro: Dados, private acordo: AcordoService) {
     addIcons({ eyeOutline, lockClosedOutline, eyeOffOutline });
+    effect(() => {
+      this.termo = this.acordo.pegarTermos();
+    });
   }
   valor: any = 'eye-outline';
 
@@ -40,6 +46,14 @@ export class CadastroPage  {
     const auth = getAuth();
     if(this.nome === '' || this.email === '' || this.senha === '' || this.confirmarSenha === ''){
         this.mensagem = 'Preencha todos os campos!';
+        console.log(this.termo);
+        setTimeout(() => {
+            this.mensagem = '';
+        }, 3000);
+        return;
+    }
+    if(this.acordo.termo() == false){
+        this.mensagem = 'Você precisa aceitar os termos de uso!';
         setTimeout(() => {
             this.mensagem = '';
         }, 3000);
@@ -73,6 +87,18 @@ export class CadastroPage  {
   
         if (errorCode === 'auth/email-already-in-use') {
           this.mensagem = 'O email já está cadastrado.';
+          setTimeout(() => {
+            this.mensagem = '';
+          }, 3000);
+        }
+        if (errorCode === 'auth/invalid-email') {
+          this.mensagem = 'O email é inválido.';
+          setTimeout(() => {
+            this.mensagem = '';
+          }, 3000);
+        }
+        if (errorCode === 'auth/weak-password') {
+          this.mensagem = 'A senha deve ter 6 caracteres.';
           setTimeout(() => {
             this.mensagem = '';
           }, 3000);

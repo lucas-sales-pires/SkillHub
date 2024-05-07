@@ -1,0 +1,31 @@
+<ion-card-content>
+  <ion-card-title class="text-center">Quantidade de perguntas</ion-card-title>
+  <ion-list>
+    <ion-radio-group [(ngModel)]="valor">
+      <ion-item>
+        <ion-label>5</ion-label>
+        <ion-radio slot="start" value="5"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>10</ion-label>
+        <ion-radio slot="start" value="10"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>15</ion-label>
+        <ion-radio slot="start" value="15"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>20</ion-label>
+        <ion-radio slot="start" value="20"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+</ion-card-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="fecharModal()">Cancelar</ion-button>
+      <ion-button (click)="confirmar()">Confirmar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

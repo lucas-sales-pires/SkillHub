@@ -1,0 +1,39 @@
+<ion-button id="open-modal" expand="block">
+  <ion-icon slot="start" name="add-circle-outline"></ion-icon>
+  FeedBack
+</ion-button>
+
+<ion-modal trigger="open-modal">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title class="text-center">Feedback</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content  class="ion-padding">
+      <h2>Dê a sua opnião, sugestão ou reclamação.</h2>
+      <ion-text>
+        <p>
+          O que você achou do SkillHub? Deixe o seu feedback para que possamos melhorar a sua experiência.
+        </p>
+        <ion-item>
+          <ion-label position="stacked">Nome</ion-label>
+          <ion-input [(ngModel)]="nome" disabled></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Email</ion-label>
+          <ion-input [(ngModel)]="email" disabled></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Feedback</ion-label>
+          <ion-textarea [(ngModel)]="feedback" placeholder="Deixe o seu feedback"></ion-textarea>
+        </ion-item>
+      </ion-text>
+      <ion-buttons>
+        <ion-button expand="full" color="primary" (click)="enviarFeedback()">Enviar</ion-button>
+        <ion-button expand="full" color="medium" (click)="cancelarFeedback()">Cancelar</ion-button>
+      </ion-buttons>
+    
+    </ion-content>
+  </ng-template>
+</ion-modal>
