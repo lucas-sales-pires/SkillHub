@@ -5,7 +5,6 @@ import { NavbarComponent } from "../../components/navbar/navbar.component";
 import { IonContent, IonGrid, IonRow, IonCol, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonText, IonButton } from "@ionic/angular/standalone";
 import { PontuacaoService } from 'src/app/services/pontuacao/pontuacao.service';
 import { AuthService } from 'src/app/services/autenticacao/auth.service';
-import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-pagina-pontuacao-quiz',
@@ -22,11 +21,11 @@ export class PaginaPontuacaoQuizPage implements OnInit {
   constructor(private pontuacaoService: PontuacaoService,private service:AuthService) { }
   
 async ngOnInit() {
-  this.service.buscarUsuario() // Busco o usuário
-    this.pontuacao = this.pontuacaoService.getPontuacao(); // Pego a pontuacao
-      this.pontuacaoService.getQuantidadePerguntas().then((quantidade) => { // Pego a quantidade
-        this.quantidade = quantidade;
-        })
+  await this.service.buscarUsuario() // Busco o usuário
+  this.pontuacao = this.pontuacaoService.getPontuacao(); // Pego a pontuacao
+  await this.pontuacaoService.getQuantidadePerguntas().then((quantidade) => { // Pego a quantidade
+  this.quantidade = quantidade;
+  })
       
   }
 }
