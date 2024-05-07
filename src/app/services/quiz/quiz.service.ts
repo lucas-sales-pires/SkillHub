@@ -51,22 +51,32 @@ export class QuizService {
 
     return perguntas;
   }
-  async obterPerguntasPorCategoria(
+
+  
+  async  embaralharArray(array: any[]): Promise<any[]> {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+  
+  async  obterPerguntasPorCategoria(
     categoriaDesejada: any,
     quantidadePerguntas: number
   ): Promise<Pergunta[]> {
     const perguntas: Pergunta[] = [];
-
+  
     const querySnapshot = await getDocs(
       query(
         collection(this.db, 'quiz'),
         where('categoria', '==', categoriaDesejada)
       )
     );
-
+  
     querySnapshot.forEach((doc) => {
       // Para cada pergunta pego todos os dados
-
+  
       const pergunta: Pergunta = {
         id: doc.id,
         categoria: doc.data()['categoria'],
@@ -74,14 +84,14 @@ export class QuizService {
         respostas: doc.data()['respostas'],
         respostaCerta: doc.data()['respostaCerta'],
       };
-        if(perguntas.length < quantidadePerguntas){
-          perguntas.push(pergunta);
-        }
+     perguntas.push(pergunta);
     });
-
-    return perguntas;
+    
+    const perguntasEmbaralhadas = await this.embaralharArray(perguntas);
+  
+    return perguntasEmbaralhadas.splice(0, quantidadePerguntas);
   }
-
+  
   async pegarIdDaPergunta(pergunta: string) {
     // Obtém a lista de perguntas
     const perguntas = await this.obterPerguntas();
