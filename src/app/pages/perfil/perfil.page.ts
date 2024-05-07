@@ -17,6 +17,8 @@ import {
 } from '@ionic/angular/standalone';
 import { AuthService } from 'src/app/services/autenticacao/auth.service';
 import { FeedbackComponent } from "../../components/feedback/feedback.component";
+import { ModalCertezaComponent } from 'src/app/components/modal-certeza/modal-certeza.component';
+
 
 @Component({
     selector: 'app-perfil',
@@ -37,7 +39,8 @@ import { FeedbackComponent } from "../../components/feedback/feedback.component"
         NavbarComponent,
         IonInput,
         FeedbackComponent
-    ]
+    ],
+    providers: [ModalCertezaComponent]
 })
 export class PerfilPage implements OnInit {
   nome: string = '';
@@ -46,7 +49,7 @@ export class PerfilPage implements OnInit {
   editando: boolean = false;
 
 
-  constructor(private dados: Dados, private service: AuthService) {}
+  constructor(private dados: Dados, private service: AuthService,private modalCerteza: ModalCertezaComponent) {}
 
   ngOnInit(): void {
     this.service.buscarUsuario().then((resultado: any) => { // buscarUsuário retorna os dados do usuário atual 
@@ -99,8 +102,11 @@ export class PerfilPage implements OnInit {
     this.service.deslogar()
   }
 
+  async deletarConta(){
+    this.modalCerteza.exibirConfirmacao(this.excluir);
+  }
 
-  async deletarConta() {
+  async excluir() {
     const auth = getAuth();
     let usuarioAtual = auth.currentUser;
     if (usuarioAtual) {
@@ -116,4 +122,7 @@ export class PerfilPage implements OnInit {
       this.service.deslogar();
     }
   }
+
+  
+  
 }
