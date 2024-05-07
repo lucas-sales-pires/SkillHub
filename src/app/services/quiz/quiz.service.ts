@@ -18,6 +18,7 @@ import { Pergunta } from 'src/app/components/perguntas/interfacePerguntas';
 export class QuizService {
   public categoria = signal('vazio');
   public quantidadePerguntas = signal(0);
+  public quantidadePerguntasPorCategoria = signal(0);
 
   constructor(private db: Firestore) {}
   setCategoria(categoria: string) {
@@ -51,7 +52,8 @@ export class QuizService {
     return perguntas;
   }
   async obterPerguntasPorCategoria(
-    categoriaDesejada: any
+    categoriaDesejada: any,
+    quantidadePerguntas: number
   ): Promise<Pergunta[]> {
     const perguntas: Pergunta[] = [];
 
@@ -72,8 +74,9 @@ export class QuizService {
         respostas: doc.data()['respostas'],
         respostaCerta: doc.data()['respostaCerta'],
       };
-
-      perguntas.push(pergunta);
+        if(perguntas.length < quantidadePerguntas){
+          perguntas.push(pergunta);
+        }
     });
 
     return perguntas;

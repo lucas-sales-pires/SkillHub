@@ -56,11 +56,12 @@ export class ModalQuantidadeComponent implements OnInit {
   @ViewChild(IonModal) //@ViewChild: Essa anotação indica ao Angular que você deseja buscar um elemento específico na sua visualização. No caso, IonModal é o tipo de elemento que você deseja acessar.
   modal!: IonModal; //O sinal de exclamação (!) indica ao Angular que a variável modal não pode ser nula. Isso significa que você tem certeza de que o elemento modal estará presente na sua visualização.
 
-  constructor(service: QuizService, private router: Router) {
+  constructor(private service: QuizService, private router: Router) {
   }
 
   async confirmar() {
     this.router.navigate(['/quiz']);
+    this.service.quantidadePerguntasPorCategoria.set(this.valor);
   }
 
   fecharModal() {

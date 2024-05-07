@@ -61,7 +61,7 @@ export class PontuacaoService {
     return this.pontuacao;
   }
   async getQuantidadePerguntas() {  
-    const perguntas = await this.quiz.obterPerguntasPorCategoria(this.quiz.getCategoria());
+    const perguntas = await this.quiz.obterPerguntasPorCategoria(this.quiz.getCategoria(),this.quiz.quantidadePerguntasPorCategoria());
     return perguntas.length;
   }
   

@@ -82,7 +82,7 @@ export class PerguntasComponent implements OnInit {
   async obterperguntas() {
  
     let perguntas = await this.quiz.obterPerguntasPorCategoria(
-      this.quiz.getCategoria()
+      this.quiz.getCategoria(),this.quiz.quantidadePerguntasPorCategoria()
     ); // Espera obter as perguntas
     if (perguntas.length == 0) {
       // Se não tiver perguntas
@@ -105,7 +105,7 @@ export class PerguntasComponent implements OnInit {
     }
     this.indice += 1; // Quando apertar em proxima pergunta o indice aumenta um para ir para proxima pergunta e respostas
     let perguntas = await this.quiz.obterPerguntasPorCategoria(
-      this.quiz.getCategoria()
+      this.quiz.getCategoria(),this.quiz.quantidadePerguntasPorCategoria()
     ); // Obtem as perguntas de novo
     if (this.indice < perguntas.length) {
       // Se o indice for menor que o tamanho da lista
