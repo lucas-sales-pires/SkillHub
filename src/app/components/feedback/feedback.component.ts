@@ -54,7 +54,7 @@ import { FormsModule } from '@angular/forms';
 export class FeedbackComponent implements OnInit {
   nome: any;
   email: any;
-  feedback: any;
+  feedback: any = '';
 
   @ViewChild(IonModal) //@ViewChild: Essa anotação indica ao Angular que você deseja buscar um elemento específico na sua visualização. No caso, IonModal é o tipo de elemento que você deseja acessar.
   modal!: IonModal; //O sinal de exclamação (!) indica ao Angular que a variável modal não pode ser nula. Isso significa que você tem certeza de que o elemento modal estará presente na sua visualização.

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { AlertController } from '@ionic/angular';
 @Component({
   selector: 'app-modal-certeza',
   templateUrl: './modal-certeza.component.html',
@@ -7,27 +7,26 @@ import { Component, OnInit } from '@angular/core';
   standalone: true
 })
 export class ModalCertezaComponent  implements OnInit {
-  alertController: any;
 
-  constructor() { }
+  constructor(private controler:AlertController) { }
 
   ngOnInit() {}
 
   async exibirConfirmacao(funcao: any) {
-    const confirmacao = await this.alertController.create({
+    const confirmacao = await this.controler.create({
       header: 'Confirmação',
       message: 'Tem certeza que quer fazer isso?',
       buttons: [
         {
           text: 'Cancelar',
           handler: () => {
-            this.alertController.dismiss();
+            this.controler.dismiss();
           }
         }, {
           text: 'Confirmar',
    
           handler: () => {
-            funcao
+            funcao.call();
           }
         }
       ]

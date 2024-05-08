@@ -101,28 +101,29 @@ export class PerfilPage implements OnInit {
   async Sair(){
     this.service.deslogar()
   }
-
-  async deletarConta(){
-    this.modalCerteza.exibirConfirmacao(this.excluir);
+  async deletarConta() {
+    this.modalCerteza.exibirConfirmacao(() => this.excluir());
   }
-
+  
   async excluir() {
     const auth = getAuth();
     let usuarioAtual = auth.currentUser;
     if (usuarioAtual) {
       const id = (await this.dados.PegarIdPorEmail(this.email)) || '';
-      deleteUser(usuarioAtual).then(() => { // Deleto o usuário atual do Firebaase Autenthication
-        console.log('Usuário deletado com sucesso no Autenthication');
-        this.dados.DeletarUsuario(id).subscribe(() => { // Utilizo a função criado no service para deletar o usuário no firestore
-          console.log('Usuário deletado com sucesso no Firestore');
-          this.service.deslogar(); // Deslogo, pois este usuário foi excluido
-        });
-      });
+      try {
+        await deleteUser(usuarioAtual); // Aguarda a resolução da promessa
+        console.log('Usuário deletado com sucesso no Authentication');
+        this.dados.DeletarUsuario(id); 
+        console.log('Usuário deletado com sucesso no Firestore');
+        this.service.deslogar();
+      } catch (error) {
+        console.error('Erro ao excluir usuário:', error);
+      }
     } else {
       this.service.deslogar();
     }
   }
-
+  
   
   
 }
