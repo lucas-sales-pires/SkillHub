@@ -16,20 +16,14 @@
                     <td colspan="4">Nenhum jogador cadastrado</td>
                 </tr>
             }
-            <ng-container *ngFor="let jogador of jogadores">
+            @for(jogador of jogadores; track jogador){
                 <tr>
                     <th scope="row">{{ jogador.posicao }}</th>
                     <td>{{ jogador.nome }}</td>
                     <td>{{ jogador.pontuacao }}</td>
-                    @if(jogador.time ){
-                        <td>Não possui time</td>
-                    }
-                    @else{
-                        <td>{{ jogador.time }}</td>
-                    }
+                    <td>{{ jogador.time }}</td>
                 </tr>
-            </ng-container>
-           
+            }           
         </tbody>
     </table>
 </ion-content>

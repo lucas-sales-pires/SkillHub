@@ -1,0 +1,19 @@
+<app-navbar/>
+<ion-content id="main-content">
+  @for(time of times; track time.nome){
+    <ion-card>
+      <ion-item>
+     
+      </ion-item>
+    </ion-card>
+  }@empty {
+    <ion-card>
+      <ion-item>
+        <ion-label>
+          <h2>Nenhum time cadastrado</h2>
+        </ion-label>
+      </ion-item>
+    </ion-card>
+  }
+
+</ion-content>
