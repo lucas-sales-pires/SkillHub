@@ -111,11 +111,13 @@ export class PerfilPage implements OnInit {
     if (usuarioAtual) {
       const id = (await this.dados.PegarIdPorEmail(this.email)) || '';
       try {
-        await deleteUser(usuarioAtual); // Aguarda a resolução da promessa
+        await deleteUser(usuarioAtual) ; // Aguarda a resolução da promessa
         console.log('Usuário deletado com sucesso no Authentication');
-        this.dados.DeletarUsuario(id); 
-        console.log('Usuário deletado com sucesso no Firestore');
-        this.service.deslogar();
+        await this.dados.DeletarUsuario(id).then(()=>{
+          console.log('Usuário deletado com sucesso no Firestore');
+          this.service.deslogar()
+        }
+        ); 
       } catch (error) {
         console.error('Erro ao excluir usuário:', error);
       }

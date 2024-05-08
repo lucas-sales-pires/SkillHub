@@ -45,10 +45,10 @@ export class Dados {
         const docRef = doc(this.db, 'usuarios', id); // Referência para o documento do usuário
         return from(setDoc(docRef, dadosUsuario, { merge: true })); // Atualiza o documento com os novos dados e retorna um Observable
     }
-
-    public DeletarUsuario(id: string): Observable<void> { // Método para deletar um usuário
-        const docRef = doc(this.db, 'usuarios', id); // Referência para o documento do usuário
-        return from(deleteDoc(docRef)); // Deleta o documento e retorna um Observable
+    public async DeletarUsuario(id: string): Promise<void> {
+        const docRef = doc(this.db, 'usuarios', id);
+        await deleteDoc(docRef);
     }
+    
 }
 
