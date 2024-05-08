@@ -26,13 +26,20 @@ export class RankingPage implements OnInit {
     });
   }
 
+
   transformarJogadorRepetidoEmUm(){
     let jogadoresUnicos: Ranking[] = []; // Criei uma lista utilizando a interface Ranking
-    this.jogadores.forEach(jogador => { // Para cada jogador
-      const jogadorExistente = jogadoresUnicos.find(jogadorUnico => jogadorUnico.email === jogador.email); // Verifica se o jogador já está na lista
-      if (!jogadorExistente) { // Se o jogador não estiver na lista
-        jogadoresUnicos.push(jogador); // Adiciona o jogador na lista
+
+    this.jogadores.forEach(jogador => { // Para cada jogador na lista jogadores( a lista principal)
+
+      const jogadorExistente = jogadoresUnicos.find(jogadorUnico => jogadorUnico.email == jogador.email); // Verifico se o jogador já está na lista de jogadores únicos
+
+      if (!jogadorExistente) { // Se o jogador não estiver na lista 
+
+        jogadoresUnicos.push(jogador); // Adiciono o jogador na lista dejogadores unico
+
       } else {
+
         jogadorExistente.pontuacao += jogador.pontuacao; // Soma a pontuação do jogador existente com a pontuação do jogador repetido
       }
     });
@@ -49,3 +56,4 @@ export class RankingPage implements OnInit {
 
 }
 }
+
