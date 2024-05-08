@@ -50,7 +50,6 @@ export class PaginaPontuacaoQuizPage implements OnInit {
     private pontuacaoService: PontuacaoService,
     private service: AuthService,
     private ranking: RankingService,
-    private dados : Dados
   ) {}
 
   async ngOnInit() {
@@ -66,7 +65,8 @@ export class PaginaPontuacaoQuizPage implements OnInit {
     });
 
   this.rankingComDados = [
-    { posicao: 0,
+    { email: this.usuario.email,
+      posicao: 0,
       nome: this.usuario.nome,
       pontuacao: this.pontuacao
     },

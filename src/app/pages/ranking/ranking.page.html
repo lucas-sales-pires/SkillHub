@@ -11,6 +11,11 @@
             </tr>
         </thead>
         <tbody>
+            @if(jogadores.length == 0){
+                <tr>
+                    <td colspan="4">Nenhum jogador cadastrado</td>
+                </tr>
+            }
             <ng-container *ngFor="let jogador of jogadores">
                 <tr>
                     <th scope="row">{{ jogador.posicao }}</th>

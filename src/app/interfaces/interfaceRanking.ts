@@ -1,4 +1,5 @@
 export interface Ranking {
+    email: string;
     posicao: number ;
     nome: string;
     pontuacao: number;
