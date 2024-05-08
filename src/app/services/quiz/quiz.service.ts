@@ -10,7 +10,7 @@ import {
   query,
 } from '@angular/fire/firestore';
 import { from, Observable } from 'rxjs';
-import { Pergunta } from 'src/app/components/perguntas/interfacePerguntas';
+import { Pergunta } from 'src/app/interfaces/interfacePerguntas';
 
 @Injectable({
   providedIn: 'root',

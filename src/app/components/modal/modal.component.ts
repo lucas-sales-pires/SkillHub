@@ -22,7 +22,7 @@ import { FormsModule } from '@angular/forms';
 import { addIcons } from 'ionicons';
 import { addCircleOutline } from 'ionicons/icons';
 import { QuizService } from 'src/app/services/quiz/quiz.service';
-import { Pergunta } from '../perguntas/interfacePerguntas';
+import { Pergunta } from '../../interfaces/interfacePerguntas';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-modal',

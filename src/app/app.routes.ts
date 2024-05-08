@@ -49,6 +49,10 @@ export const routes: Routes = [
     path: 'acordo',
     loadComponent: () => import('./pages/acordo/acordo.page').then( m => m.AcordoPage)
   },
+  {
+    path: 'ranking',
+    loadComponent: () => import('./pages/ranking/ranking.page').then( m => m.RankingPage)
+  },
 
 
 

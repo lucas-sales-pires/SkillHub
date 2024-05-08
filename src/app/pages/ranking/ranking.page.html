@@ -1,0 +1,30 @@
+<app-navbar/>
+<ion-content class="ion-padding" id="main-content">
+    <h2 class="mb-4">Ranking dos Jogadores</h2>
+    <table class="table table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Pontuação</th>
+                <th scope="col">Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let jogador of jogadores">
+                <tr>
+                    <th scope="row">{{ jogador.posicao }}</th>
+                    <td>{{ jogador.nome }}</td>
+                    <td>{{ jogador.pontuacao }}</td>
+                    @if(jogador.time ){
+                        <td>Não possui time</td>
+                    }
+                    @else{
+                        <td>{{ jogador.time }}</td>
+                    }
+                </tr>
+            </ng-container>
+           
+        </tbody>
+    </table>
+</ion-content>

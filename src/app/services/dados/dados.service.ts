@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Firestore,collection,doc,addDoc,setDoc,deleteDoc,query,where, getDocs} from '@angular/fire/firestore';
+import { Ranking } from 'src/app/interfaces/interfaceRanking';
 
 import { Observable, from } from 'rxjs';
 
@@ -29,6 +30,16 @@ export class Dados {
     public async EnviarFeedBack(feedback: { nome: string; email: string; feedback: string; diaFeedback:string }) { // Método para criar um feedback
         const collectionRef = collection(this.db, 'feedbacks'); // Referência para a coleção 'feedbacks'
         return addDoc(collectionRef, feedback); // Adiciona um novo documento com os dados do feedback e retorna uma Promise
+    }
+    
+    public async EnviarParaRanking(ranking: Ranking) { // Método para criar um ranking
+        const collectionRef = collection(this.db, 'ranking'); // Referência para a coleção 'ranking'
+        return addDoc(collectionRef, ranking); // Adiciona um novo documento com os dados do ranking e retorna uma Promise
+    }
+    public async PegarRanking() { // Método para pegar o ranking
+        const dados = query(collection(this.db, "ranking")); // Query para buscar todos os documentos da coleção 'ranking'
+        const consulta = await getDocs(dados); // Executa a query
+        return !consulta.empty ? consulta.docs.map(doc => doc.data()) : ''; // Retorna todos os documentos se eles existirem, senão retorna undefined
     }
 
     public async CriarUsuario(dadosUsuario: { nome: string; email: string; senha: string; diaCadastro:string }) { // Método para criar um usuário
