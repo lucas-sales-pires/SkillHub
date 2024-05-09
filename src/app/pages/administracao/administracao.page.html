@@ -1,28 +1,3 @@
-<!-- <app-navbar-adm></app-navbar-adm>
-<ion-content id="main-content">
-  <ion-title class="text-center">Usuários</ion-title>
-  <ion-card-subtitle class="text-center">Clique no Usuário Para Mais Opções.</ion-card-subtitle>
-  <ion-list>
-    @for(usuario of usuarios; track usuarios){
-      <ion-item>
-        <ion-label (click)="visualizarPerfil(usuario)" class="classePerfil" >{{ usuario.nome }}</ion-label>
-        @if(usuario.email != usuarioAtual.email){
-          @if(usuario.status == 'Desbloqueado'){
-            <ion-label>Desbloqueado</ion-label>
-         
-          }
-          @else {
-            <ion-label>Bloqueado</ion-label>
-
-          }
-        }
-        @else {
-          <ion-label>Este é você</ion-label>
-        }
-      </ion-item>
-    }
-  </ion-list>
-</ion-content> -->
 
 
 <app-navbar-adm></app-navbar-adm>
