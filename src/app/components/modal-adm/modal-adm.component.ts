@@ -15,6 +15,8 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./modal-adm.component.scss'],
   standalone: true,
   imports: [IonText, IonItem, IonList, IonLabel, IonContent, IonIcon, IonButton, IonTitle, IonButtons, IonToolbar, IonHeader, IonModal,CommonModule ],
+  providers: [ ModalCertezaComponent]
+  
 })
 export class ModalADMComponent implements OnInit {
   usuario: any;
