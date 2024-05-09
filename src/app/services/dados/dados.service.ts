@@ -63,6 +63,27 @@ export class Dados {
         const docRef = doc(this.db, 'usuarios', id);
         await deleteDoc(docRef);
     }
+
+    public async BloquearUsuario(id: string) {
+        try {
+            const docRef = doc(this.db, 'usuarios', id);
+            await setDoc(docRef, { bloqueado: true }, { merge: true });
+            console.log("Usuário bloqueado com sucesso!");
+        } catch (error) {
+            console.error("Erro ao bloquear usuário:", error);
+        }
+    }
+    
+    public async DesbloquearUsuario(id: string) {
+        try {
+            const docRef = doc(this.db, 'usuarios', id);
+            await setDoc(docRef, { bloqueado: false }, { merge: true });
+            console.log("Usuário desbloqueado com sucesso!");
+        } catch (error) {
+            console.error("Erro ao desbloquear usuário:", error);
+        }
+    }
+    
     
     public async AdicionarTime(time: TimeInterface) {
         const collectionRef = collection(this.db, 'times');

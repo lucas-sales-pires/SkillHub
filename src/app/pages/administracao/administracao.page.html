@@ -3,18 +3,27 @@
   <ion-content>
     <ion-list>
       @for(usuario of usuarios; track usuarios){
-      <ion-item>
-        <ion-label>{{ usuario.nome }}</ion-label>
-        @if(usuario.email != usuarioAtual.email){
-          <ion-button (click)="bloquearUsuario(usuario)">Bloquear</ion-button>
-          <ion-button (click)="deletarUsuario(usuario)">Excluir</ion-button>
-          <ion-button (click)="enviarMensagem(usuario)">Enviar Mensagem</ion-button>
-        }
-        @else {
-          <ion-label>Este é você</ion-label>
-        }
-      </ion-item>
-    }
+        <ion-item>
+          <ion-label>{{ usuario.nome }}</ion-label>
+          @if(usuario.email != usuarioAtual.email){
+            @if(usuario.status == 'Desbloqueado'){
+              <ion-label>Desbloqueado</ion-label>
+              <ion-button (click)="bloquearUsuario(usuario)">Bloquear</ion-button>
+              <ion-button (click)="deletarUsuario(usuario)">Excluir</ion-button>
+              <ion-button (click)="enviarMensagem(usuario)">Enviar Mensagem</ion-button>
+            }
+            @else {
+              <ion-label>Bloqueado</ion-label>
+              <ion-button (click)="desbloquearUsuario(usuario)">Desbloquear</ion-button>
+              <ion-button (click)="deletarUsuario(usuario)">Excluir</ion-button>
+              <ion-button (click)="enviarMensagem(usuario)">Enviar Mensagem</ion-button>
+            }
+          }
+          @else {
+            <ion-label>Este é você</ion-label>
+          }
+        </ion-item>
+      }
     </ion-list>
   </ion-content>
 </ion-content>

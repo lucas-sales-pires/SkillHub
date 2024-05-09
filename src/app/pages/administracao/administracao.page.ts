@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, effect, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
@@ -7,6 +7,7 @@ import { Dados } from 'src/app/services/dados/dados.service';
 import { AuthService } from 'src/app/services/autenticacao/auth.service';
 import { deleteUser, getAuth } from 'firebase/auth';
 import { ModalCertezaComponent } from 'src/app/components/modal-certeza/modal-certeza.component';
+
 
 @Component({
   selector: 'app-administracao',
@@ -21,8 +22,12 @@ export class AdministracaoPage implements OnInit {
   usuario: any;
   id: any;
   usuarioAtual: any;
+  bloqueado: any;
   
+  constructor(private dados: Dados, private service: AuthService,private modalCerteza: ModalCertezaComponent) {
 
+  }
+  
   async excluir(email: string) {
     const auth = getAuth();
     let usuarioAtual = auth.currentUser;
@@ -50,25 +55,40 @@ export class AdministracaoPage implements OnInit {
 
 
 
-  enviarMensagem(usuarioAtual: any) {
+  enviarMensagem(usuarioSelecionado: any) {
     throw new Error('Method not implemented.');
   }
 
-  deletarUsuario(usuarioAtual: any) {
-      this.modalCerteza.exibirConfirmacao(() => this.excluir(usuarioAtual.email));
-    
+  deletarUsuario(usuarioSelecionado: any) {
+      this.modalCerteza.exibirConfirmacao(() => this.excluir(usuarioSelecionado.email));
   }
 
-  bloquearUsuario(usuarioAtual: any) {
-    throw new Error('Method not implemented.');
+  async bloquearUsuario(usuarioSelecionado: any) {
+    const id = (await this.dados.PegarIdPorEmail(usuarioSelecionado.email) || '');
+    this.dados.BloquearUsuario(id)
+    usuarioSelecionado.status = 'Bloqueado';
   }
-
-  constructor(private dados: Dados, private service: AuthService,private modalCerteza: ModalCertezaComponent) {}
+  
+  async desbloquearUsuario(usuarioSelecionado: any) {
+    const id = (await this.dados.PegarIdPorEmail(usuarioSelecionado.email) || '');
+    usuarioSelecionado.status = 'Desbloqueado';
+    this.dados.DesbloquearUsuario(id)
+  }
 
   async ngOnInit() {
-    this.usuarios = await this.dados.PegarTodosUsuarios();
+    this.usuarios = (await this.dados.PegarTodosUsuarios());
     await this.service.buscarUsuario().then((usuario) => {
       this.usuarioAtual = usuario
+      for(let j of this.usuarios){
+        if(j.bloqueado ){
+          j.status = 'Bloqueado'
+        }
+        else{
+          j.status = 'Desbloqueado'
+          j.bloqueado = false
+        }
+      }
     });
+
   }
 }
