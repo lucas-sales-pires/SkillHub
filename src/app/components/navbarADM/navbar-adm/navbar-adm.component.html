@@ -12,6 +12,7 @@
           href="/login"
           routerDirection="forward"
         >
+        
         <ion-icon name="person-circle-outline" slot="start"></ion-icon>
         <ion-label>Login</ion-label>
       </ion-item>
@@ -25,11 +26,6 @@
           <ion-label>Principal</ion-label>
         </ion-item>
         @if(autenticado){
-
-        <ion-item routerLink="/administracao"  lines="none" href="/administracao">
-          <ion-icon name="settings-outline" slot="start"></ion-icon>
-          <ion-label>Administracao</ion-label>
-        </ion-item>
 
         <ion-item routerLink="/ranking" lines="none" href="/ranking">
           <ion-icon name="trophy-outline" slot="start"></ion-icon>
@@ -46,6 +42,10 @@
           <ion-label>Perfil</ion-label>
         </ion-item>
         
+        <ion-item routerLink="/gerenciar-perguntas" lines="none" href="/gerenciar-perguntas">
+          <ion-icon name="settings-outline" slot="start"></ion-icon>
+          <ion-label>Gerenciar Perguntas</ion-label>
+        </ion-item>
 
         <ion-item routerLink="/pagina-pre-quiz" lines="none" href="/pagina-pre-quiz">
           <ion-icon name="information-circle-outline" slot="start"></ion-icon>
@@ -77,3 +77,4 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
+  

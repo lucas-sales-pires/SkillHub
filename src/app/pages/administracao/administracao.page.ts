@@ -1,0 +1,74 @@
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { IonicModule } from '@ionic/angular';
+import { NavbarADMComponent } from '../../components/navbarADM/navbar-adm/navbar-adm.component';
+import { Dados } from 'src/app/services/dados/dados.service';
+import { AuthService } from 'src/app/services/autenticacao/auth.service';
+import { deleteUser, getAuth } from 'firebase/auth';
+import { ModalCertezaComponent } from 'src/app/components/modal-certeza/modal-certeza.component';
+
+@Component({
+  selector: 'app-administracao',
+  templateUrl: './administracao.page.html',
+  styleUrls: ['./administracao.page.scss'],
+  standalone: true,
+  imports: [IonicModule, CommonModule, FormsModule, NavbarADMComponent],
+  providers: [ModalCertezaComponent],
+})
+export class AdministracaoPage implements OnInit {
+  usuarios: any;
+  usuario: any;
+  id: any;
+  usuarioAtual: any;
+  
+
+  async excluir(email: string) {
+    const auth = getAuth();
+    let usuarioAtual = auth.currentUser;
+    if (usuarioAtual) {
+      const id = (await this.dados.PegarIdPorEmail(email) || '');
+  
+      try {
+        // Aguarda a exclusão do usuário no Authentication e no Firestore
+        await Promise.all([
+          deleteUser(usuarioAtual),
+          this.dados.DeletarUsuario(id)
+        ]);
+  
+        console.log('Usuário deletado com sucesso em ambos o Authentication e Firestore');
+        window.location.reload();
+        
+        // Desloga o usuário após ambas as operações serem concluídas
+      } catch (error) {
+        console.error('Erro ao excluir usuário:', error);
+      }
+    } else {
+      this.service.deslogar();
+    }
+  }
+
+
+
+  enviarMensagem(usuarioAtual: any) {
+    throw new Error('Method not implemented.');
+  }
+
+  deletarUsuario(usuarioAtual: any) {
+      this.modalCerteza.exibirConfirmacao(() => this.excluir(usuarioAtual.email));
+    
+  }
+
+  bloquearUsuario(usuarioAtual: any) {
+    throw new Error('Method not implemented.');
+  }
+
+  constructor(private dados: Dados, private service: AuthService,private modalCerteza: ModalCertezaComponent) {}
+
+  async ngOnInit() {
+    this.usuarios = await this.dados.PegarTodosUsuarios();
+    await this.service.buscarUsuario().then((usuario) => {
+      this.usuarioAtual = usuario
+    });
+  }
+}

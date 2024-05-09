@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { NavbarComponent } from "../../components/navbar/navbar.component";
+import { TimeInterface } from 'src/app/interfaces/interfaceTime';
 
 @Component({
     selector: 'app-time',
@@ -12,12 +13,22 @@ import { NavbarComponent } from "../../components/navbar/navbar.component";
     imports: [IonicModule, CommonModule, FormsModule, NavbarComponent]
 })
 export class TimePage implements OnInit {
-time: any;
-times: any;
+times: TimeInterface[]=[];
+time = [
+  { nome: 'Juventudo',
+    descricao: 'Clube de futebol',
+    dataFundacao: '17 de novembro de 1895',
+    pais: 'Brasil',
+    pontuacaoTime: 100,
+  },
+]
+constructor() { }
 
-  constructor() { }
-
-  ngOnInit() {
+ngOnInit() {
+    this.times = [
+      this.time[0],
+      ]
+    
   }
 
 }

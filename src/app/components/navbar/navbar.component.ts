@@ -32,6 +32,7 @@ import {
   personOutline,
   informationCircleOutline,
   arrowUndoOutline,
+  peopleOutline
 } from 'ionicons/icons';
 import { AuthService } from 'src/app/services/autenticacao/auth.service';
 
@@ -82,6 +83,7 @@ export class NavbarComponent implements OnInit {
       personOutline,
       informationCircleOutline,
       arrowUndoOutline,
+      peopleOutline
     });
   }
 

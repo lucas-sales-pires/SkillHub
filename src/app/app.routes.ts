@@ -57,6 +57,10 @@ export const routes: Routes = [
     path: 'time',
     loadComponent: () => import('./pages/time/time.page').then( m => m.TimePage)
   },
+  {
+    path: 'administracao',
+    loadComponent: () => import('./pages/administracao/administracao.page').then( m => m.AdministracaoPage)
+  },
 
 
 

@@ -1,8 +1,53 @@
 <app-navbar/>
 <ion-content id="main-content">
-  @for(time of times; track time.nome){
+  @for(time of times; track time){
     <ion-card>
       <ion-item>
+        <ion-label>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">
+                  <h2>Nome</h2>
+                </th>
+                <th scope="col">
+                  <h2>Descrição</h2>
+                </th>
+                <th scope="col">
+                  <h2>Fundação</h2>
+                </th>
+                <th scope="col">
+                  <h2>País</h2>
+                </th>
+                <th scope="col">
+                  <h2>Pontuação</h2>
+              </tr>
+
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">
+                  <h2>{{time.nome}}</h2>
+                </th>
+                <td>
+                  <h2>{{time.descricao}}</h2>
+                </td>
+                <td>
+                  <h2>{{time.dataFundacao}}</h2>
+                </td>
+                <td>
+                  <h2>{{time.pais}}</h2>
+                </td>
+                <td>
+                  <h2>{{time.pontuacaoTime}}</h2>
+                </td>
+
+            </tbody>
+
+          </table>
+        </ion-label>
+
+        
      
       </ion-item>
     </ion-card>

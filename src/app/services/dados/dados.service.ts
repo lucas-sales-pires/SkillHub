@@ -3,6 +3,7 @@ import {Firestore,collection,doc,addDoc,setDoc,deleteDoc,query,where, getDocs} f
 import { Ranking } from 'src/app/interfaces/interfaceRanking';
 
 import { Observable, from } from 'rxjs';
+import { TimeInterface } from 'src/app/interfaces/interfaceTime';
 
 @Injectable({
     providedIn: 'root',
@@ -36,6 +37,7 @@ export class Dados {
         const collectionRef = collection(this.db, 'ranking'); // Referência para a coleção 'ranking'
         return addDoc(collectionRef, ranking); // Adiciona um novo documento com os dados do ranking e retorna uma Promise
     }
+
     public async PegarRanking() { // Método para pegar o ranking
         const dados = query(collection(this.db, "ranking")); // Query para buscar todos os documentos da coleção 'ranking'
         const consulta = await getDocs(dados); // Executa a query
@@ -56,10 +58,28 @@ export class Dados {
         const docRef = doc(this.db, 'usuarios', id); // Referência para o documento do usuário
         return from(setDoc(docRef, dadosUsuario, { merge: true })); // Atualiza o documento com os novos dados e retorna um Observable
     }
+
     public async DeletarUsuario(id: string): Promise<void> {
         const docRef = doc(this.db, 'usuarios', id);
         await deleteDoc(docRef);
     }
     
+    public async AdicionarTime(time: TimeInterface) {
+        const collectionRef = collection(this.db, 'times');
+        return addDoc(collectionRef, time);
+    }
+    
+    public async PegarTime() {
+        const dados = query(collection(this.db, "times"));
+        const consulta = await getDocs(dados);
+        return !consulta.empty ? consulta.docs.map(doc => doc.data()) : '';
+    }
+
+    public async PegarTodosUsuarios() {
+        const dados = query(collection(this.db, "usuarios"));
+        const consulta = await getDocs(dados);
+        return !consulta.empty ? consulta.docs.map(doc => doc.data()) : '';
+    }
+
 }
 
