@@ -10,7 +10,8 @@ import { ModalCertezaComponent } from 'src/app/components/modal-certeza/modal-ce
 import { AdmService } from 'src/app/services/adm/adm.service';
 import { ModalADMComponent } from 'src/app/components/modal-adm/modal-adm.component';
 import { ModalController } from '@ionic/angular';
-
+import { share,trash,pin} from 'ionicons/icons';
+import { addIcons } from 'ionicons';
 @Component({
   selector: 'app-administracao',
   templateUrl: './administracao.page.html',
@@ -39,7 +40,13 @@ export class AdministracaoPage implements OnInit {
     private modalCerteza: ModalCertezaComponent,
     private adm: AdmService,
     private modalController: ModalController
-  ) {}
+  ) {
+    addIcons({
+      'trash': trash,
+      'share': share,
+      'pin': pin
+    });
+  }
 
   async excluir(email: string) {
     const auth = getAuth();

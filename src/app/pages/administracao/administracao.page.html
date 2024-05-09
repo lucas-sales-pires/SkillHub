@@ -1,9 +1,11 @@
-<app-navbar-adm></app-navbar-adm>
+<!-- <app-navbar-adm></app-navbar-adm>
 <ion-content id="main-content">
+  <ion-title class="text-center">Usuários</ion-title>
+  <ion-card-subtitle class="text-center">Clique no Usuário Para Mais Opções.</ion-card-subtitle>
   <ion-list>
     @for(usuario of usuarios; track usuarios){
       <ion-item>
-        <ion-label (click)="visualizarPerfil(usuario)">{{ usuario.nome }}</ion-label>
+        <ion-label (click)="visualizarPerfil(usuario)" class="classePerfil" >{{ usuario.nome }}</ion-label>
         @if(usuario.email != usuarioAtual.email){
           @if(usuario.status == 'Desbloqueado'){
             <ion-label>Desbloqueado</ion-label>
@@ -19,5 +21,38 @@
         }
       </ion-item>
     }
+  </ion-list>
+</ion-content> -->
+
+
+<app-navbar-adm></app-navbar-adm>
+
+<ion-content color="light">
+  <ion-list [inset]="true">
+    <ion-item-sliding *ngFor="let usuario of usuarios; track usuarios">
+      <ion-item [button]="true">
+                <ion-label (click)="visualizarPerfil(usuario)" class="classePerfil" >{{ usuario.nome }}</ion-label>
+
+        <ion-avatar aria-hidden="true" slot="start">
+          <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+        </ion-avatar>
+        <ion-label>{{usuario.nome}}</ion-label>
+        <ion-label *ngIf="usuario.email !== usuarioAtual.email">
+          {{ usuario.status === 'Desbloqueado' ? 'Desbloqueado' : 'Bloqueado' }}
+        </ion-label>
+        <ion-label *ngIf="usuario.email === usuarioAtual.email">Este é você</ion-label>
+      </ion-item>
+      <ion-item-options slot="end">
+        <ion-item-option color="warning">
+          <ion-icon slot="icon-only" name="pin"></ion-icon>
+        </ion-item-option>
+        <ion-item-option color="tertiary">
+          <ion-icon slot="icon-only" name="share"></ion-icon>
+        </ion-item-option>
+        <ion-item-option color="danger" expandable="true">
+          <ion-icon slot="icon-only" name="trash"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
   </ion-list>
 </ion-content>
