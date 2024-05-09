@@ -8,9 +8,14 @@ import { AuthService } from 'src/app/services/autenticacao/auth.service';
 import { deleteUser, getAuth } from 'firebase/auth';
 import { ModalCertezaComponent } from 'src/app/components/modal-certeza/modal-certeza.component';
 import { AdmService } from 'src/app/services/adm/adm.service';
-import { ModalADMComponent } from 'src/app/components/modal-adm/modal-adm.component';
 import { ModalController } from '@ionic/angular';
-import { share,trash,lockClosed,mailOutline,lockOpen} from 'ionicons/icons';
+import {
+  share,
+  trash,
+  lockClosed,
+  mailOutline,
+  lockOpen,
+} from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 @Component({
   selector: 'app-administracao',
@@ -18,15 +23,11 @@ import { addIcons } from 'ionicons';
   styleUrls: ['./administracao.page.scss'],
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule, NavbarADMComponent],
-  providers: [ModalCertezaComponent, ModalADMComponent, ModalController],
+  providers: [ModalCertezaComponent, ModalController],
 })
 export class AdministracaoPage implements OnInit {
-  async visualizarPerfil(_t5: any) { 
+  async visualizarPerfil(_t5: any) {
     this.adm.usuario = _t5;
-    const modal = await this.modalController.create({
-      component: ModalADMComponent,
-    });
-    await modal.present();
   }
   usuarios: any;
   usuario: any;
@@ -38,15 +39,14 @@ export class AdministracaoPage implements OnInit {
     private dados: Dados,
     private service: AuthService,
     private modalCerteza: ModalCertezaComponent,
-    private adm: AdmService,
-    private modalController: ModalController
+    private adm: AdmService
   ) {
     addIcons({
-      'trash': trash,
-      'share': share,
-      'lockClosed': lockClosed,
-      'mailOutline': mailOutline,
-      'lockOpen': lockOpen
+      trash: trash,
+      share: share,
+      lockClosed: lockClosed,
+      mailOutline: mailOutline,
+      lockOpen: lockOpen,
     });
   }
 
