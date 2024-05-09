@@ -1,4 +1,4 @@
-import { Component, effect, OnInit, signal } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
@@ -7,7 +7,9 @@ import { Dados } from 'src/app/services/dados/dados.service';
 import { AuthService } from 'src/app/services/autenticacao/auth.service';
 import { deleteUser, getAuth } from 'firebase/auth';
 import { ModalCertezaComponent } from 'src/app/components/modal-certeza/modal-certeza.component';
-
+import { AdmService } from 'src/app/services/adm/adm.service';
+import { ModalADMComponent } from 'src/app/components/modal-adm/modal-adm.component';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-administracao',
@@ -15,35 +17,48 @@ import { ModalCertezaComponent } from 'src/app/components/modal-certeza/modal-ce
   styleUrls: ['./administracao.page.scss'],
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule, NavbarADMComponent],
-  providers: [ModalCertezaComponent],
+  providers: [ModalCertezaComponent, ModalADMComponent, ModalController],
 })
 export class AdministracaoPage implements OnInit {
+  async visualizarPerfil(_t5: any) { 
+    this.adm.usuario = _t5;
+    const modal = await this.modalController.create({
+      component: ModalADMComponent,
+    });
+    await modal.present();
+  }
   usuarios: any;
   usuario: any;
   id: any;
   usuarioAtual: any;
   bloqueado: any;
-  
-  constructor(private dados: Dados, private service: AuthService,private modalCerteza: ModalCertezaComponent) {
 
-  }
-  
+  constructor(
+    private dados: Dados,
+    private service: AuthService,
+    private modalCerteza: ModalCertezaComponent,
+    private adm: AdmService,
+    private modalController: ModalController
+  ) {}
+
   async excluir(email: string) {
     const auth = getAuth();
     let usuarioAtual = auth.currentUser;
     if (usuarioAtual) {
-      const id = (await this.dados.PegarIdPorEmail(email) || '');
-  
+      const id = (await this.dados.PegarIdPorEmail(email)) || '';
+
       try {
         // Aguarda a exclusão do usuário no Authentication e no Firestore
         await Promise.all([
           deleteUser(usuarioAtual),
-          this.dados.DeletarUsuario(id)
+          this.dados.DeletarUsuario(id),
         ]);
-  
-        console.log('Usuário deletado com sucesso em ambos o Authentication e Firestore');
+
+        console.log(
+          'Usuário deletado com sucesso em ambos o Authentication e Firestore'
+        );
         window.location.reload();
-        
+
         // Desloga o usuário após ambas as operações serem concluídas
       } catch (error) {
         console.error('Erro ao excluir usuário:', error);
@@ -53,42 +68,42 @@ export class AdministracaoPage implements OnInit {
     }
   }
 
-
-
   enviarMensagem(usuarioSelecionado: any) {
     throw new Error('Method not implemented.');
   }
 
   deletarUsuario(usuarioSelecionado: any) {
-      this.modalCerteza.exibirConfirmacao(() => this.excluir(usuarioSelecionado.email));
+    this.modalCerteza.exibirConfirmacao(() =>
+      this.excluir(usuarioSelecionado.email)
+    );
   }
 
   async bloquearUsuario(usuarioSelecionado: any) {
-    const id = (await this.dados.PegarIdPorEmail(usuarioSelecionado.email) || '');
-    this.dados.BloquearUsuario(id)
+    const id =
+      (await this.dados.PegarIdPorEmail(usuarioSelecionado.email)) || '';
+    this.dados.BloquearUsuario(id);
     usuarioSelecionado.status = 'Bloqueado';
   }
-  
+
   async desbloquearUsuario(usuarioSelecionado: any) {
-    const id = (await this.dados.PegarIdPorEmail(usuarioSelecionado.email) || '');
+    const id =
+      (await this.dados.PegarIdPorEmail(usuarioSelecionado.email)) || '';
     usuarioSelecionado.status = 'Desbloqueado';
-    this.dados.DesbloquearUsuario(id)
+    this.dados.DesbloquearUsuario(id);
   }
 
   async ngOnInit() {
-    this.usuarios = (await this.dados.PegarTodosUsuarios());
+    this.usuarios = await this.dados.PegarTodosUsuarios();
     await this.service.buscarUsuario().then((usuario) => {
-      this.usuarioAtual = usuario
-      for(let j of this.usuarios){
-        if(j.bloqueado ){
-          j.status = 'Bloqueado'
-        }
-        else{
-          j.status = 'Desbloqueado'
-          j.bloqueado = false
+      this.usuarioAtual = usuario;
+      for (let j of this.usuarios) {
+        if (j.bloqueado) {
+          j.status = 'Bloqueado';
+        } else {
+          j.status = 'Desbloqueado';
+          j.bloqueado = false;
         }
       }
     });
-
   }
 }

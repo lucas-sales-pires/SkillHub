@@ -1,29 +1,23 @@
-<app-navbar-adm />
+<app-administracao></app-administracao>
 <ion-content id="main-content">
-  <ion-content>
-    <ion-list>
-      @for(usuario of usuarios; track usuarios){
-        <ion-item>
-          <ion-label>{{ usuario.nome }}</ion-label>
-          @if(usuario.email != usuarioAtual.email){
-            @if(usuario.status == 'Desbloqueado'){
-              <ion-label>Desbloqueado</ion-label>
-              <ion-button (click)="bloquearUsuario(usuario)">Bloquear</ion-button>
-              <ion-button (click)="deletarUsuario(usuario)">Excluir</ion-button>
-              <ion-button (click)="enviarMensagem(usuario)">Enviar Mensagem</ion-button>
-            }
-            @else {
-              <ion-label>Bloqueado</ion-label>
-              <ion-button (click)="desbloquearUsuario(usuario)">Desbloquear</ion-button>
-              <ion-button (click)="deletarUsuario(usuario)">Excluir</ion-button>
-              <ion-button (click)="enviarMensagem(usuario)">Enviar Mensagem</ion-button>
-            }
+  <ion-list>
+    @for(usuario of usuarios; track usuarios){
+      <ion-item>
+        <ion-label (click)="visualizarPerfil(usuario)">{{ usuario.nome }}</ion-label>
+        @if(usuario.email != usuarioAtual.email){
+          @if(usuario.status == 'Desbloqueado'){
+            <ion-label>Desbloqueado</ion-label>
+         
           }
           @else {
-            <ion-label>Este é você</ion-label>
+            <ion-label>Bloqueado</ion-label>
+
           }
-        </ion-item>
-      }
-    </ion-list>
-  </ion-content>
+        }
+        @else {
+          <ion-label>Este é você</ion-label>
+        }
+      </ion-item>
+    }
+  </ion-list>
 </ion-content>
