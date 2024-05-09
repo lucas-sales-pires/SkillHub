@@ -66,6 +66,7 @@ export class CadastroPage  {
         }, 3000);
         return;
     }
+    this.email.toLowerCase();
     createUserWithEmailAndPassword(auth, this.email, this.senha) // Método proprio do firebase
       .then(() => {
         const novoUsuario = { // Pego estes dados do usuario

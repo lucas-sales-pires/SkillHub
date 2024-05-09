@@ -57,11 +57,19 @@ export class PerfilPage implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.service.buscarUsuario().then((resultado: any) => {
-      // buscarUsuário retorna os dados do usuário atual
-      this.email = resultado['email']; // Atribui ao this.email o email dele
-      this.carregarUsuario(this.email); //A função carregarUsuario precisa do email do usuário para ser executada
-    });
+    try{
+
+      this.service.buscarUsuario().then((resultado: any) => {
+        // buscarUsuário retorna os dados do usuário atual
+        console.log('Resultado da busca de usuário:', resultado);
+
+        this.email = resultado['email']; // Atribui ao this.email o email dele
+        this.carregarUsuario(this.email); //A função carregarUsuario precisa do email do usuário para ser executada
+      });
+    }
+    catch (error) {
+      console.error('Erro ao buscar usuário:', error);
+    }
   }
 
   async carregarUsuario(email: string) {

@@ -33,6 +33,7 @@ export class LoginPage implements OnInit {
   }
   async logar() {
     const auth = getAuth();
+    this.email.toLowerCase();
     await signInWithEmailAndPassword(auth, this.email, this.senha)
       .then(() => {
         this.mensagem = 'Usuário logado com sucesso.';
