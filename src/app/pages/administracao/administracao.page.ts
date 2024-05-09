@@ -10,7 +10,7 @@ import { ModalCertezaComponent } from 'src/app/components/modal-certeza/modal-ce
 import { AdmService } from 'src/app/services/adm/adm.service';
 import { ModalADMComponent } from 'src/app/components/modal-adm/modal-adm.component';
 import { ModalController } from '@ionic/angular';
-import { share,trash,pin} from 'ionicons/icons';
+import { share,trash,lockClosed,mailOutline,lockOpen} from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 @Component({
   selector: 'app-administracao',
@@ -44,7 +44,9 @@ export class AdministracaoPage implements OnInit {
     addIcons({
       'trash': trash,
       'share': share,
-      'pin': pin
+      'lockClosed': lockClosed,
+      'mailOutline': mailOutline,
+      'lockOpen': lockOpen
     });
   }
 
