@@ -66,55 +66,71 @@ export class CadastroPage  {
         }, 3000);
         return;
     }
+
     this.email.toLowerCase()
-    createUserWithEmailAndPassword(auth, this.email, this.senha) // Método proprio do firebase
+    const novoUsuario = { // Pego estes dados do usuario
+      nome: this.nome,
+      email: this.email,
+      diaCadastro: new Date().toLocaleDateString(),
+      bloqueado: false,
+    };
+    
+      this.salvarInformacoesUsuario(novoUsuario); 
+  
+  
+  
+this.email.toLocaleLowerCase();
+  
+    if(this.cadastro.resultado() == false){
+
+    createUserWithEmailAndPassword(auth, this.email, this.senha)
       .then(() => {
-        const novoUsuario = { // Pego estes dados do usuario
-          nome: this.nome,
-          email: this.email,
-          diaCadastro: new Date().toLocaleDateString(),
-          bloqueado: false,
-        };
-        this.salvarInformacoesUsuario(novoUsuario); // Utilizo o metodo criado para salvar o usuário no firebasae
         this.mensagem = 'Usuário criado com sucesso!';
         setTimeout(() => {
           this.mensagem = '';
           window.location.href = "/login"
         }, 3000);
       })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorMessage, errorCode);
-  
-        if (errorCode === 'auth/email-already-in-use') {
-          this.mensagem = 'O email já está cadastrado.';
-          setTimeout(() => {
-            this.mensagem = '';
-          }, 3000);
-        }
-        if (errorCode === 'auth/invalid-email') {
-          this.mensagem = 'O email é inválido.';
-          setTimeout(() => {
-            this.mensagem = '';
-          }, 3000);
-        }
-        if (errorCode === 'auth/weak-password') {
-          this.mensagem = 'A senha deve ter 6 caracteres.';
-          setTimeout(() => {
-            this.mensagem = '';
-          }, 3000);
-        }
-      });
+    
   }
-
+  }
   salvarInformacoesUsuario(novoUsuario:any) {
     this.cadastro.CriarUsuario(novoUsuario).then( 
       () => {
         console.log('Informações do usuário salvas com sucesso!');
       },
-      (error) => {
-        console.error('Erro ao salvar informações do usuário:', error.message);
+    
+        (error: any) => { 
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(errorMessage, errorCode);
+      
+          if (errorCode === 'auth/email-already-in-use') {
+              this.mensagem = 'O email já está cadastrado.';
+              setTimeout(() => {
+                  this.mensagem = '';
+              }, 3000);
+          }
+          if (errorCode === 'auth/invalid-email') {
+              this.mensagem = 'O email é inválido.';
+              setTimeout(() => {
+                  this.mensagem = '';
+              }, 3000);
+              
+          }
+          if (errorCode === 'auth/weak-password') {
+              this.mensagem = 'A senha deve ter 6 caracteres.';
+              setTimeout(() => {
+                  this.mensagem = '';
+              }, 3000);
+          }
+          if (errorMessage === 'O nome já está cadastrado.') { 
+              this.mensagem = 'O nome já está cadastrado.';
+              setTimeout(() => {
+                  this.mensagem = '';
+              }, 3000);
+              
+          }
       }
     );
   }

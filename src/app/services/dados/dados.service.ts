@@ -10,6 +10,7 @@ import { TimeInterface } from 'src/app/interfaces/interfaceTime';
 })
 export class Dados {
     public adm = signal(false);
+    public resultado = signal(false);
 
     constructor(private db: Firestore) {}
 
@@ -46,8 +47,18 @@ export class Dados {
         return !consulta.empty ? consulta.docs.map(doc => doc.data()) : ''; // Retorna todos os documentos se eles existirem, senão retorna undefined
     }
 
-    public async CriarUsuario(dadosUsuario: { nome: string; email: string; senha: string; diaCadastro:string; bloqueado: boolean }) { // Método para criar um usuário
+    public async CriarUsuario(dadosUsuario: { nome: any; email: string; senha: string; diaCadastro:string; bloqueado: boolean }) { // Método para criar um usuário
         const usuarioExistente = await this.PegarUsuarioPorEmail(dadosUsuario.email);  // Verifica se o email já está cadastrado
+        const mesmonome = await this.PegarTodosUsuarios().then((resultado: any) => {
+            return resultado.some((usuario: any) => usuario.nome === dadosUsuario.nome);
+        }   
+        );
+
+      if(mesmonome){
+            this.resultado.set(true);
+            throw new Error('O nome já está cadastrado.');
+            
+        }
         if (usuarioExistente) { // Se o email já estiver cadastrado
             throw new Error('O email já está cadastrado.'); // Lança um erro se o email já estiver cadastrado
         } else {
