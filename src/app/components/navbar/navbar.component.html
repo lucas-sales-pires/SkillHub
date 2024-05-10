@@ -24,7 +24,7 @@
           <ion-icon name="home-outline" slot="start"></ion-icon>
           <ion-label>Principal</ion-label>
         </ion-item>
-        @if(autenticado){
+        @if(autenticado && email){
         @if(adm()){
 
           <ion-item routerLink="/administracao"  lines="none" href="/administracao">
