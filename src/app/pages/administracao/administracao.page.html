@@ -1,7 +1,4 @@
-
-
-<app-navbar-adm></app-navbar-adm>
-
+<app-navbar></app-navbar>
 <ion-content color="light" id="main-content">
   <ion-list [inset]="true">
     @for(usuario of usuarios; track usuarios){
@@ -14,28 +11,29 @@
         <ion-avatar aria-hidden="true" slot="start">
           <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
         </ion-avatar>
-        <ion-label class="text-wrap px-2 email">{{usuario.email}}</ion-label>
-        @if(usuario.email !== usuarioAtual.email){
-          <ion-label> {{usuario.status === 'Desbloqueado' ? 'Desbloqueado' : 'Bloqueado'}}</ion-label>
-        }
-        @if(usuario.email == usuarioAtual.email){
-          <ion-label>Este é você</ion-label>
-        }
-      </ion-item>
-      @if(usuario.email != usuarioAtual.email){
 
-      <ion-item-options slot="end">
-          @if(usuario.status == 'Desbloqueado'){
-        <ion-item-option color="tertiary">
-          <ion-icon slot="icon-only" name="lock-open"  (click)="bloquearUsuario(usuario)" class="text-wrap px-2">Bloquear</ion-icon>
-        </ion-item-option>
+          <ion-label class="text-wrap px-2 email">{{usuario.email}}</ion-label>
+          @if(usuario.email !== usuarioAtual.email){
+            <ion-label> {{usuario.status === 'Desbloqueado' ? 'Desbloqueado' : 'Bloqueado'}}</ion-label>
           }
-          @else {
-        <ion-item-option color="success">
-          <ion-icon slot="icon-only" name="lock-closed" (click)="desbloquearUsuario(usuario)" class="text-wrap px-2">Desbloquear</ion-icon>
-        </ion-item-option>
+          @if(usuario.email == usuarioAtual.email){
+            <ion-label>Este é você</ion-label>
           }
-        
+        </ion-item>
+        @if(usuario.email != usuarioAtual.email){
+          
+          <ion-item-options slot="end">
+            @if(usuario.status == 'Desbloqueado'){
+              <ion-item-option color="tertiary">
+                <ion-icon slot="icon-only" name="lock-open"  (click)="bloquearUsuario(usuario)" class="text-wrap px-2">Bloquear</ion-icon>
+              </ion-item-option>
+            }
+            @else {
+              <ion-item-option color="success">
+                <ion-icon slot="icon-only" name="lock-closed" (click)="desbloquearUsuario(usuario)" class="text-wrap px-2">Desbloquear</ion-icon>
+              </ion-item-option>
+            }
+            
         <ion-item-option color="danger" expandable="true">
           
           <ion-icon slot="icon-only" name="mail-outline" (click)="enviarMensagem(usuario)" class="text-wrap px-2">Mensagem</ion-icon>

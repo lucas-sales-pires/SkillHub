@@ -2,10 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { NavbarADMComponent } from '../../components/navbarADM/navbar-adm/navbar-adm.component';
 import { Dados } from 'src/app/services/dados/dados.service';
 import { AuthService } from 'src/app/services/autenticacao/auth.service';
-import { deleteUser, getAuth } from 'firebase/auth';
 import { ModalCertezaComponent } from 'src/app/components/modal-certeza/modal-certeza.component';
 import { AdmService } from 'src/app/services/adm/adm.service';
 import { ModalController } from '@ionic/angular';
@@ -17,14 +15,15 @@ import {
   lockOpen,
 } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
+import { NavbarComponent } from "../../components/navbar/navbar.component";
 
 @Component({
-  selector: 'app-administracao',
-  templateUrl: './administracao.page.html',
-  styleUrls: ['./administracao.page.scss'],
-  standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, NavbarADMComponent],
-  providers: [ModalCertezaComponent, ModalController],
+    selector: 'app-administracao',
+    templateUrl: './administracao.page.html',
+    styleUrls: ['./administracao.page.scss'],
+    standalone: true,
+    providers: [ModalCertezaComponent, ModalController],
+    imports: [IonicModule, CommonModule, FormsModule, NavbarComponent]
 })
 export class AdministracaoPage implements OnInit {
   async visualizarPerfil(usuario: any) {

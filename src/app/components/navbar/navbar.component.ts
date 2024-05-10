@@ -70,9 +70,7 @@ export class NavbarComponent implements OnInit {
   adm = signal(false);
   usuario:any;
   constructor(private autenticacao: AuthService,private dados: Dados) {
-    effect(() => {
-      this.autenticado = this.autenticacao.autenticado();
-    });
+
 
     addIcons({
       search,
@@ -105,6 +103,7 @@ export class NavbarComponent implements OnInit {
     if(this.autenticado){
     this.administrador();
     }
+    this.autenticado = this.autenticacao.autenticado();
   }
 
   deslogar(){
