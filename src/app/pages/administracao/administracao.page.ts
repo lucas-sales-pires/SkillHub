@@ -39,7 +39,6 @@ export class AdministracaoPage implements OnInit {
   constructor(
     private dados: Dados,
     private service: AuthService,
-    private modalCerteza: ModalCertezaComponent,
     private adm: AdmService
   ) {
     addIcons({

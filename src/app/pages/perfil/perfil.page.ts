@@ -62,9 +62,11 @@ export class PerfilPage implements OnInit {
       this.service.buscarUsuario().then((resultado: any) => {
         // buscarUsuário retorna os dados do usuário atual
         console.log('Resultado da busca de usuário:', resultado);
-
         this.email = resultado['email']; // Atribui ao this.email o email dele
         this.carregarUsuario(this.email); //A função carregarUsuario precisa do email do usuário para ser executada
+        if(this.email === ''){
+          this.service.deslogar()
+        }
       });
     }
     catch (error) {
@@ -124,14 +126,14 @@ export class PerfilPage implements OnInit {
   async excluir() {
     const auth = getAuth();
     let usuarioAtual = auth.currentUser;
-    if (usuarioAtual) {
+   
       const id = (await this.dados.PegarIdPorEmail(this.email)) || '';
   
       try {
         // Aguarda a exclusão do usuário no Authentication e no Firestore
         await Promise.all([
-          deleteUser(usuarioAtual),
-          this.dados.DeletarUsuario(id)
+          this.dados.DeletarUsuario(id).then(() => console.log('Usuário deletado com sucesso no Firestore')).then(() =>
+          deleteUser(usuarioAtual!).then(() => console.log('Usuário deletado com sucesso no Authentication')))
         ]);
   
         console.log('Usuário deletado com sucesso em ambos o Authentication e Firestore');
@@ -141,8 +143,6 @@ export class PerfilPage implements OnInit {
       } catch (error) {
         console.error('Erro ao excluir usuário:', error);
       }
-    } else {
-      this.service.deslogar();
-    }
+  
   }
 }
