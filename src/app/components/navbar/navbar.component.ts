@@ -1,4 +1,4 @@
-import { Component, effect, OnInit } from '@angular/core';
+import { Component, effect, OnInit, signal, Signal } from '@angular/core';
 import {
   IonHeader,
   IonButton,
@@ -35,6 +35,7 @@ import {
   peopleOutline
 } from 'ionicons/icons';
 import { AuthService } from 'src/app/services/autenticacao/auth.service';
+import { Dados } from 'src/app/services/dados/dados.service';
 
 @Component({
   selector: 'app-navbar',
@@ -65,8 +66,10 @@ import { AuthService } from 'src/app/services/autenticacao/auth.service';
 })
 export class NavbarComponent implements OnInit {
   autenticado: boolean = false;
-
-  constructor(private autenticacao: AuthService) {
+  email:any;
+  adm = signal(false);
+  usuario:any;
+  constructor(private autenticacao: AuthService,private dados: Dados) {
     effect(() => {
       this.autenticado = this.autenticacao.autenticado();
     });
@@ -87,9 +90,25 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  async administrador(){
+    this.usuario = await this.autenticacao.buscarUsuario();
+    this.email = this.usuario.email;
+    this.dados.Administrador(this.email).then((res)=>{
+      this.adm.set(res);
+    }
+    )
+  }
+
+  
+
+  ngOnInit() {
+    if(this.autenticado){
+    this.administrador();
+    }
+  }
 
   deslogar(){
     this.autenticacao.deslogar();
+    this.adm.set(this.dados.adm());
   }
 }

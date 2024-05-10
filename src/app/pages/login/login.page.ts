@@ -13,6 +13,7 @@ import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { Router } from '@angular/router';
 import { IonInput, IonButton, IonIcon, IonCardContent, IonCardTitle, IonContent, IonCard, IonCardHeader } from '@ionic/angular/standalone';
 import { AuthService } from 'src/app/services/autenticacao/auth.service';
+import { Dados } from 'src/app/services/dados/dados.service';
 
 @Component({
   selector: 'app-login',
@@ -27,12 +28,21 @@ export class LoginPage implements OnInit {
   mensagem: string = '';
 
   
-  constructor(private autenticado: AuthService) {
+  constructor(private dados: Dados) {
     addIcons({ eye, lockClosed, lockClosedOutline, eyeOutline, eyeOffOutline }); 
     
   }
   async logar() {
     const auth = getAuth();
+    const resposta =await  this.dados.VerificarSeEstaBloqueado(this.email)
+    if(resposta){
+      this.mensagem = 'Usuário bloqueado.';
+      setInterval(() => {
+        this.mensagem = '';
+      }, 3000);
+      return;
+    }
+    
     this.email.toLowerCase();
     await signInWithEmailAndPassword(auth, this.email, this.senha)
       .then(() => {

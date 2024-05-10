@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import {Firestore,collection,doc,addDoc,setDoc,deleteDoc,query,where, getDocs} from '@angular/fire/firestore';
 import { Ranking } from 'src/app/interfaces/interfaceRanking';
 
@@ -9,6 +9,8 @@ import { TimeInterface } from 'src/app/interfaces/interfaceTime';
     providedIn: 'root',
 })
 export class Dados {
+    public adm = signal(false);
+
     constructor(private db: Firestore) {}
 
     public async PegarIdPorEmail(email: string) { // Método para pegar um usuário por email
@@ -44,7 +46,7 @@ export class Dados {
         return !consulta.empty ? consulta.docs.map(doc => doc.data()) : ''; // Retorna todos os documentos se eles existirem, senão retorna undefined
     }
 
-    public async CriarUsuario(dadosUsuario: { nome: string; email: string; senha: string; diaCadastro:string }) { // Método para criar um usuário
+    public async CriarUsuario(dadosUsuario: { nome: string; email: string; senha: string; diaCadastro:string; bloqueado: boolean }) { // Método para criar um usuário
         const usuarioExistente = await this.PegarUsuarioPorEmail(dadosUsuario.email);  // Verifica se o email já está cadastrado
         if (usuarioExistente) { // Se o email já estiver cadastrado
             throw new Error('O email já está cadastrado.'); // Lança um erro se o email já estiver cadastrado
@@ -100,6 +102,18 @@ export class Dados {
         const dados = query(collection(this.db, "usuarios"));
         const consulta = await getDocs(dados);
         return !consulta.empty ? consulta.docs.map(doc => doc.data()) : '';
+    }
+
+    public async VerificarSeEstaBloqueado(email: string) {
+        const dados = query(collection(this.db, "usuarios"), where("email", "==", email));
+        const consulta = await getDocs(dados);
+        return !consulta.empty ? consulta.docs[0].data()['bloqueado'] : '';
+    }
+
+    public async Administrador(email: string) {
+        const dados = query(collection(this.db, "usuarios"), where("email", "==", email));
+        const consulta = await getDocs(dados);
+        return !consulta.empty ? consulta.docs[0].data()['administrador'] : '';
     }
 
 }
