@@ -17,6 +17,7 @@ import {
   lockOpen,
 } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
+
 @Component({
   selector: 'app-administracao',
   templateUrl: './administracao.page.html',
@@ -26,8 +27,8 @@ import { addIcons } from 'ionicons';
   providers: [ModalCertezaComponent, ModalController],
 })
 export class AdministracaoPage implements OnInit {
-  async visualizarPerfil(_t5: any) {
-    this.adm.usuario = _t5;
+  async visualizarPerfil(usuario: any) {
+    this.adm.usuario = usuario;
   }
   usuarios: any;
   usuario: any;
@@ -49,43 +50,14 @@ export class AdministracaoPage implements OnInit {
       lockOpen: lockOpen,
     });
   }
+  
 
-  async excluir(email: string) {
-    const auth = getAuth();
-    let usuarioAtual = auth.currentUser;
-    if (usuarioAtual) {
-      const id = (await this.dados.PegarIdPorEmail(email)) || '';
-
-      try {
-        // Aguarda a exclusão do usuário no Authentication e no Firestore
-        await Promise.all([
-          deleteUser(usuarioAtual),
-          this.dados.DeletarUsuario(id),
-        ]);
-
-        console.log(
-          'Usuário deletado com sucesso em ambos o Authentication e Firestore'
-        );
-        window.location.reload();
-
-        // Desloga o usuário após ambas as operações serem concluídas
-      } catch (error) {
-        console.error('Erro ao excluir usuário:', error);
-      }
-    } else {
-      this.service.deslogar();
-    }
-  }
-
+  
   enviarMensagem(usuarioSelecionado: any) {
     throw new Error('Method not implemented.');
   }
 
-  deletarUsuario(usuarioSelecionado: any) {
-    this.modalCerteza.exibirConfirmacao(() =>
-      this.excluir(usuarioSelecionado.email)
-    );
-  }
+
 
   async bloquearUsuario(usuarioSelecionado: any) {
     const id =
