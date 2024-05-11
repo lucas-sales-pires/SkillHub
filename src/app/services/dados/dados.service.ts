@@ -121,11 +121,17 @@ export class Dados {
         return !consulta.empty ? consulta.docs[0].data()['bloqueado'] : '';
     }
 
-    public async Administrador(email: string) {
+    public async Administrador(email: string): Promise<boolean> {
         const dados = query(collection(this.db, "usuarios"), where("email", "==", email));
         const consulta = await getDocs(dados);
-        return !consulta.empty ? consulta.docs[0].data()['administrador'] : '';
+    
+        if (!consulta.empty) {
+            const isAdmin = consulta.docs[0].data()['administrador'];
+            return isAdmin === true; // Se o administrador for true, retorna true
+        } else {
+            return false; // Se não houver documentos na consulta, retorna false
+        }
     }
-
+    
 }
 

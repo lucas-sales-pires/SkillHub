@@ -65,12 +65,14 @@ import { Dados } from 'src/app/services/dados/dados.service';
   ],
 })
 export class NavbarComponent implements OnInit {
-  autenticado: boolean = false;
+  autenticado =  signal(false);
   email:any;
   adm = signal(false);
   usuario:any;
   constructor(private autenticacao: AuthService,private dados: Dados) {
-
+    effect(() => {
+      this.adm.set(this.dados.adm());
+    })
 
     addIcons({
       search,
@@ -89,25 +91,27 @@ export class NavbarComponent implements OnInit {
   }
 
   async administrador(){
-    this.usuario = await this.autenticacao.buscarUsuario();
+    this.usuario = await this.autenticacao.buscarUsuario().then((res)=>{
+      return res;
+    })
     this.email = this.usuario.email;
     this.dados.Administrador(this.email).then((res)=>{
       this.adm.set(res);
-    }
-    )
+    })
+    
+    
   }
 
   
+    deslogar(){
+      this.autenticacao.deslogar();
+      this.adm.set(this.dados.adm());
+    }
+  
 
   ngOnInit() {
-    if(this.autenticado){
+    this.autenticado = this.autenticacao.autenticado;
     this.administrador();
-    }
-    this.autenticado = this.autenticacao.autenticado();
-  }
 
-  deslogar(){
-    this.autenticacao.deslogar();
-    this.adm.set(this.dados.adm());
   }
 }

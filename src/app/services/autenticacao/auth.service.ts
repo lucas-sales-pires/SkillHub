@@ -20,8 +20,8 @@ export class AuthService {
           this.usuarioAtual = user; // O usuario atual recebe o usuario 
           resolve(usuario); // A promessa resolvida me retorna o usuario com seus dados
         } else {
-          this.deslogar(); // Deslogo o usuario 
           this.usuarioAtual = null; // E o meu usuarioAtual recebe um null
+          this.deslogar(); 
         }
       }
     )})
@@ -36,7 +36,8 @@ export class AuthService {
     try {
       const auth = getAuth();
       await auth.signOut();
-      window.location.href = "/login";
+      this.autenticado.set(false);
+      
     } catch (error) {
       console.error('Erro ao deslogar:', error);
     }
