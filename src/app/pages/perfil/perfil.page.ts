@@ -1,10 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, effect, inject, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Dados } from 'src/app/services/dados/dados.service';
-import {
-  deleteUser,
-  getAuth,
-} from 'firebase/auth';
+import { deleteUser, getAuth } from 'firebase/auth';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import {
   IonContent,
@@ -17,10 +14,14 @@ import {
   IonButton,
   IonInput,
   IonIcon,
+  IonAvatar,
+  IonProgressBar,
 } from '@ionic/angular/standalone';
 import { AuthService } from 'src/app/services/autenticacao/auth.service';
 import { FeedbackComponent } from '../../components/feedback/feedback.component';
 import { ModalCertezaComponent } from 'src/app/components/modal-certeza/modal-certeza.component';
+import { ref, Storage } from '@angular/fire/storage';
+import { getDownloadURL, listAll, uploadBytesResumable } from 'firebase/storage';
 
 @Component({
   selector: 'app-perfil',
@@ -41,6 +42,8 @@ import { ModalCertezaComponent } from 'src/app/components/modal-certeza/modal-ce
     NavbarComponent,
     IonInput,
     FeedbackComponent,
+    IonAvatar,
+    IonProgressBar,
   ],
   providers: [ModalCertezaComponent],
 })
@@ -49,33 +52,99 @@ export class PerfilPage implements OnInit {
   email: string = '';
   cadastradoDesde: string = '';
   editando: boolean = false;
+  arquivo!: File;
+  progresso = 0;
+  idUsuarioAtual:string = '';
+  ultimaFotoURL = signal('');
+
+  private readonly storage: Storage = inject(Storage);
 
   constructor(
     private dados: Dados,
     private service: AuthService,
     private modalCerteza: ModalCertezaComponent
-  ) {}
+  ) {
+    effect(() => {
+      this.pegarTodasAsFotos().then((res) => {
+        console.log(res);
+      });
+    });
+  }
 
   ngOnInit(): void {
-    try{
-
+    
+    
+    try {
       this.service.buscarUsuario().then((resultado: any) => {
         // buscarUsuário retorna os dados do usuário atual
-        console.log('Resultado da busca de usuário:', resultado);
         this.email = resultado['email']; // Atribui ao this.email o email dele
         this.carregarUsuario(this.email); //A função carregarUsuario precisa do email do usuário para ser executada
-        if(this.email === ''){
-          this.service.deslogar()
+        if (this.email === '') {
+          this.service.deslogar();
         }
+        console.log('Resultado da busca de usuário:', resultado);
+
+      }).then(() => {
+        this.pegarTodasAsFotos();;
+      }).catch((error) => {
+        console.error('Erro ao buscar usuário:', error);
       });
-    }
-    catch (error) {
+    } catch (error) {
       console.error('Erro ao buscar usuário:', error);
     }
+    
+}
+async changeInput(event: Event) {
+  const input = event.target as HTMLInputElement;
+  if (input.files) {
+    this.arquivo = input.files[0];
+    await this.carregarFoto();
   }
+}
+
+async carregarFoto(): Promise<void> {
+    if (!this.arquivo || !this.idUsuarioAtual) {
+        return; 
+    }
+
+    const storageRef = ref(this.storage, `uploads/${this.arquivo.name + this.idUsuarioAtual}`);
+    const task = uploadBytesResumable(storageRef, this.arquivo);
+
+    task.on('state_changed', async (snapshot) => {
+        this.progresso = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      if(this.progresso == 100){
+        const downloadURL = await getDownloadURL(storageRef);
+        this.ultimaFotoURL.set(downloadURL);
+        console.log('ULTIMA FOTO ' +this.ultimaFotoURL); // Verifique se o URL está sendo obtido corretamente
+      }
+    });
+}
+
+async pegarTodasAsFotos() {
+  try {
+    const storageRef = ref(this.storage, 'uploads/');
+    const resultado = await listAll(storageRef);
+    
+    const fotos = resultado.items;
+    for (const foto of fotos) {
+      const url = await getDownloadURL(foto);
+      if (url.includes(this.idUsuarioAtual)) {
+        this.ultimaFotoURL.set(url);     
+        this.service.fotoUsuario.set(this.ultimaFotoURL());
+        this.dados.AdicionarFotoNoUsuario(this.email, url);
+      }
+    }
+  } catch (error) {
+    console.error('Erro ao recuperar fotos:', error);
+  }
+}
+
+
+
 
   async carregarUsuario(email: string) {
     const usuario = await this.dados.PegarUsuarioPorEmail(email); // Usuário recebe uma requisição assincrona pra pegar os dados do usuário baseado no email
+    this.idUsuarioAtual = await this.dados.PegarIdPorEmail(email) || ''; // Pega o ID do usuário
     if (usuario) {
       // Se existir este usuário
       this.nome = usuario['nome']; // Preenche o nome dele
@@ -126,23 +195,30 @@ export class PerfilPage implements OnInit {
   async excluir() {
     const auth = getAuth();
     let usuarioAtual = auth.currentUser;
-   
-      const id = (await this.dados.PegarIdPorEmail(this.email)) || '';
-  
-      try {
-        // Aguarda a exclusão do usuário no Authentication e no Firestore
-        await Promise.all([
-          this.dados.DeletarUsuario(id).then(() => console.log('Usuário deletado com sucesso no Firestore')).then(() =>
-          deleteUser(usuarioAtual!).then(() => console.log('Usuário deletado com sucesso no Authentication')))
-        ]);
-  
-        console.log('Usuário deletado com sucesso em ambos o Authentication e Firestore');
-        
-        // Desloga o usuário após ambas as operações serem concluídas
-        this.service.deslogar();
-      } catch (error) {
-        console.error('Erro ao excluir usuário:', error);
-      }
-  
+
+    const id = (await this.dados.PegarIdPorEmail(this.email)) || '';
+
+    try {
+      // Aguarda a exclusão do usuário no Authentication e no Firestore
+      await Promise.all([
+        this.dados
+          .DeletarUsuario(id)
+          .then(() => console.log('Usuário deletado com sucesso no Firestore'))
+          .then(() =>
+            deleteUser(usuarioAtual!).then(() =>
+              console.log('Usuário deletado com sucesso no Authentication')
+            )
+          ),
+      ]);
+
+      console.log(
+        'Usuário deletado com sucesso em ambos o Authentication e Firestore'
+      );
+
+      // Desloga o usuário após ambas as operações serem concluídas
+      this.service.deslogar();
+    } catch (error) {
+      console.error('Erro ao excluir usuário:', error);
+    }
   }
 }

@@ -9,6 +9,7 @@ import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
 import { environment  } from './environments/environment';
 import { firebaseConfig } from './firebase'
+import { getStorage, provideStorage } from '@angular/fire/storage';
 
 
 if (environment.production) {
@@ -23,6 +24,7 @@ bootstrapApplication(AppComponent, {
     importProvidersFrom(
             provideFirebaseApp(() => initializeApp(firebaseConfig)),
             provideFirestore(() => getFirestore()),
+            provideStorage(() => getStorage())
                   )
   ],
 });

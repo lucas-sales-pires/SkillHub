@@ -8,10 +8,16 @@
       <ion-item [button]="true">
         <ion-label (click)="visualizarPerfil(usuario)" class="classePerfil text-wrap px-2" >{{ usuario.nome }}</ion-label>
 
+        @if (usuario.foto){
         <ion-avatar aria-hidden="true" slot="start">
-          <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+          <img [src] = 'usuario.foto' alt="{{ usuario.nome }}" >
         </ion-avatar>
-
+      }
+      @else{
+        <ion-avatar aria-hidden="true" slot="start">
+          <img alt="Imagem Padrão" src="https://ionicframework.com/docs/img/demos/avatar.svg">
+        </ion-avatar>
+      }
           <ion-label class="text-wrap px-2 email">{{usuario.email}}</ion-label>
           @if(usuario.email !== usuarioAtual.email){
             <ion-label> {{usuario.status === 'Desbloqueado' ? 'Desbloqueado' : 'Bloqueado'}}</ion-label>

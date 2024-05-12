@@ -9,6 +9,7 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { IonInput, IonButton, IonIcon, IonItem, IonLabel, IonCardContent, IonCardTitle, IonCardHeader, IonCard, IonContent } from '@ionic/angular/standalone';
 import { ModalAcordoComponent } from "../../components/modal-acordo/modal-acordo.component";
 
+
 @Component({
     selector: 'app-cadastro',
     templateUrl: './cadastro.page.html',

@@ -132,6 +132,15 @@ export class Dados {
             return false; // Se não houver documentos na consulta, retorna false
         }
     }
+
+    public async AdicionarFotoNoUsuario(email: string, foto: string) {
+        const dados = query(collection(this.db, "usuarios"), where("email", "==", email));
+        const consulta = await getDocs(dados);
+        if (!consulta.empty) {
+            const docRef = doc(this.db, 'usuarios', consulta.docs[0].id);
+            await setDoc(docRef, { foto: foto }, { merge: true });
+        }
+    }
     
 }
 

@@ -5,6 +5,27 @@
       <ion-card-title>Perfil</ion-card-title>
     </ion-card-header>
     <ion-card-content>
+      <ion-item>Foto
+        <input type="file" accept="images/*" id="fotoInput" (change)="changeInput($event)">
+        <ion-progress-bar [value]="progresso" type="determinate"  id="progressBar"></ion-progress-bar>
+      </ion-item>
+
+      @if(ultimaFotoURL()){
+        <ion-item>
+          <ion-avatar aria-hidden="true" slot="start">
+            <img alt="Imagem Padrão" [src]="ultimaFotoURL()">
+          </ion-avatar>
+        </ion-item>
+      }
+      @else{
+        <ion-item>
+          <ion-avatar aria-hidden="true" slot="start">
+            <img alt="Imagem Padrão" src="https://ionicframework.com/docs/img/demos/avatar.svg">
+          </ion-avatar>
+        </ion-item>
+      }
+
+      
       <ion-item>
         <ion-label position="stacked">Nome</ion-label>
         @if({nome}){<ion-input [(ngModel)]="nome" disabled></ion-input>}

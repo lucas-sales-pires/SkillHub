@@ -6,6 +6,7 @@ import { AuthService } from './services/autenticacao/auth.service';
 import { getAuth } from 'firebase/auth';
 import { QuizService } from './services/quiz/quiz.service';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',

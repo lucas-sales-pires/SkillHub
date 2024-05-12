@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
@@ -16,6 +16,9 @@ import {
 } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { NavbarComponent } from "../../components/navbar/navbar.component";
+import { getDownloadURL, listAll, ref } from 'firebase/storage';
+import { Storage } from '@angular/fire/storage';
+
 
 @Component({
     selector: 'app-administracao',
@@ -34,11 +37,14 @@ export class AdministracaoPage implements OnInit {
   id: any;
   usuarioAtual: any;
   bloqueado: any;
+  ultimaImagem: any;
+  private readonly storage: Storage = inject(Storage)
 
   constructor(
     private dados: Dados,
     private service: AuthService,
-    private adm: AdmService
+    private adm: AdmService,
+
   ) {
     addIcons({
       trash: trash,
@@ -55,6 +61,7 @@ export class AdministracaoPage implements OnInit {
     throw new Error('Method not implemented.');
   }
 
+  
 
 
   async bloquearUsuario(usuarioSelecionado: any) {

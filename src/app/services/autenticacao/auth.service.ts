@@ -8,6 +8,7 @@ import { Dados } from '../dados/dados.service';
 export class AuthService {
   usuarioAtual: User | null = null;
   public autenticado = signal(false);
+  public fotoUsuario = signal('');
 
   constructor(private dados: Dados) { }
 
@@ -15,10 +16,15 @@ export class AuthService {
     return new Promise((resolve) => { // Uma nova promessa que espera resolver algo
       const auth = getAuth(); // Pega os dados do usuário autenticado
       auth.onAuthStateChanged(async (user) => { // Fica observando cada alteração no status do usuário(login,logout etc)
+
         if (user) { // Se eu tenho o usuario
           const usuario = await this.dados.PegarUsuarioPorEmail(user.email); // A constante usuario recebe os dados do usuário que vem do PegarUsuarioPorEmail
-          this.usuarioAtual = user; // O usuario atual recebe o usuario 
-          resolve(usuario); // A promessa resolvida me retorna o usuario com seus dados
+          if(usuario){
+
+            usuario['foto'] = this.fotoUsuario(); // O usuario recebe a foto do usuario
+            this.usuarioAtual = user; // O usuario atual recebe o usuario 
+            resolve(usuario); // A promessa resolvida me retorna o usuario com seus dados
+          }
         } else {
           this.usuarioAtual = null; // E o meu usuarioAtual recebe um null
           this.deslogar(); 
