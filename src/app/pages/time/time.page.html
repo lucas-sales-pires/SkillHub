@@ -1,5 +1,15 @@
 <app-navbar/>
 <ion-content id="main-content">
+  <ion-card>
+    <ion-item>
+      <ion-label>
+        <h2>Adicionar novo time</h2>
+      </ion-label>
+      <app-cadastrotime routerLink="time/cadastro"> 
+        <ion-icon name="add-circle"></ion-icon>
+         </app-cadastrotime>
+    </ion-item>
+  </ion-card>
   @for(time of times; track time){
     <ion-card>
       <ion-item>
@@ -16,9 +26,7 @@
                 <th scope="col">
                   <h2>Fundação</h2>
                 </th>
-                <th scope="col">
-                  <h2>País</h2>
-                </th>
+
                 <th scope="col">
                   <h2>Pontuação</h2>
               </tr>
@@ -36,19 +44,13 @@
                   <h2>{{time.dataFundacao}}</h2>
                 </td>
                 <td>
-                  <h2>{{time.pais}}</h2>
-                </td>
-                <td>
                   <h2>{{time.pontuacaoTime}}</h2>
                 </td>
 
             </tbody>
 
           </table>
-        </ion-label>
-
-        
-     
+        </ion-label> 
       </ion-item>
     </ion-card>
   }@empty {

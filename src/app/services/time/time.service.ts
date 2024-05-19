@@ -1,11 +1,69 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Firestore } from '@angular/fire/firestore';
+import { addDoc, collection, doc, getDocs, query, setDoc, where } from 'firebase/firestore';
+import { TimeInterface } from 'src/app/interfaces/interfaceTime';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TimeService {
+  private paises: any[] = [];
+
+  constructor(private db : Firestore, private http: HttpClient) { 
+    this.buscarPaises().subscribe((data) => {
+      this.paises = data.map((item: any) => ({
+        nome: item.name.common
+      }));
+    });
+  }
+  private  buscarPaises() {
+    return  this.http.get<any[]>('https://restcountries.com/v3.1/all');
+  }
+
+  getPaises(): any[]{
+    return this.paises;
+  }
+    
+  public async AdicionarTime(time: TimeInterface) {
+    try {
+        const todosTimes = await this.PegarTimes();
+        const timeExiste = todosTimes
+        console.log(todosTimes)
+        if (timeExiste) {
+            return 'Time já cadastrado';
+        }
+        const collectionRef = collection(this.db, 'times');
+        await addDoc(collectionRef, time);
+        return 'Time adicionado com sucesso';
+    } catch (error) {
+        console.error('Erro ao adicionar time:', error);
+        return 'Erro ao adicionar time';
+    }
+}
+
+
+public async PegarTimes() {
+    const dados = query(collection(this.db, "times"));
+    const consulta = await getDocs(dados);
+    return !consulta.empty ? consulta.docs.map(doc => doc.data()) : '';
+    
+} 
+public async PegarIdTime(nomeTime : string){
+  const dados = query(collection(this.db, "times"));
+  const consulta = await getDocs(dados);
+  return !consulta.empty ? consulta.docs.find(doc => doc.data()['nome'] === nomeTime)?.id : '';
+}
+
+public async AdicionarFotoNoTime(nome: string, foto: string) {
+  const dados = query(collection(this.db, "times"), where("nome", "==", nome));
+  const consulta = await getDocs(dados);
+  if (!consulta.empty) {
+      const docRef = doc(this.db, 'times', consulta.docs[0].id);
+      await setDoc(docRef, { foto: foto }, { merge: true });
+  }
+}
 
 
 
-  constructor() { }
 }

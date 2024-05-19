@@ -61,6 +61,8 @@ export const routes: Routes = [
     path: 'administracao',
     loadComponent: () => import('./pages/administracao/administracao.page').then( m => m.AdministracaoPage)
   },
+  { path: 'time/cadastro' , loadChildren: () => import('./components/cadastrotime/cadastrotime.component').then( m => m.CadastrotimeComponent) },
+
 
 
 

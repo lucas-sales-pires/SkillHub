@@ -76,7 +76,6 @@ export class PerfilPage implements OnInit {
     
     try {
       this.service.buscarUsuario().then((resultado: any) => {
-        // buscarUsuário retorna os dados do usuário atual
         this.email = resultado['email']; // Atribui ao this.email o email dele
         this.carregarUsuario(this.email); //A função carregarUsuario precisa do email do usuário para ser executada
         if (this.email === '') {
@@ -115,7 +114,7 @@ async carregarFoto(): Promise<void> {
       if(this.progresso == 100){
         const downloadURL = await getDownloadURL(storageRef);
         this.ultimaFotoURL.set(downloadURL);
-        console.log('ULTIMA FOTO ' +this.ultimaFotoURL); // Verifique se o URL está sendo obtido corretamente
+        this.dados.AdicionarFotoNoUsuario(this.email, downloadURL);
       }
     });
 }

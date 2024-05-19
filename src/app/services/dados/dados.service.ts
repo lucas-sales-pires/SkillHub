@@ -96,18 +96,7 @@ export class Dados {
             console.error("Erro ao desbloquear usuário:", error);
         }
     }
-    
-    
-    public async AdicionarTime(time: TimeInterface) {
-        const collectionRef = collection(this.db, 'times');
-        return addDoc(collectionRef, time);
-    }
-    
-    public async PegarTime() {
-        const dados = query(collection(this.db, "times"));
-        const consulta = await getDocs(dados);
-        return !consulta.empty ? consulta.docs.map(doc => doc.data()) : '';
-    }
+
 
     public async PegarTodosUsuarios() {
         const dados = query(collection(this.db, "usuarios"));
@@ -141,6 +130,8 @@ export class Dados {
             await setDoc(docRef, { foto: foto }, { merge: true });
         }
     }
+    
+
     
 }
 

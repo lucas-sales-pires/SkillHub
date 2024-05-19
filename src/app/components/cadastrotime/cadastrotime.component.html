@@ -1,0 +1,47 @@
+<ion-button id="open-modal" expand="block">
+  <ion-icon slot="start" name="add-circle-outline"></ion-icon>
+  Adicionar TIme
+</ion-button>
+
+<ion-modal trigger="open-modal">
+  <ng-template>
+    <ion-content>
+      <h2 class="text-center">Cadastrar Time</h2>
+      <form>
+        <ion-item>
+          <ion-label position="floating">Nome:</ion-label>
+          <ion-input
+            type="text"
+            id="nome"
+            name="nome"
+            [(ngModel)]="nome"
+            required
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Descrição:</ion-label>
+          <ion-input
+            id="descricao"
+            name="descricao"
+            [(ngModel)]="descricao"
+            required
+          ></ion-input>
+        </ion-item>
+
+        <ion-item class="ion-padding">
+          <ion-progress-bar [value]="progresso" type="determinate"  id="progressBar"></ion-progress-bar>
+
+          <ion-label position="floating">Logo:</ion-label>
+          <ion-input
+            type="file"
+            id="logo"
+            name="logo"
+            (change)="logo($event)"
+          ></ion-input>
+        </ion-item>
+        <ion-button expand="full" color="primary" (click)="adicionarTime()">Cadastrar</ion-button>
+        <ion-button expand="full" color="medium" (click)="fecharModal()">Cancelar</ion-button>
+      </form>
+    </ion-content>
+  </ng-template>
+</ion-modal>

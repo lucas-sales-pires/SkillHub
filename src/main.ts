@@ -10,6 +10,7 @@ import { AppComponent } from './app/app.component';
 import { environment  } from './environments/environment';
 import { firebaseConfig } from './firebase'
 import { getStorage, provideStorage } from '@angular/fire/storage';
+import { HttpClientModule } from '@angular/common/http';
 
 
 if (environment.production) {
@@ -18,10 +19,11 @@ if (environment.production) {
 
 bootstrapApplication(AppComponent, {
   providers: [
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
     provideIonicAngular(),
     provideRouter(routes), 
     importProvidersFrom(
+            HttpClientModule,
             provideFirebaseApp(() => initializeApp(firebaseConfig)),
             provideFirestore(() => getFirestore()),
             provideStorage(() => getStorage())
