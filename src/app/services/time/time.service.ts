@@ -10,6 +10,7 @@ import { TimeInterface } from 'src/app/interfaces/interfaceTime';
 export class TimeService {
   private paises: any[] = [];
 
+
   constructor(private db : Firestore, private http: HttpClient) { 
     this.buscarPaises().subscribe((data) => {
       this.paises = data.map((item: any) => ({
@@ -27,12 +28,6 @@ export class TimeService {
     
   public async AdicionarTime(time: TimeInterface) {
     try {
-        const todosTimes = await this.PegarTimes();
-        const timeExiste = todosTimes
-        console.log(todosTimes)
-        if (timeExiste) {
-            return 'Time já cadastrado';
-        }
         const collectionRef = collection(this.db, 'times');
         await addDoc(collectionRef, time);
         return 'Time adicionado com sucesso';
@@ -63,7 +58,30 @@ public async AdicionarFotoNoTime(nome: string, foto: string) {
       await setDoc(docRef, { foto: foto }, { merge: true });
   }
 }
+ 
 
 
 
+  public async AtualizarTimeNoBackEnd(time: any, novoUsuario: any) {
+    const id = await this.PegarIdTime(time.nome);
+
+    if (id) {
+      const docRef = doc(this.db, 'times', id);
+      const timeAtualizado = { ...time }; 
+
+      if (!timeAtualizado.membros) {
+        timeAtualizado.membros = [];
+      }
+      if(timeAtualizado.membros.includes(novoUsuario)){
+        console.error('Usuário já está no time.');
+        return;
+      }
+
+      timeAtualizado.membros.push(novoUsuario);
+
+      await setDoc(docRef, timeAtualizado, { merge: true }); 
+    } else {
+      console.error('Time não encontrado para atualização.');
+    }
+  }
 }

@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="text-center">Detalhes Time</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col"><h2>Nome</h2></th>
+              <th scope="col"><h2>Descrição</h2></th>
+              <th scope="col" class="fundacao"><h2>Fundação</h2></th>
+              <th scope="col"><h2>Pontuação</h2></th>
+            </tr>
+          </thead>
+          <tbody>
+            
+            <tr>
+              <th scope="row"><h2>{{time.nome}}</h2></th>
+              <td><h2>{{time.descricao}}</h2></td>
+              <td class="fundacao"><h2>{{time.dataFundacao}}</h2></td>
+              <td><h2>{{time.pontuacaoTime}}</h2></td>
+            </tr>
+            @if(time.membros && time.membros.length > 0){
+              <tr>
+                <th scope="row">Membros(quantidade)</th>
+                <td><h2>{{time.membros.length}}</h2></td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="fecharModal()">Voltar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

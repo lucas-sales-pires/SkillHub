@@ -1,59 +1,62 @@
-<app-navbar/>
+<app-navbar></app-navbar>
 <ion-content id="main-content">
   <ion-card>
-    <ion-item>
+    <ion-item >
       <ion-label>
         <h2>Adicionar novo time</h2>
       </ion-label>
       <app-cadastrotime routerLink="time/cadastro"> 
         <ion-icon name="add-circle"></ion-icon>
-         </app-cadastrotime>
+      </app-cadastrotime>
     </ion-item>
   </ion-card>
-  @for(time of times; track time){
-    <ion-card>
+  @for (time of times; track time) {
+    <ion-card (click)="abrirModalDetalhes(time)">
       <ion-item>
         <ion-label>
           <table class="table table-hover">
             <thead>
               <tr>
-                <th scope="col">
-                  <h2>Nome</h2>
-                </th>
-                <th scope="col">
-                  <h2>Descrição</h2>
-                </th>
-                <th scope="col">
-                  <h2>Fundação</h2>
-                </th>
-
-                <th scope="col">
-                  <h2>Pontuação</h2>
+                <th scope="col"><h2>Nome</h2></th>
+                <th scope="col"><h2>Descrição</h2></th>
+                <th scope="col" class="fundacao"><h2>Fundação</h2></th>
+                <th scope="col"><h2>Pontuação</h2></th>
               </tr>
-
             </thead>
             <tbody>
               <tr>
-                <th scope="row">
-                  <h2>{{time.nome}}</h2>
-                </th>
-                <td>
-                  <h2>{{time.descricao}}</h2>
-                </td>
-                <td>
-                  <h2>{{time.dataFundacao}}</h2>
-                </td>
-                <td>
-                  <h2>{{time.pontuacaoTime}}</h2>
-                </td>
-
+                <th scope="row"><h2>{{time.nome}}</h2></th>
+                <td><h2>{{time.descricao}}</h2></td>
+                <td class="fundacao"><h2>{{time.dataFundacao}}</h2></td>
+                <td><h2>{{time.pontuacaoTime}}</h2></td>
+              </tr>
+              @if(time.membros && time.membros.length > 0){
+                <tr>
+                  <th scope="row">Membros(quantidade)</th>
+                  <td><h2>{{time.membros.length}}</h2></td>
+                </tr>
+              }
             </tbody>
-
           </table>
         </ion-label> 
       </ion-item>
+      
+      @if (time.membros && time.membros.includes(usuarioAtual)) {
+        <ion-button expand="block" color="danger" (click)="sairDoTime(time)"> 
+          Sair do Time
+        </ion-button>
+      }
+      @else if (usuarioEstaEmAlgumTime()) {
+        <ion-button expand="block" color="danger" disabled> 
+          Você já está em um Time
+        </ion-button>
+      } @else { 
+        <ion-button expand="block" color="primary" (click)="entrarNoTime(time)"> 
+          Entrar no Time
+        </ion-button>
+      } 
     </ion-card>
-  }@empty {
+  } @empty {
     <ion-card>
       <ion-item>
         <ion-label>
@@ -62,5 +65,4 @@
       </ion-item>
     </ion-card>
   }
-
 </ion-content>

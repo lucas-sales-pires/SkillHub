@@ -4,4 +4,5 @@ export interface TimeInterface {
     dataFundacao: string;
     pontuacaoTime: number;
     logo?: any;
+    membros?: any;
 }
