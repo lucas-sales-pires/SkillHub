@@ -24,10 +24,10 @@ export class ProgressBarComponent  implements OnInit {
   constructor(private pontuacao:PontuacaoService,private quiz:QuizService) { 
     addIcons({closeOutline})
     effect(()=>{
-      this.valorAtual = this.pontuacao.valorAtual() // valor atual
+      this.valorAtual = this.pontuacao.valorAtual() 
       this.porcentagem = this.qntPerguntas === 0 ? 0 : Math.floor((this.valorAtual / this.qntPerguntas) * 100);
-      this.cronometro = this.pontuacao.cronometro() // cronometro recebe o valor do cronometro que esta no service
-      this.regredir = this.pontuacao.regredir() // regredir recebe o valor do regredir que esta no service
+      this.cronometro = this.pontuacao.cronometro() 
+      this.regredir = this.pontuacao.regredir()
       
     })
   
@@ -38,7 +38,7 @@ export class ProgressBarComponent  implements OnInit {
   }
   
   ngOnInit() {
-    this.pontuacao.getQuantidadePerguntas().then(perguntas =>  this.qntPerguntas = perguntas) // pega a quantidade de perguntas
+    this.pontuacao.getQuantidadePerguntas().then(perguntas =>  this.qntPerguntas = perguntas)
   }
 
 }

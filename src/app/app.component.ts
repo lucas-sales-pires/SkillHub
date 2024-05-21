@@ -18,7 +18,7 @@ export class AppComponent {
 
   constructor(private autenticacao: AuthService, private quiz: QuizService) {
     effect(() => {
-      const auth = getAuth(); // Pega os dados do usuário autenticado
+      const auth = getAuth(); 
       auth.onAuthStateChanged(async (user) => {
         if (user) {
           this.autenticacao.setAutenticado(true);

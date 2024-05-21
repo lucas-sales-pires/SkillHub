@@ -2,17 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { addIcons } from 'ionicons';
-import {
-  eye,
-  lockClosed,
-  lockClosedOutline,
-  eyeOutline,
-  eyeOffOutline,
+import {eye,lockClosed,lockClosedOutline,eyeOutline,eyeOffOutline,
 } from 'ionicons/icons';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { Router } from '@angular/router';
 import { IonInput, IonButton, IonIcon, IonCardContent, IonCardTitle, IonContent, IonCard, IonCardHeader } from '@ionic/angular/standalone';
-import { AuthService } from 'src/app/services/autenticacao/auth.service';
 import { Dados } from 'src/app/services/dados/dados.service';
 
 @Component({

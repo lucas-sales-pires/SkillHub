@@ -1,13 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import {
-  Firestore,
-  collection,
-  addDoc,
-  getDocs,
-  deleteDoc,
-  doc,
-  where,
-  query,
+import {Firestore,collection,addDoc,getDocs,deleteDoc,doc,where,query,
 } from '@angular/fire/firestore';
 import { from, Observable } from 'rxjs';
 import { Pergunta } from 'src/app/interfaces/interfacePerguntas';
@@ -38,7 +30,6 @@ export class QuizService {
 
     const querySnapshot = await getDocs(colecao);
     querySnapshot.forEach((doc) => {
-      // Para cada pergunta pego todos os dados
       const pergunta: Pergunta = {
         id: doc.id,
         categoria: doc.data()['categoria'],
@@ -74,9 +65,7 @@ export class QuizService {
       )
     );
   
-    querySnapshot.forEach((doc) => {
-      // Para cada pergunta pego todos os dados
-  
+    querySnapshot.forEach((doc) => {  
       const pergunta: Pergunta = {
         id: doc.id,
         categoria: doc.data()['categoria'],
@@ -93,17 +82,14 @@ export class QuizService {
   }
   
   async pegarIdDaPergunta(pergunta: string) {
-    // Obtém a lista de perguntas
     const perguntas = await this.obterPerguntas();
 
-    // Encontra a pergunta pelo texto
     const perguntaEncontrada = perguntas.find((p) => p.pergunta === pergunta);
 
     return perguntaEncontrada?.id;
   }
   public removerPergunta(id: string): Observable<void> {
-    // Método para deletar um usuário
-    const docRef = doc(this.db, 'quiz', id); // Referência para o documento do quiz
-    return from(deleteDoc(docRef)); // Deleta o documento e retorna um Observable
+    const docRef = doc(this.db, 'quiz', id); 
+    return from(deleteDoc(docRef));
   }
 }

@@ -41,23 +41,23 @@ export class GerenciarPerguntasPage implements OnInit {
   }
   
   async carregarCategorias(){
-    const perguntas = await this.quiz.obterPerguntas(); // Obtenho perguntas e resposta
-    perguntas.forEach(pergunta => { // Primeira pergunta
-      this.categorias.push(pergunta.categoria) // a lista de categoria pega só pergunta
+    const perguntas = await this.quiz.obterPerguntas(); 
+    perguntas.forEach(pergunta => {
+      this.categorias.push(pergunta.categoria) 
     })
-    this.categorias  = this.categorias.filter((item,index) => this.categorias.indexOf(item) === index) // Pego só uma por categoria, pega só o primeiro indice daquela categoria
+    this.categorias  = this.categorias.filter((item,index) => this.categorias.indexOf(item) === index)
     
   }
   async carregarPerguntas(){
-    const perguntas = await this.quiz.obterPerguntas(); // Obtenho perguntas e respostas
-    this.perguntas = perguntas // This.perguntas recebe tanto perguntas quanto respostas 
+    const perguntas = await this.quiz.obterPerguntas(); 
+    this.perguntas = perguntas 
   }
   
   async removerPerguntas(selecionada:string){
-    const id = await this.quiz.pegarIdDaPergunta(selecionada); // Pego o id da pergunta selecionada
-    this.quiz.removerPergunta(id!); // Remove a pergunta
-    this.perguntas = this.perguntas.filter(pergunta => pergunta !== selecionada); // Removo a pergunta baseado na selecionada
-    this.carregarPerguntas(); // Carrego novamente as perguntas
+    const id = await this.quiz.pegarIdDaPergunta(selecionada); 
+    this.quiz.removerPergunta(id!);
+    this.perguntas = this.perguntas.filter(pergunta => pergunta !== selecionada);
+    this.carregarPerguntas();
   }
   
 }

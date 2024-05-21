@@ -20,30 +20,29 @@ export class RankingPage implements OnInit {
   constructor(private ranking: Dados) {}
   ordenarRanking() {
     this.transformarJogadorRepetidoEmUm();
-    this.jogadores.sort((a, b) => b.pontuacao - a.pontuacao); // Ordena do maior para o menor
+    this.jogadores.sort((a, b) => b.pontuacao - a.pontuacao);
     this.jogadores.forEach((jogador, index) => {
-      jogador.posicao = index + 1; // Define a posição do jogador com base no índice + 1
+      jogador.posicao = index + 1; 
     });
   }
 
 
   transformarJogadorRepetidoEmUm(){
-    let jogadoresUnicos: Ranking[] = []; // Criei uma lista utilizando a interface Ranking
+    let jogadoresUnicos: Ranking[] = []; 
 
-    this.jogadores.forEach(jogador => { // Para cada jogador na lista jogadores( a lista principal)
+    this.jogadores.forEach(jogador => { 
 
-      const jogadorExistente = jogadoresUnicos.find(jogadorUnico => jogadorUnico.email == jogador.email); // Verifico se o jogador já está na lista de jogadores únicos
+      const jogadorExistente = jogadoresUnicos.find(jogadorUnico => jogadorUnico.email == jogador.email); 
 
-      if (!jogadorExistente) { // Se o jogador não estiver na lista 
+      if (!jogadorExistente) {
 
-        jogadoresUnicos.push(jogador); // Adiciono o jogador na lista dejogadores unico
-
+        jogadoresUnicos.push(jogador);
       } else {
 
-        jogadorExistente.pontuacao += jogador.pontuacao; // Soma a pontuação do jogador existente com a pontuação do jogador repetido
+        jogadorExistente.pontuacao += jogador.pontuacao;
       }
     });
-    this.jogadores = jogadoresUnicos; // Atribui a lista de jogadores únicos à lista de jogadores
+    this.jogadores = jogadoresUnicos; 
   
   }
 

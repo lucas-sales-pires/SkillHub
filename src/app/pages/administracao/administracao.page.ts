@@ -7,16 +7,10 @@ import { AuthService } from 'src/app/services/autenticacao/auth.service';
 import { ModalCertezaComponent } from 'src/app/components/modal-certeza/modal-certeza.component';
 import { AdmService } from 'src/app/services/adm/adm.service';
 import { ModalController } from '@ionic/angular';
-import {
-  share,
-  trash,
-  lockClosed,
-  mailOutline,
-  lockOpen,
+import {share,trash,lockClosed,mailOutline,lockOpen,
 } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { NavbarComponent } from "../../components/navbar/navbar.component";
-import { getDownloadURL, listAll, ref } from 'firebase/storage';
 import { Storage } from '@angular/fire/storage';
 
 

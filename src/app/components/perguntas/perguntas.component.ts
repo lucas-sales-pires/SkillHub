@@ -1,18 +1,5 @@
 import { Component, effect, OnInit } from '@angular/core';
-import {
-  IonContent,
-  IonCard,
-  IonCardHeader,
-  IonCardTitle,
-  IonCardContent,
-  IonList,
-  IonItem,
-  IonLabel,
-  IonRadioGroup,
-  IonRadio,
-  IonButton,
-  IonInput,
-  IonCheckbox,
+import {IonContent,IonCard,IonCardHeader,IonCardTitle,IonCardContent,IonList,IonItem,IonLabel,IonRadioGroup,IonRadio,IonButton,IonInput,IonCheckbox,
 } from '@ionic/angular/standalone';
 import { QuizService } from 'src/app/services/quiz/quiz.service';
 import { FormsModule } from '@angular/forms';
@@ -25,22 +12,7 @@ import { NavbarComponent } from '../navbar/navbar.component';
   templateUrl: './perguntas.component.html',
   styleUrls: ['./perguntas.component.scss'],
   standalone: true,
-  imports: [
-    IonCheckbox,
-    IonInput,
-    IonButton,
-    IonRadio,
-    IonRadioGroup,
-    IonLabel,
-    IonItem,
-    IonList,
-    IonCardContent,
-    IonCardTitle,
-    IonCardHeader,
-    IonCard,
-    IonContent,
-    FormsModule,
-    NavbarComponent,
+  imports: [IonCheckbox,IonInput,IonButton,IonRadio,IonRadioGroup,IonLabel,IonItem,IonList,IonCardContent,IonCardTitle,IonCardHeader,IonCard,IonContent,FormsModule,NavbarComponent,
   ],
 })
 export class PerguntasComponent implements OnInit {
@@ -66,13 +38,13 @@ export class PerguntasComponent implements OnInit {
     private pontuacaoService: PontuacaoService
   ) {
     effect(() => {
-      this.categoriaEscolhida = this.quiz.getCategoria(); // Pega a categoria escolhida
+      this.categoriaEscolhida = this.quiz.getCategoria();
       console.log(this.quiz.categoria());
     });
   }
 
   ngOnInit() {
-    this.obterperguntas(); //Assim que inicia já carrega esta função
+    this.obterperguntas();
   }
   voltar() {
     this.router.navigate(['/pagina-pre-quiz']);
@@ -83,64 +55,57 @@ export class PerguntasComponent implements OnInit {
  
     let perguntas = await this.quiz.obterPerguntasPorCategoria(
       this.quiz.getCategoria(),this.quiz.quantidadePerguntasPorCategoria()
-    ); // Espera obter as perguntas
+    );
     if (perguntas.length == 0) {
-      // Se não tiver perguntas
       this.quiz.setCategoria('vazio');
       return;
     }
  
-    this.perguntaAtual = perguntas[this.indice]['pergunta']; // Depois que carrega os dados, pega a pergunta e os demais dados
+    this.perguntaAtual = perguntas[this.indice]['pergunta']; 
     this.respostas0 = perguntas[this.indice]['respostas'][0];
     this.respostas1 = perguntas[this.indice]['respostas'][1];
     this.respostas2 = perguntas[this.indice]['respostas'][2];
     this.respostacorreta = perguntas[this.indice]['respostaCerta'];
     
-    this.pontuacaoService.regredir30segundos(); // Inicia o regredir de 30 segundos
-    this.pontuacaoService.contador30segundos(); // Inicia o contador de 30 segundos
+    this.pontuacaoService.regredir30segundos();
+    this.pontuacaoService.contador30segundos();
   }
   async proximaPergunta() {
     if(this.respostaSelecionada == this.respostacorreta){
-      this.pontuacaoService.setPontuacao(); // Soma 1 na pontuacao
+      this.pontuacaoService.setPontuacao(); 
     }
-    this.indice += 1; // Quando apertar em proxima pergunta o indice aumenta um para ir para proxima pergunta e respostas
+    this.indice += 1;
     let perguntas = await this.quiz.obterPerguntasPorCategoria(
       this.quiz.getCategoria(),this.quiz.quantidadePerguntasPorCategoria()
-    ); // Obtem as perguntas de novo
+    );
     if (this.indice < perguntas.length) {
-      // Se o indice for menor que o tamanho da lista
-      this.perguntaAtual = perguntas[this.indice]['pergunta']; // Prossigo em buscar os dados
+      this.perguntaAtual = perguntas[this.indice]['pergunta'];
       this.respostas0 = perguntas[this.indice]['respostas'][0];
       this.respostas1 = perguntas[this.indice]['respostas'][1];
       this.respostas2 = perguntas[this.indice]['respostas'][2];
       this.respostacorreta = perguntas[this.indice]['respostaCerta'];
-      this.pontuacaoService.setValorAtual(this.indice); // Seto o valor atual do indice
-      this.pontuacaoService.contador30segundos(); // Inicia o contador de 30 segundos
-      this.pontuacaoService.regredir30segundos(); // Inicia o regredir de 30 segundos
+      this.pontuacaoService.setValorAtual(this.indice); 
+      this.pontuacaoService.contador30segundos();
+      this.pontuacaoService.regredir30segundos();
       
     } else {
       this.router.navigate(['/pagina-pontuacao-quiz']);
     }
-    console.log(this.pontuacaoService.getValorAtual()); // Pego o valor atual do indice
+    console.log(this.pontuacaoService.getValorAtual());
   }
 
   async apenasUm() {
-    const checkboxs = document.querySelectorAll('ion-checkbox'); // Pega todos os ion-checkbox
+    const checkboxs = document.querySelectorAll('ion-checkbox');
     checkboxs.forEach((checkbox) => {
-      // Para cada checkbox
       checkbox.addEventListener('ionChange', async (e) => {
-        // Adiciona o event IonChange
-        const checkbox = e.target; // Pega o target dele
+        const checkbox = e.target; 
         if (checkbox.checked) {
-          // Se ele estiver Marcado
           checkboxs.forEach((cb) => {
-            //Aqui, estamos iterando sobre todos os checkboxes novamente para desmarcar todos
             if (cb !== checkbox) {
-              //  exceto o que foi marcado recentemente.
               cb.checked = false;
             }
           });
-          this.opcaoSelecionada = checkbox.value; // Opcao selecionada recebe o valor do checkbox
+          this.opcaoSelecionada = checkbox.value; 
         }
       });
     });

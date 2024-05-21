@@ -1,24 +1,5 @@
 import { Component, effect, OnInit, ViewChild } from '@angular/core';
-import {
-  IonHeader,
-  IonToolbar,
-  IonContent,
-  IonItem,
-  IonButton,
-  IonModal,
-  IonButtons,
-  IonTitle,
-  IonInput,
-  IonLabel,
-  IonIcon,
-  IonList,
-  IonRadio,
-  IonRadioGroup,
-  IonSelectOption,
-  IonCheckbox,
-  IonSelect,
-  IonText,
-  IonTextarea,
+import {IonHeader,IonToolbar,IonContent,IonItem,IonButton,IonModal,IonButtons,IonTitle,IonInput,IonLabel,IonIcon,IonList,IonRadio,IonRadioGroup,IonSelectOption,IonCheckbox,IonSelect,IonText,IonTextarea,
 } from '@ionic/angular/standalone';
 import { Dados } from 'src/app/services/dados/dados.service';
 import { AuthService } from 'src/app/services/autenticacao/auth.service';
@@ -28,27 +9,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './feedback.component.html',
   styleUrls: ['./feedback.component.scss'],
   standalone: true,
-  imports: [
-    IonTextarea,
-    IonText,
-    IonCheckbox,
-    IonRadioGroup,
-    IonRadio,
-    IonList,
-    IonIcon,
-    IonLabel,
-    IonInput,
-    IonTitle,
-    IonButtons,
-    IonModal,
-    IonHeader,
-    IonToolbar,
-    IonContent,
-    IonItem,
-    IonButton,
-    FormsModule,
-    IonSelectOption,
-    IonSelect,
+  imports: [IonTextarea,IonText,IonCheckbox,IonRadioGroup,IonRadio,IonList,IonIcon,IonLabel,IonInput,IonTitle,IonButtons,IonModal,IonHeader,IonToolbar,IonContent,IonItem,IonButton,FormsModule,IonSelectOption,IonSelect,
   ],
 })
 export class FeedbackComponent implements OnInit {
@@ -56,8 +17,8 @@ export class FeedbackComponent implements OnInit {
   email: any;
   feedback: any = '';
 
-  @ViewChild(IonModal) //@ViewChild: Essa anotação indica ao Angular que você deseja buscar um elemento específico na sua visualização. No caso, IonModal é o tipo de elemento que você deseja acessar.
-  modal!: IonModal; //O sinal de exclamação (!) indica ao Angular que a variável modal não pode ser nula. Isso significa que você tem certeza de que o elemento modal estará presente na sua visualização.
+  @ViewChild(IonModal)
+  modal!: IonModal;
 
   constructor(private dados: Dados, private service: AuthService) {
     effect(() => {
@@ -69,52 +30,45 @@ export class FeedbackComponent implements OnInit {
 
   ngOnInit() {
     this.service.buscarUsuario().then((resultado: any) => {
-      // buscarUsuário retorna os dados do usuário atual
-      this.email = resultado['email']; // Atribui ao this.email o email dele
+      this.email = resultado['email']; 
       this.nome = resultado['nome'];
-      this.carregarUsuario(this.email); //A função carregarUsuario precisa do email do usuário para ser executada
+      this.carregarUsuario(this.email); 
     });
   }
 
   cancelarFeedback() {
-    this.modal.dismiss(); // Fecha o modal
+    this.modal.dismiss(); 
   }
 
   enviarFeedback() {
-    // Obtém a data e hora atual
     let dataAtual = new Date();
-    // Obtém os componentes individuais da data e hora
     let dia = dataAtual.getDate();
     let mes = dataAtual.getMonth() + 1;
     let ano = dataAtual.getFullYear();
     let horas = dataAtual.getHours();
     let minutos = dataAtual.getMinutes();
 
-    // Formata a data e hora para o formato desejado
     let dataHoraFormatada = `${dia}/${mes}/${ano} ${horas}:${minutos}`;
 
     this.dados
       .EnviarFeedBack({
-        // Envia um feedback com os dados do usuário
-        nome: this.nome, // Nome do usuário
-        email: this.email, // Email do usuário
-        feedback: this.feedback, // Feedback do usuário
-        diaFeedback: dataHoraFormatada, // Data e hora do feedback
+        nome: this.nome, 
+        email: this.email, 
+        feedback: this.feedback,
+        diaFeedback: dataHoraFormatada,
       })
       .then(() => {
-        // Se o feedback for enviado com sucesso
-        this.feedback = ''; // Limpa o campo de feedback
-        this.modal.dismiss(); // Fecha o modal
+        this.feedback = '';
+        this.modal.dismiss();
       });
   }
 
   async carregarUsuario(email: string) {
-    const usuario = await this.dados.PegarUsuarioPorEmail(email); // Usuário recebe uma requisição assincrona pra pegar os dados do usuário baseado no email
+    const usuario = await this.dados.PegarUsuarioPorEmail(email);
     if (usuario) {
-      // Se existir este usuário
-      this.nome = usuario['nome']; // Preenche o nome dele
+      this.nome = usuario['nome']; 
     } else {
-      this.service.deslogar(); // Utiliza a função de deslogar
+      this.service.deslogar();
     }
   }
 }

@@ -16,31 +16,31 @@ export class PontuacaoService {
   
   contador30segundos() {
     let contador = 0;
-    const incremento = 100 / 30; // Incremento necessário para chegar a 100 em 30 segundos
-    clearInterval(this.intervalo); // Cancela o intervalo anterior, se houver
+    const incremento = 100 / 30; 
+    clearInterval(this.intervalo); 
 
     this.intervalo = setInterval(() => {
         contador += incremento;
-        this.cronometro.set(Math.round(contador)); // Arredonda o contador para o número inteiro mais próximo
-        if (contador >= 100) { // Verifica se o contador atingiu 100 isso pra preencher o círculo
-            clearInterval(this.intervalo); // Cancela o intervalo
+        this.cronometro.set(Math.round(contador)); 
+        if (contador >= 100) { 
+            clearInterval(this.intervalo); 
             alert("Acabou o tempo!.");
         }
-    }, 1000); // Chama a função a cada segundo
+    }, 1000);
 }
 
   regredir30segundos(){
     let contador = 30;
-    clearInterval(this.intervalo2); // Cancela o intervalo anterior, se houver
+    clearInterval(this.intervalo2); 
 
     this.intervalo2 = setInterval(() => {
         contador--;
         this.regredir.set(contador);
         if (contador <= 0) {
-            clearInterval(this.intervalo2); // Cancela o intervalo após 30 segundos
+            clearInterval(this.intervalo2); 
             alert("acabou o tempo")
         }
-    }, 1000); // Chama a função a cada segundo
+    }, 1000); 
   }
 
   

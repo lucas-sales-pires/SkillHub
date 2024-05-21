@@ -3,19 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { Dados } from 'src/app/services/dados/dados.service';
 import { deleteUser, getAuth } from 'firebase/auth';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
-import {
-  IonContent,
-  IonCardHeader,
-  IonCard,
-  IonCardTitle,
-  IonItem,
-  IonCardContent,
-  IonLabel,
-  IonButton,
-  IonInput,
-  IonIcon,
-  IonAvatar,
-  IonProgressBar,
+import {IonContent,IonCardHeader,IonCard,IonCardTitle,IonItem,IonCardContent,IonLabel,IonButton,IonInput,IonIcon,IonAvatar,IonProgressBar,
 } from '@ionic/angular/standalone';
 import { AuthService } from 'src/app/services/autenticacao/auth.service';
 import { FeedbackComponent } from '../../components/feedback/feedback.component';
@@ -28,22 +16,7 @@ import { getDownloadURL, listAll, uploadBytesResumable } from 'firebase/storage'
   templateUrl: './perfil.page.html',
   styleUrls: ['./perfil.page.scss'],
   standalone: true,
-  imports: [
-    IonIcon,
-    IonButton,
-    IonLabel,
-    IonCardContent,
-    IonItem,
-    IonCardTitle,
-    IonCard,
-    IonCardHeader,
-    IonContent,
-    FormsModule,
-    NavbarComponent,
-    IonInput,
-    FeedbackComponent,
-    IonAvatar,
-    IonProgressBar,
+  imports: [IonIcon,IonButton,IonLabel,IonCardContent,IonItem,IonCardTitle,IonCard,IonCardHeader,IonContent,FormsModule,NavbarComponent,IonInput,FeedbackComponent,IonAvatar,IonProgressBar,
   ],
   providers: [ModalCertezaComponent],
 })
@@ -76,8 +49,8 @@ export class PerfilPage implements OnInit {
     
     try {
       this.service.buscarUsuario().then((resultado: any) => {
-        this.email = resultado['email']; // Atribui ao this.email o email dele
-        this.carregarUsuario(this.email); //A função carregarUsuario precisa do email do usuário para ser executada
+        this.email = resultado['email'];
+        this.carregarUsuario(this.email); 
         if (this.email === '') {
           this.service.deslogar();
         }
@@ -142,46 +115,40 @@ async pegarTodasAsFotos() {
 
 
   async carregarUsuario(email: string) {
-    const usuario = await this.dados.PegarUsuarioPorEmail(email); // Usuário recebe uma requisição assincrona pra pegar os dados do usuário baseado no email
-    this.idUsuarioAtual = await this.dados.PegarIdPorEmail(email) || ''; // Pega o ID do usuário
+    const usuario = await this.dados.PegarUsuarioPorEmail(email);
+    this.idUsuarioAtual = await this.dados.PegarIdPorEmail(email) || '';
     if (usuario) {
-      // Se existir este usuário
-      this.nome = usuario['nome']; // Preenche o nome dele
-      this.cadastradoDesde = usuario['diaCadastro']; // Preenche a data de cadastro
+      this.nome = usuario['nome']; 
+      this.cadastradoDesde = usuario['diaCadastro'];
     } else {
-      this.service.deslogar(); // Utiliza a função de deslogar
+      this.service.deslogar();
     }
   }
 
   async editarPerfil() {
     const auth = getAuth();
-    let usuarioAtual = auth.currentUser; // Usuário Atual
-    this.editando = true; // A variável editando == true que sera utilizado no perfil.page.html
+    let usuarioAtual = auth.currentUser; 
+    this.editando = true;
 
     if (usuarioAtual?.email === this.email) {
-      // Se o usuárioAtual.email for igual ao this.email
-      const inputs = document.querySelectorAll('ion-input'); // Pego todos os ion-input
+      const inputs = document.querySelectorAll('ion-input');
 
       inputs.forEach((input) => {
-        // Pega cada input
         if (input.id !== 'cadastradoDesdeInput') {
-          // Menos o que tem o id de cadastradoDesdeInput
-          input.removeAttribute('disabled'); // Remove o atributo disabled e fica disponivel pra editar
+          input.removeAttribute('disabled'); 
         }
       });
-      const id = (await this.dados.PegarIdPorEmail(this.email)) || ''; // Pego o ID do usuario
+      const id = (await this.dados.PegarIdPorEmail(this.email)) || '';
       this.dados
         .AtualizarUsuario(id, {
-          // Utilizo a função para atualizar o Usuário
           nome: this.nome,
           email: this.email,
         })
         .subscribe(() => {
-          // Como é um Observable utilizo o subscribe para emitir a mensagem de usuário atualizado
           console.log('Usuário atualizado com sucesso');
         });
     } else {
-      this.service.deslogar(); // Deslogo, pois o usuario não está conectado
+      this.service.deslogar();
     }
   }
   async Sair() {
@@ -198,7 +165,6 @@ async pegarTodasAsFotos() {
     const id = (await this.dados.PegarIdPorEmail(this.email)) || '';
 
     try {
-      // Aguarda a exclusão do usuário no Authentication e no Firestore
       await Promise.all([
         this.dados
           .DeletarUsuario(id)
@@ -214,7 +180,6 @@ async pegarTodasAsFotos() {
         'Usuário deletado com sucesso em ambos o Authentication e Firestore'
       );
 
-      // Desloga o usuário após ambas as operações serem concluídas
       this.service.deslogar();
     } catch (error) {
       console.error('Erro ao excluir usuário:', error);

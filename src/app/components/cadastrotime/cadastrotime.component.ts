@@ -1,18 +1,5 @@
 import { Component, inject, OnInit, ViewChild } from '@angular/core';
-import {
-  IonCard,
-  IonContent,
-  IonLabel,
-  IonItem,
-  IonModal,
-  IonButton,
-  IonIcon,
-  IonButtons,
-  IonInput,
-  IonImg,
-  IonRadio,
-  IonSelect,
-  IonSelectOption, IonProgressBar } from '@ionic/angular/standalone';
+import {IonCard,IonContent,IonLabel,IonItem,IonModal,IonButton,IonIcon,IonButtons,IonInput,IonImg,IonRadio,IonSelect,IonSelectOption, IonProgressBar } from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
 import { TimeService } from 'src/app/services/time/time.service';
 import { addCircleOutline } from 'ionicons/icons';
@@ -27,22 +14,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './cadastrotime.component.html',
   styleUrls: ['./cadastrotime.component.scss'],
   standalone: true,
-  imports: [IonProgressBar, 
-    IonRadio,
-    IonImg,
-    IonInput,
-    IonButtons,
-    IonIcon,
-    IonButton,
-    IonItem,
-    IonLabel,
-    IonContent,
-    IonCard,
-    FormsModule,
-    IonModal,
-    IonSelect,
-    IonSelectOption,
-    CommonModule,
+  imports: [IonProgressBar, IonRadio,IonImg,IonInput,IonButtons,IonIcon,IonButton,IonItem,IonLabel,IonContent,IonCard,FormsModule,IonModal,IonSelect,IonSelectOption,CommonModule,
   ],
 })
 export class CadastrotimeComponent implements OnInit {
@@ -51,15 +23,15 @@ nome: any;
 descricao: any;
 dataFundacao: any;
 pontuacaoTime: any = 0;
-@ViewChild(IonModal) //@ViewChild: Essa anotação indica ao Angular que você deseja buscar um elemento específico na sua visualização. No caso, IonModal é o tipo de elemento que você deseja acessar.
-modal!: IonModal; //O sinal de exclamação (!) indica ao Angular que a variável modal não pode ser nula. Isso significa que você tem certeza de que o elemento modal estará presente na sua visualização.
 bandeiraUrl: any;
 arquivo!: File;
 idTimeAtual: any;
+@ViewChild(IonModal) 
+modal!: IonModal;
 
 private readonly storage: Storage = inject(Storage);
   
-constructor(private time: TimeService, private http: HttpClient) {
+constructor(private time: TimeService) {
   addIcons({
     'add-circle-outline': addCircleOutline,
     });
@@ -71,17 +43,13 @@ fecharModal() {
   
 
 adicionarTime() {
-  // Obtém a data e hora atual
   let dataAtual = new Date();
-  // Obtém os componentes individuais da data e hora
   let dia = dataAtual.getDate();
   let mes = dataAtual.getMonth() + 1;
   let ano = dataAtual.getFullYear();
   let horas = dataAtual.getHours();
   let minutos = dataAtual.getMinutes();
-  // Formata a data e hora para o formato desejado
   let dataHoraFormatada = `${dia}/${mes}/${ano} ${horas}:${minutos}`;
-  console.log(this.nome, this.descricao, this.pontuacaoTime);
   this.time.AdicionarTime({
     nome: this.nome,
     descricao: this.descricao,

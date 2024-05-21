@@ -34,7 +34,7 @@ import { TimeService } from 'src/app/services/time/time.service';
 })
 export class ModalDetalhesComponent  implements OnInit {
 
-  @ViewChild(IonModal) //@ViewChild: Essa anotação indica ao Angular que você deseja buscar um elemento específico na sua visualização. No caso, IonModal é o tipo de elemento que você deseja acessar.
+  @ViewChild(IonModal)
   modal!: IonModal;
   times: TimeInterface[]=[];
   @Input() time!: TimeInterface; 
@@ -43,9 +43,8 @@ export class ModalDetalhesComponent  implements OnInit {
 
   carregarTimes(){
     this.timesService.PegarTimes().then((resultado: any) => {
-        this.times = resultado;
-        
-        console.log(resultado)
+    this.times = resultado;
+    console.log(resultado)
     });
 }
 
