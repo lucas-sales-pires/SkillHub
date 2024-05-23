@@ -23,9 +23,6 @@ import { Storage } from '@angular/fire/storage';
     imports: [IonicModule, CommonModule, FormsModule, NavbarComponent]
 })
 export class AdministracaoPage implements OnInit {
-  async visualizarPerfil(usuario: any) {
-    this.adm.usuario = usuario;
-  }
   usuarios: any;
   usuario: any;
   id: any;
@@ -52,7 +49,7 @@ export class AdministracaoPage implements OnInit {
     private dados: Dados,
     private service: AuthService,
     private adm: AdmService,
-
+    
   ) {
     addIcons({
       trash: trash,
@@ -63,10 +60,13 @@ export class AdministracaoPage implements OnInit {
     });
   }
   
-
+  
+  async visualizarPerfil(usuario: any) {
+    this.adm.usuario = usuario;
+  }
   
   enviarMensagem(usuarioSelecionado: any) {
-    throw new Error('Method not implemented.');
+    throw new Error('Metodo não implementado.');
   }
 
   

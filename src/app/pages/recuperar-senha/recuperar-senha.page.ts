@@ -28,10 +28,10 @@ sendPasswordResetEmail(auth, this.email)
       this.mensagem = '';
     }, 3000);
   })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log(errorMessage, errorCode);
+  .catch((erro) => {
+    const erroCodigo = erro.code;
+    const erroMensagem = erro.message;
+    console.log(erroMensagem, erroCodigo);
     this.erro = "Não foi possível enviar o email de recuperação de senha. Verifique se o email foi digitado corretamente."
 
   });

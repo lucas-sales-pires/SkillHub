@@ -8,10 +8,10 @@ export class AcordoService {
 
   constructor() { }
 
-  aceitarTermos() {
+  public aceitarTermos() {
     this.termo.set(!this.termo);
   }
-  pegarTermos() {
+  public pegarTermos() {
     return this.termo;
   }
 

@@ -95,8 +95,6 @@ async mostrarAlerta(mensagem: string) {
 carregarTimes(){
     this.timesService.PegarTimes().then((resultado: any) => {
         this.times = resultado;
-        
-        console.log(resultado)
     });
 }
 

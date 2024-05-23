@@ -4,7 +4,6 @@ import { inject } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
 import { AuthService } from './services/autenticacao/auth.service';
 import { getAuth } from 'firebase/auth';
-import { QuizService } from './services/quiz/quiz.service';
 
 
 @Component({
@@ -16,7 +15,7 @@ import { QuizService } from './services/quiz/quiz.service';
 export class AppComponent {
   firestore: Firestore = inject(Firestore);
 
-  constructor(private autenticacao: AuthService, private quiz: QuizService) {
+  constructor(private autenticacao: AuthService) {
     effect(() => {
       const auth = getAuth(); 
       auth.onAuthStateChanged(async (user) => {

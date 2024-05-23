@@ -32,7 +32,7 @@ export class LoginPage implements OnInit {
   }
   async logar() {
     const auth = getAuth();
-    const resposta =await  this.dados.VerificarSeEstaBloqueado(this.email)
+    const resposta = await  this.dados.VerificarSeEstaBloqueado(this.email)
     if(resposta){
       this.mensagem = 'Usuário bloqueado.';
       setInterval(() => {

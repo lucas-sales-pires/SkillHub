@@ -27,6 +27,7 @@ export class RankingPage implements OnInit {
 }
   
   constructor(private ranking: Dados) {}
+  
   ordenarRanking() {
     this.transformarJogadorRepetidoEmUm();
     this.jogadores.sort((a, b) => b.pontuacao - a.pontuacao);

@@ -27,13 +27,14 @@ export class PaginaPontuacaoQuizPage implements OnInit {
     private service: AuthService,
     private ranking: RankingService,
   ) {}
-  
   async ngOnInit() {
     await this.service.buscarUsuario().then((resultado)=>
       {
         this.usuario = resultado;
     }
   );
+  
+  
   this.pontuacao = this.pontuacaoService.getPontuacao();
   await this.pontuacaoService.getQuantidadePerguntas().then((quantidade) => {
       this.quantidade = quantidade;
