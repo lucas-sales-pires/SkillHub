@@ -61,7 +61,10 @@
             <tr>
               <th scope="row"  colspan="3">
                 <ion-select interface="popover" aria-label="Lista de membros do time" placeholder="Membros" (ionChange)="buscarUsuarioSelecionado($event.detail.value)">
-                  <ion-select-option *ngFor="let membro of time.membros" [value]="membro">{{membro}}</ion-select-option>
+                  <ion-select-option [value]="time.nome">{{time.nome}}</ion-select-option>
+                  @for(membro of time.membros ; track membro){
+                    <ion-select-option [value]="membro">{{membro}}</ion-select-option>
+                  }
                 </ion-select>
               </th>
             </tr>

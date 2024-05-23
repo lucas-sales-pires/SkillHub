@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import {Firestore,collection,doc,addDoc,setDoc,deleteDoc,query,where, getDocs} from '@angular/fire/firestore';
+import {Firestore,collection,doc,addDoc,setDoc,deleteDoc,query,where, getDocs, updateDoc} from '@angular/fire/firestore';
 import { Ranking } from 'src/app/interfaces/interfaceRanking';
 import { Observable, from } from 'rxjs';
 
@@ -34,14 +34,31 @@ export class Dados {
     }
 
     public async EnviarFeedBack(feedback: { nome: string; email: string; feedback: string; diaFeedback:string }) { 
-        const collectionRef = collection(this.db, 'feedbacks'); 
-        return addDoc(collectionRef, feedback); 
+        const feedbackBanco = collection(this.db, 'feedbacks'); 
+        return addDoc(feedbackBanco, feedback); 
     }
     
-    public async EnviarParaRanking(ranking: Ranking) { 
-        const collectionRef = collection(this.db, 'ranking'); 
-        return addDoc(collectionRef, ranking);
-    }
+    public async enviarParaRanking(jogador: Ranking) {
+        const rankingBanco = collection(this.db, 'ranking');
+      
+        try {
+          const consulta = query(rankingBanco, where("email", "==", jogador.email));
+          const jogadorNoRanking = await getDocs(consulta);
+      
+          if (!jogadorNoRanking.empty) {
+            const jogadorDoc = jogadorNoRanking.docs[0];
+            const novaPontuacao = jogadorDoc.data()['pontuacao'] + jogador.pontuacao;
+            await updateDoc(jogadorDoc.ref, { pontuacao: novaPontuacao });
+          } else {
+            await addDoc(rankingBanco, jogador);
+            console.log("Jogador adicionado ao ranking com sucesso!");
+          }
+        } catch (error) {
+          console.error("Erro ao atualizar/adicionar ao ranking:", error);
+        }
+      }
+      
+      
 
     public async PegarRanking() { 
         const dados = query(collection(this.db, "ranking"));

@@ -22,35 +22,36 @@ export class PaginaPontuacaoQuizPage implements OnInit {
   usuario: any;
   rankingComDados: Ranking[]=[];
 
+  constructor(
+    private pontuacaoService: PontuacaoService,
+    private service: AuthService,
+    private ranking: RankingService,
+  ) {}
+  
   async ngOnInit() {
     await this.service.buscarUsuario().then((resultado)=>
-    {
-      this.usuario = resultado;
+      {
+        this.usuario = resultado;
     }
-    );
-
-    this.pontuacao = this.pontuacaoService.getPontuacao();
-    await this.pontuacaoService.getQuantidadePerguntas().then((quantidade) => {
+  );
+  this.pontuacao = this.pontuacaoService.getPontuacao();
+  await this.pontuacaoService.getQuantidadePerguntas().then((quantidade) => {
       this.quantidade = quantidade;
     });
 
   this.rankingComDados = [
-    { email: this.usuario.email,
+    { 
+      email: this.usuario.email,
       posicao: 0,
       nome: this.usuario.nome,
       pontuacao: this.pontuacao
     },
   ];
 
-    this.ranking.adicionarJogadorAoRanking(this.rankingComDados[0]); 
+  this.ranking.adicionarJogadorAoRanking(this.rankingComDados[0]); 
   
   }; 
   
-  constructor(
-    private pontuacaoService: PontuacaoService,
-    private service: AuthService,
-    private ranking: RankingService,
-  ) {}
 
 
 }

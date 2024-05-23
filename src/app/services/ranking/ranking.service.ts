@@ -11,7 +11,7 @@ export class RankingService {
 
   adicionarJogadorAoRanking(ranking:Ranking) {
     const jogador = { ...ranking };
-    this.dados.EnviarParaRanking(jogador);
+    this.dados.enviarParaRanking(jogador);
 
   }
 
