@@ -2,6 +2,8 @@ import { Injectable, signal } from '@angular/core';
 import {Firestore,collection,doc,addDoc,setDoc,deleteDoc,query,where, getDocs, updateDoc} from '@angular/fire/firestore';
 import { Ranking } from 'src/app/interfaces/interfaceRanking';
 import { Observable, from } from 'rxjs';
+import { TimeService } from '../time/time.service';
+import { TimeInterface } from 'src/app/interfaces/interfaceTime';
 
 @Injectable({
     providedIn: 'root',
@@ -9,10 +11,11 @@ import { Observable, from } from 'rxjs';
 export class Dados {
     public adm = signal(false);
     public resultado = signal(false);
+    public times: TimeInterface[]=[];
 
-    constructor(private db: Firestore) {}
+    constructor(private db: Firestore, private time: TimeService) {}
 
-    getAdm() {
+    public getAdm() {
         return this.adm;
       }
 
@@ -37,18 +40,48 @@ export class Dados {
         const feedbackBanco = collection(this.db, 'feedbacks'); 
         return addDoc(feedbackBanco, feedback); 
     }
+
+    public async usuarioEstaEmAlgumTime(membro: string){
+        await this.time.PegarTimes().then((resultado: any) => {
+            this.times = resultado;
+        });
+    
+        const timeEncontrado = this.times.find(time => time.membros && time.membros.includes(membro));
+        return timeEncontrado ? timeEncontrado.nome : null;
+    }
+    
+    public async TimeDoJogador(jogador: string) {
+        const time = await this.time.PegarTimes().then((resultado: any) => {
+            return resultado.find((time: TimeInterface) => time.membros.includes(jogador));
+        });
+        return time.nome;
+    }
     
     public async enviarParaRanking(jogador: Ranking) {
         const rankingBanco = collection(this.db, 'ranking');
-      
+
         try {
           const consulta = query(rankingBanco, where("email", "==", jogador.email));
           const jogadorNoRanking = await getDocs(consulta);
-      
+        
+          if (await this.usuarioEstaEmAlgumTime(jogador.nome )) {
+            const nomeDoTime = await this.usuarioEstaEmAlgumTime(jogador.nome);
+            jogador.time = nomeDoTime || jogador.time; 
+            
+            await updateDoc(doc(this.db, 'ranking', jogadorNoRanking.docs[0].id), { time: jogador.time });
+                this.TimeDoJogador(jogador.nome).then(() => {
+                    if(jogador.time){
+                        this.time.AdicionarPontuacaoAoTime(jogador.time, jogador.pontuacao);
+                        console.log('Pontuação adicionada ao time com sucesso!')
+                    }
+                });      
+        }    
+
           if (!jogadorNoRanking.empty) {
             const jogadorDoc = jogadorNoRanking.docs[0];
             const novaPontuacao = jogadorDoc.data()['pontuacao'] + jogador.pontuacao;
             await updateDoc(jogadorDoc.ref, { pontuacao: novaPontuacao });
+        
           } else {
             await addDoc(rankingBanco, jogador);
             console.log("Jogador adicionado ao ranking com sucesso!");
@@ -58,8 +91,7 @@ export class Dados {
         }
       }
       
-      
-
+    
     public async PegarRanking() { 
         const dados = query(collection(this.db, "ranking"));
         const consulta = await getDocs(dados); 
@@ -129,7 +161,7 @@ export class Dados {
         return !consulta.empty ? consulta.docs[0].data()['bloqueado'] : '';
     }
 
-    public async Administrador(email: string): Promise<boolean> {
+    public async Administrador(email: string){
         const dados = query(collection(this.db, "usuarios"), where("email", "==", email));
         const consulta = await getDocs(dados);
     

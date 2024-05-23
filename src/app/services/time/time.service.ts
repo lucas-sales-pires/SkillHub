@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
-import { addDoc, collection, doc, getDocs, query, setDoc, where } from 'firebase/firestore';
+import { addDoc, collection, doc, getDocs, increment, query, setDoc, updateDoc, where } from 'firebase/firestore';
 import { TimeInterface } from 'src/app/interfaces/interfaceTime';
 
 @Injectable({
@@ -42,8 +42,8 @@ public async PegarTimes() {
     const dados = query(collection(this.db, "times"));
     const consulta = await getDocs(dados);
     return !consulta.empty ? consulta.docs.map(doc => doc.data()) : '';
-    
 } 
+
 public async PegarIdTime(nomeTime : string){
   const dados = query(collection(this.db, "times"));
   const consulta = await getDocs(dados);
@@ -59,9 +59,6 @@ public async AdicionarFotoNoTime(nome: string, foto: string) {
   }
 }
  
-
-
-
   public async AtualizarTimeNoBackEnd(time: any, novoUsuario: any) {
     const id = await this.PegarIdTime(time.nome);
 
@@ -84,4 +81,16 @@ public async AdicionarFotoNoTime(nome: string, foto: string) {
       console.error('Time não encontrado para atualização.');
     }
   }
+
+  public async AdicionarPontuacaoAoTime(nomeTime: string, pontuacao: number) {
+    const id = await this.PegarIdTime(nomeTime);
+  
+    if (id) {
+      const docRef = doc(this.db, 'times', id);
+      await updateDoc(docRef, { pontuacaoTime: increment(pontuacao) });
+    } else {
+      console.error('Time não encontrado para atualização.');
+    }
+  }
+  
 }

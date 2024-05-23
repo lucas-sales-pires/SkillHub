@@ -24,7 +24,7 @@ export class QuizService {
     const colecao = collection(this.db, 'quiz');
     return addDoc(colecao, pergunta);
   }
-  async obterPerguntas(): Promise<Pergunta[]> {
+  async obterPerguntas(){
     const colecao = collection(this.db, 'quiz');
     const perguntas: Pergunta[] = [];
 
@@ -44,7 +44,7 @@ export class QuizService {
   }
 
   
-  async  embaralharArray(array: any[]): Promise<any[]> {
+  async  embaralharArray(array: any[]) {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [array[i], array[j]] = [array[j], array[i]];
