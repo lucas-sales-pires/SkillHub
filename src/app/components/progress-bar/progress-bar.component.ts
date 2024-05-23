@@ -20,7 +20,11 @@ export class ProgressBarComponent  implements OnInit {
   porcentagem :number = 0;
   cronometro:any; 
   regredir:any;
-
+  
+  ngOnInit() {
+    this.pontuacao.getQuantidadePerguntas().then(perguntas =>  this.qntPerguntas = perguntas)
+  }
+  
   constructor(private pontuacao:PontuacaoService,private quiz:QuizService) { 
     addIcons({closeOutline})
     effect(()=>{
@@ -36,9 +40,6 @@ export class ProgressBarComponent  implements OnInit {
   voltar(){
     this.quiz.setCategoria('vazio')
   }
-  
-  ngOnInit() {
-    this.pontuacao.getQuantidadePerguntas().then(perguntas =>  this.qntPerguntas = perguntas)
-  }
+
 
 }

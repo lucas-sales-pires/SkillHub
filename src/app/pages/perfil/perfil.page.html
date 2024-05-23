@@ -5,25 +5,36 @@
       <ion-card-title>Perfil</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <ion-item>Foto
-        <input type="file" accept="images/*" id="fotoInput" (change)="changeInput($event)">
-        <ion-progress-bar [value]="progresso" type="determinate"  id="progressBar"></ion-progress-bar>
-      </ion-item>
 
-      @if(ultimaFotoURL()){
-        <ion-item>
-          <ion-avatar aria-hidden="true" slot="start">
-            <img alt="Imagem Padrão" [src]="ultimaFotoURL()">
-          </ion-avatar>
-        </ion-item>
-      }
-      @else{
-        <ion-item>
-          <ion-avatar aria-hidden="true" slot="start">
-            <img alt="Imagem Padrão" src="https://ionicframework.com/docs/img/demos/avatar.svg">
-          </ion-avatar>
-        </ion-item>
-      }
+      <label class="py-2">Escolha sua foto de perfil</label>
+      <form class="flex items-center space-x-6">
+        <div class="shrink-0">
+          @if(ultimaFotoURL()){
+            <img class="h-24 w-24 object-cover rounded-full my-4" [src]="ultimaFotoURL()" alt="Foto de perfil Atual" />
+          }
+       
+          @else{
+            <ion-item>
+              <ion-avatar aria-hidden="true" slot="start">
+                <img alt="Imagem Padrão" src="https://ionicframework.com/docs/img/demos/avatar.svg">
+              </ion-avatar>
+            </ion-item>
+          }
+          
+        </div>
+        <label class="block">
+          <input type="file" accept="images/*" (change)="changeInput($event)" class="block w-full text-sm text-slate-500
+            file:mr-4 file:py-2 file:px-4
+            file:rounded-full file:border-0
+            file:text-sm file:font-semibold
+            file:bg-black file:text-white
+            hover:file:bg-violet-100
+            py-4
+          "/>
+          
+          <ion-progress-bar [value]="progresso" type="determinate"  id="progressBar"></ion-progress-bar>
+        </label>
+      </form>
 
       
       <ion-item>

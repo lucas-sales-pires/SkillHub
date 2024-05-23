@@ -10,27 +10,64 @@
       <ion-label>
         <table class="table table-hover">
           <thead>
+            @if(!usuarioSelecionado){
+              <tr>
+                <th scope="row"><h2>Nome</h2></th> 
+                <th scope="row"><h2>{{time.nome}}</h2></th>
+              </tr>
+              <tr class="fundacao">
+                <th scope="row"><h2>Data fundação</h2></th>
+                <td><h2>{{time.dataFundacao}}</h2></td>
+              </tr>
+              <tr>
+                <th scope="row"><h2>Descrição</h2></th>
+                <td><h2>{{time.descricao}}</h2></td>
+              </tr>
+              <tr scope="row">
+                <th scope="col"><h2>Pontuacao Time</h2></th>
+                <td><h2>{{time.pontuacaoTime}}</h2></td>
+              </tr>
+
+              @if(time.membros && time.membros.length > 0){
+                <tr>
+                  <th scope="row">Membros(qnt)</th>
+                  <td><h2>{{time.membros.length}}</h2></td>
+                </tr>
+              }
+            }
+            @if(usuarioSelecionado){
             <tr>
-              <th scope="col"><h2>Nome</h2></th>
-              <th scope="col"><h2>Descrição</h2></th>
-              <th scope="col" class="fundacao"><h2>Fundação</h2></th>
-              <th scope="col"><h2>Pontuação</h2></th>
+              <th scope="row"><h2>Nome</h2></th> 
+              <th scope="row"><h2>{{usuarioSelecionado.nome}}</h2></th>
             </tr>
+            <tr>
+              <th scope="row"><h2>Cadastro</h2></th>
+              <td><h2>{{usuarioSelecionado.diaCadastro}}</h2></td>
+            </tr>
+            <tr>
+              <th scope="row"><h2>Email</h2></th>
+              <td><h2>{{usuarioSelecionado.email}}</h2></td>
+            </tr>
+            <tr scope="row">
+              <th scope="col"><h2>Bloqueado</h2></th>
+              @if(usuarioSelecionado.bloqueado){
+                <td><h2>Sim</h2></td>
+              }@else{
+                <td><h2>Não</h2></td>
+              }
+            </tr>
+          }
+
+            <tr>
+              <th scope="row"  colspan="3">
+                <ion-select interface="popover" aria-label="Lista de membros do time" placeholder="Membros" (ionChange)="buscarUsuarioSelecionado($event.detail.value)">
+                  <ion-select-option *ngFor="let membro of time.membros" [value]="membro">{{membro}}</ion-select-option>
+                </ion-select>
+              </th>
+            </tr>
+            
           </thead>
           <tbody>
-            
-            <tr>
-              <th scope="row"><h2>{{time.nome}}</h2></th>
-              <td><h2>{{time.descricao}}</h2></td>
-              <td class="fundacao"><h2>{{time.dataFundacao}}</h2></td>
-              <td><h2>{{time.pontuacaoTime}}</h2></td>
-            </tr>
-            @if(time.membros && time.membros.length > 0){
-              <tr>
-                <th scope="row">Membros(quantidade)</th>
-                <td><h2>{{time.membros.length}}</h2></td>
-              </tr>
-            }
           </tbody>
         </table>
       </ion-label>

@@ -12,6 +12,10 @@ export class Dados {
 
     constructor(private db: Firestore) {}
 
+    getAdm() {
+        return this.adm;
+      }
+
     public async PegarIdPorEmail(email: string) { 
         const dados = query(collection(this.db, "usuarios"), where("email", "==", email)); 
         const consulta = await getDocs(dados); 
@@ -53,8 +57,8 @@ export class Dados {
         );
 
       if(mesmonome){
-            this.resultado.set(true);
-            throw new Error('O nome já está cadastrado.');
+        this.resultado.set(true);
+        throw new Error('O nome já está cadastrado.');
             
         }
         if (usuarioExistente) {

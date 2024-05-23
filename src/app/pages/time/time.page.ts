@@ -19,10 +19,21 @@ import { ModalQuantidadeComponent } from 'src/app/components/modal-quantidade/mo
   styleUrls: ['./time.page.scss'],
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule, NavbarComponent, ModalQuantidadeComponent,CadastrotimeComponent,ModalDetalhesComponent]
-
+  
 })
 
 export class TimePage implements OnInit {
+  times: TimeInterface[]=[];
+  atualizarTimeNoBackend: any;
+  usuarioAtual : string = '';
+  
+ngOnInit() {
+  this.carregarTimes();
+  this.usuario.buscarUsuario().then((usuario: any) => {
+    this.usuarioAtual = usuario.nome; 
+  });
+
+}
   constructor(private timesService: TimeService,private controler:AlertController, private usuario: AuthService, private ModalController: ModalController) {
     addIcons({
       'add-circle': addCircle
@@ -41,11 +52,8 @@ export class TimePage implements OnInit {
     await modal.present();
   }
   sairDoTime(_t17: TimeInterface) {
-    throw new Error('Method not implemented.');
+    throw new Error('Metodo não implementado.');
   }
-times: TimeInterface[]=[];
-atualizarTimeNoBackend: any;
-usuarioAtual : string = '';
 
 
 async entrarNoTime(time: any) {
@@ -101,12 +109,4 @@ adicionarFotoNoTime(time: TimeInterface){
 }
 
 
-ngOnInit() {
-   this.carregarTimes();
-   this.usuario.buscarUsuario().then((usuario: any) => {
-     this.usuarioAtual = usuario.nome; 
-   });
-
-
-}
 }

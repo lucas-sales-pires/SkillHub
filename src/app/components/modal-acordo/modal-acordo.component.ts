@@ -12,13 +12,13 @@ import { AcordoService } from 'src/app/services/acordo/acordo.service';
   ],
 })
 
-export class ModalAcordoComponent  implements OnInit {
-
+export class ModalAcordoComponent {
+  
 termo: any;
-
-
 @ViewChild(IonModal)
 modal!: IonModal;
+
+
 constructor(termos: AcordoService) { 
   effect(() => {
     this.termo = termos.termo;
@@ -33,7 +33,5 @@ recusarTermos() {
   this.modal.dismiss();
 }
 
-  ngOnInit() {
-  }
 
 }

@@ -29,23 +29,9 @@ export class PerfilPage implements OnInit {
   progresso = 0;
   idUsuarioAtual:string = '';
   ultimaFotoURL = signal('');
-
   private readonly storage: Storage = inject(Storage);
 
-  constructor(
-    private dados: Dados,
-    private service: AuthService,
-    private modalCerteza: ModalCertezaComponent
-  ) {
-    effect(() => {
-      this.pegarTodasAsFotos().then((res) => {
-        console.log(res);
-      });
-    });
-  }
-
   ngOnInit(): void {
-    
     
     try {
       this.service.buscarUsuario().then((resultado: any) => {
@@ -66,6 +52,19 @@ export class PerfilPage implements OnInit {
     }
     
 }
+
+  constructor(
+    private dados: Dados,
+    private service: AuthService,
+    private modalCerteza: ModalCertezaComponent
+  ) {
+    effect(() => {
+      this.pegarTodasAsFotos().then((res) => {
+        console.log(res);
+      });
+    });
+  }
+
 async changeInput(event: Event) {
   const input = event.target as HTMLInputElement;
   if (input.files) {

@@ -28,14 +28,17 @@ arquivo!: File;
 idTimeAtual: any;
 @ViewChild(IonModal) 
 modal!: IonModal;
-
 private readonly storage: Storage = inject(Storage);
-  
+
+ngOnInit() {
+  this.gerarId();
+}
+
 constructor(private time: TimeService) {
   addIcons({
     'add-circle-outline': addCircleOutline,
-    });
-  }
+  });
+}
 
 fecharModal() {
   this.modal.dismiss();
@@ -92,9 +95,4 @@ async carregarFoto(): Promise<void> {
 }
 
 
-  ngOnInit() {
-  
-
-    this.gerarId();
-  }
 }

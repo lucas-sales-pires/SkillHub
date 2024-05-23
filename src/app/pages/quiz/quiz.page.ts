@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
     standalone: true,
     imports: [IonicModule, CommonModule, FormsModule, NavbarComponent, ProgressBarComponent, PerguntasComponent]
 })
-export class QuizPage implements OnInit {
+export class QuizPage {
   categoria = 'vazio';
   constructor(categoria:QuizService, private router:Router) {
     effect(() => {
@@ -26,7 +26,5 @@ export class QuizPage implements OnInit {
     this.router.navigate(['/pagina-pre-quiz']);
   }
 
-  ngOnInit() {
-  }
 
 }

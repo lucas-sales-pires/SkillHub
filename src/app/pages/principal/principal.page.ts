@@ -13,11 +13,8 @@ import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
 })
 
 
-export class PrincipalPage implements OnInit {
+export class PrincipalPage {
 
   constructor() { }
-
-  ngOnInit() {
-  }
 
 }

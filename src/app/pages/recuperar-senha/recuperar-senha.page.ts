@@ -11,15 +11,13 @@ import { NavbarComponent } from "../../components/navbar/navbar.component";
     standalone: true,
     imports: [IonicModule, FormsModule, NavbarComponent]
 })
-export class RecuperarSenhaPage implements OnInit {
+export class RecuperarSenhaPage {
   email = '';
   mensagem = '';
   erro:string =  "";
 
   constructor() { }
 
-  ngOnInit() {
-  }
 
   recuperarSenha() {
     const auth = getAuth();

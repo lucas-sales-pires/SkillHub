@@ -34,6 +34,7 @@
             "styles": [
               "src/global.scss",
               "src/theme/variables.scss",
+              "src/tailwind-output.css" ,
               "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [

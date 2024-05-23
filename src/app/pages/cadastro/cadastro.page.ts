@@ -69,7 +69,7 @@ export class CadastroPage  {
     }
 
     this.email.toLowerCase()
-    const novoUsuario = { // Pego estes dados do usuario
+    const novoUsuario = { 
       nome: this.nome,
       email: this.email,
       diaCadastro: new Date().toLocaleDateString(),

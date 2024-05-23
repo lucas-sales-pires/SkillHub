@@ -1,4 +1,4 @@
-import { Component, effect, OnInit, signal, Signal } from '@angular/core';
+import { Component, effect, OnInit, signal } from '@angular/core';
 import {IonHeader,IonButton,IonMenu,IonToolbar,IonTitle,IonContent,IonButtons,IonMenuButton,IonImg,IonIcon,IonSearchbar,IonItem,IonInput,IonLabel,IonGrid,IonRow,IonCol,IonList,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
@@ -21,10 +21,16 @@ export class NavbarComponent implements OnInit {
   email:any;
   adm = signal(false);
   usuario:any;
+  
+  ngOnInit() {
+    this.autenticado = this.autenticacao.autenticado;
+    this.administrador();
+  }
+
   constructor(private autenticacao: AuthService,private dados: Dados) {
     effect(() => {
-      this.adm.set(this.dados.adm());
-    })
+      this.adm = this.dados.getAdm(); 
+    });
 
     addIcons({
       search,
@@ -54,16 +60,10 @@ export class NavbarComponent implements OnInit {
     
   }
 
-  
     deslogar(){
       this.autenticacao.deslogar();
       this.adm.set(this.dados.adm());
     }
   
 
-  ngOnInit() {
-    this.autenticado = this.autenticacao.autenticado;
-    this.administrador();
-
-  }
 }

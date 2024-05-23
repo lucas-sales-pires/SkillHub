@@ -20,6 +20,11 @@ export class LoginPage implements OnInit {
   senha: string = '';
   mensagem: string = '';
 
+  ngOnInit() {
+    this.email = '';
+    this.senha = '';
+  }
+
   
   constructor(private dados: Dados) {
     addIcons({ eye, lockClosed, lockClosedOutline, eyeOutline, eyeOffOutline }); 
@@ -80,8 +85,5 @@ export class LoginPage implements OnInit {
     verificar.type = formato === 'password' ? 'text' : 'password';
     this.valor = formato === 'password' ? 'eye-off-outline' : 'eye-outline';
   }
-  ngOnInit() {
-    this.email = '';
-    this.senha = '';
-  }
+
 }

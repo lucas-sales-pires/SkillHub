@@ -29,10 +29,24 @@ export class AdministracaoPage implements OnInit {
   usuarios: any;
   usuario: any;
   id: any;
-  usuarioAtual: any;
+  usuarioAtual: any= '';
   bloqueado: any;
   ultimaImagem: any;
-  private readonly storage: Storage = inject(Storage)
+
+  async ngOnInit() {
+    this.usuarios = await this.dados.PegarTodosUsuarios();
+    await this.service.buscarUsuario().then((usuario) => {
+      this.usuarioAtual = usuario;
+      for (let j of this.usuarios) {
+        if (j.bloqueado) {
+          j.status = 'Bloqueado';
+        } else {
+          j.status = 'Desbloqueado';
+          j.bloqueado = false;
+        }
+      }
+    });
+  }
 
   constructor(
     private dados: Dados,
@@ -72,18 +86,5 @@ export class AdministracaoPage implements OnInit {
     this.dados.DesbloquearUsuario(id);
   }
 
-  async ngOnInit() {
-    this.usuarios = await this.dados.PegarTodosUsuarios();
-    await this.service.buscarUsuario().then((usuario) => {
-      this.usuarioAtual = usuario;
-      for (let j of this.usuarios) {
-        if (j.bloqueado) {
-          j.status = 'Bloqueado';
-        } else {
-          j.status = 'Desbloqueado';
-          j.bloqueado = false;
-        }
-      }
-    });
-  }
+
 }

@@ -30,27 +30,30 @@ export class GerenciarPerguntasPage implements OnInit {
   catSelecionada:string = '';
   dados:any[] = [];
   
+  ngOnInit() {
+    this.carregarCategorias();
+    this.carregarPerguntas();
+  }
 
   constructor(private quiz:QuizService) { 
     addIcons({addOutline,trashOutline});
   }
 
-  ngOnInit() {
-    this.carregarCategorias();
-    this.carregarPerguntas();
-  }
-  
   async carregarCategorias(){
     const perguntas = await this.quiz.obterPerguntas(); 
     perguntas.forEach(pergunta => {
       this.categorias.push(pergunta.categoria) 
     })
-    this.categorias  = this.categorias.filter((item,index) => this.categorias.indexOf(item) === index)
-    
+    this.categorias = this.removerDuplicadas(this.categorias);
   }
+
+  removerDuplicadas(array:any[]){
+    return array.filter((item,index) => array.indexOf(item) === index)
+  }
+
   async carregarPerguntas(){
     const perguntas = await this.quiz.obterPerguntas(); 
-    this.perguntas = perguntas 
+    this.perguntas = perguntas;
   }
   
   async removerPerguntas(selecionada:string){

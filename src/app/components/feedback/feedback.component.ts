@@ -16,17 +16,8 @@ export class FeedbackComponent implements OnInit {
   nome: any;
   email: any;
   feedback: any = '';
-
   @ViewChild(IonModal)
   modal!: IonModal;
-
-  constructor(private dados: Dados, private service: AuthService) {
-    effect(() => {
-      this.feedback.length > 0
-        ? console.log('Feedback: ', this.feedback)
-        : console.log('Feedback vazio');
-    });
-  }
 
   ngOnInit() {
     this.service.buscarUsuario().then((resultado: any) => {
@@ -35,6 +26,15 @@ export class FeedbackComponent implements OnInit {
       this.carregarUsuario(this.email); 
     });
   }
+  
+  constructor(private dados: Dados, private service: AuthService) {
+    effect(() => {
+      this.feedback.length > 0
+        ? console.log('Feedback: ', this.feedback)
+        : console.log('Feedback vazio');
+    });
+  }
+
 
   cancelarFeedback() {
     this.modal.dismiss(); 

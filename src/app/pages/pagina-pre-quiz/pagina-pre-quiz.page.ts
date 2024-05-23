@@ -13,8 +13,7 @@ import { ModalQuantidadeComponent } from 'src/app/components/modal-quantidade/mo
     standalone: true,
     imports: [IonicModule, CommonModule, FormsModule, NavbarComponent, ModalQuantidadeComponent]
 })
-export class PaginaPreQuizPage implements OnInit {
-  valor:any;
+export class PaginaPreQuizPage {
 
   constructor(
     private quiz: QuizService,
@@ -30,6 +29,4 @@ export class PaginaPreQuizPage implements OnInit {
     await modal.present();
   }
 
-  ngOnInit() {
-  }
 }

@@ -11,9 +11,9 @@
     </ion-item>
   </ion-card>
   @for (time of times; track time) {
-    <ion-card (click)="abrirModalDetalhes(time)">
-      <ion-item>
-        <ion-label>
+    <ion-card>
+      <ion-item [button] = "true">
+        <ion-label (click)="abrirModalDetalhes(time)" >
           <table class="table table-hover">
             <thead>
               <tr>
@@ -32,7 +32,7 @@
               </tr>
               @if(time.membros && time.membros.length > 0){
                 <tr>
-                  <th scope="row">Membros(quantidade)</th>
+                  <th scope="row">Membros (qnt)</th>
                   <td><h2>{{time.membros.length}}</h2></td>
                 </tr>
               }

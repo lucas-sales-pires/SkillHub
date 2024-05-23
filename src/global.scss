@@ -12,7 +12,6 @@
 /* Core CSS required for Ionic components to work properly */
 @import "@ionic/angular/css/core.css";
 
-
 /* Basic CSS for apps built with Ionic */
 @import "@ionic/angular/css/normalize.css";
 @import "@ionic/angular/css/structure.css";
@@ -29,6 +28,8 @@
 /* Theme variables */
 
 /* App Global CSS */
+@import 'tailwind-output.css'; 
+
 
 
 .logo {

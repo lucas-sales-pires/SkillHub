@@ -14,9 +14,8 @@ import { ModalController } from '@ionic/angular';
   imports: [IonButtons,IonFooter,IonRadio,IonLabel,IonItem,IonRadioGroup,IonCardContent,IonList,IonCardTitle,IonCardHeader,IonCard,IonContent,IonTitle,IonToolbar,IonHeader,IonModal,IonButton,IonIcon,FormsModule,
   ],
 })
-export class ModalQuantidadeComponent implements OnInit {
+export class ModalQuantidadeComponent {
   valor: any;
-
   @ViewChild(IonModal)
   modal!: IonModal;
 
@@ -33,5 +32,4 @@ export class ModalQuantidadeComponent implements OnInit {
   fecharModal() {
     this.modalController.dismiss();
   }
-  ngOnInit() {}
 }

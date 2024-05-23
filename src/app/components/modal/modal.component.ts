@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
   imports: [IonCheckbox,IonRadioGroup,IonRadio,IonList,IonIcon,IonLabel,IonInput,IonTitle,IonButtons,IonModal,IonHeader,IonToolbar,IonContent,IonItem,IonButton,FormsModule,IonSelectOption,IonSelect,
   ],
 })
-export class ModalComponent implements OnInit {
+export class ModalComponent {
   categoria: string = '';
   pergunta: string = '';
   resposta1: string = '';
@@ -24,17 +24,14 @@ export class ModalComponent implements OnInit {
   respostaCerta: string = '';
   perguntasCadastradas: any;
   arquivoSelecionado: any;
-
   @ViewChild(IonModal)
   modal!: IonModal; 
+  name: string = '';
 
   constructor(private quiz: QuizService, private router: Router) {
     addIcons({ addCircleOutline });
   }
 
-  ngOnInit() {}
-
-  name: string = '';
 
   confirm() {
     this.modal.dismiss(this.name, 'confirm');

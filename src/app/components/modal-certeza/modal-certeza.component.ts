@@ -6,11 +6,9 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./modal-certeza.component.scss'],
   standalone: true
 })
-export class ModalCertezaComponent  implements OnInit {
+export class ModalCertezaComponent {
 
   constructor(private controler:AlertController) { }
-
-  ngOnInit() {}
 
   async exibirConfirmacao(funcao: any) {
     const confirmacao = await this.controler.create({

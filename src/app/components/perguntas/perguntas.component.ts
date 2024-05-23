@@ -31,7 +31,11 @@ export class PerguntasComponent implements OnInit {
   pontuacao: number = 0;
   categoriaEscolhida: any;
   respostaSelecionada: string = '';
-
+  
+  ngOnInit() {
+    this.obterperguntas();
+  }
+  
   constructor(
     private quiz: QuizService,
     private router: Router,
@@ -43,9 +47,6 @@ export class PerguntasComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    this.obterperguntas();
-  }
   voltar() {
     this.router.navigate(['/pagina-pre-quiz']);
     this.quiz.setCategoria('vazio');

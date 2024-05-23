@@ -16,6 +16,15 @@ import { Ranking } from 'src/app/interfaces/interfaceRanking';
 export class RankingPage implements OnInit {
 
   jogadores: Ranking[] = [];
+
+  ngOnInit() {
+    this.ranking.PegarRanking().then((resultado: any) => {
+      this.jogadores = resultado;
+      this.ordenarRanking();
+    });
+
+
+}
   
   constructor(private ranking: Dados) {}
   ordenarRanking() {
@@ -46,13 +55,6 @@ export class RankingPage implements OnInit {
   
   }
 
-  ngOnInit() {
-    this.ranking.PegarRanking().then((resultado: any) => {
-      this.jogadores = resultado;
-      this.ordenarRanking();
-    });
 
-
-}
 }
 
