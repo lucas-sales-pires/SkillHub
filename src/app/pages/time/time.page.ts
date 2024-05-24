@@ -39,24 +39,40 @@ ngOnInit() {
       'add-circle': addCircle
     });
   }
+  
   fecharModal() {
     this.ModalController.dismiss();
   }
+  
   public async abrirModalDetalhes(time: TimeInterface){
     const modal = await this.ModalController.create({
       component: ModalDetalhesComponent, 
       componentProps: {
-        time: time 
+        time: time
       }
     });
     await modal.present();
   }
-  sairDoTime(_t17: TimeInterface) {
-    throw new Error('Metodo não implementado.');
-  }
+async sairDoTime(time: TimeInterface) {
+    const confirmar = await this.controler.create({
+      header: 'Confirmar Saida',
+      message: `Deseja sair do time ${time.nome}?`,
+      buttons: [
+        { text: 'Cancelar', role: 'cancel' },
+        { text: 'Sair', handler: () => this.confirmarSaida(time) }
+      ]
+  });
+  await confirmar.present();
+}
 
+confirmarSaida(time:TimeInterface){
 
-async entrarNoTime(time: any) {
+  this.timesService.RemoverUsuarioDoTime(time,this.usuarioAtual); 
+
+  this.mostrarAlerta("Você saiu no time com sucesso!");
+}
+
+async entrarNoTime(time: TimeInterface) {
   
   const confirm = await this.controler.create({
     header: 'Confirmar Entrada',
@@ -70,7 +86,7 @@ async entrarNoTime(time: any) {
 }
 
 
-confirmarEntrada(time: any) {
+confirmarEntrada(time: TimeInterface) {
   if(time.membros.includes(this.usuarioAtual)){
     this.mostrarAlerta("Você já está no time!");
     return;
@@ -102,9 +118,10 @@ adicionarFotoNoTime(time: TimeInterface){
     
 }
 
- usuarioEstaEmAlgumTime(): boolean {
+usuarioEstaEmAlgumTime(): boolean {
   return this.times.some(time => time.membros && time.membros.includes(this.usuarioAtual));
 }
+
 
 
 }

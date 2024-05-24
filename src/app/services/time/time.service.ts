@@ -82,6 +82,25 @@ public async AdicionarFotoNoTime(nome: string, foto: string) {
     }
   }
 
+  public async RemoverUsuarioDoTime(time:TimeInterface, usuario: string){
+    const id = await this.PegarIdTime(time.nome);
+
+    if(id) {
+      const docRef = doc(this.db, 'times', id);
+      const timeAtualizado = {...time};
+    
+
+    if(timeAtualizado.membros.includes(usuario)){
+      timeAtualizado.membros = timeAtualizado.membros.filter((membro:string)=> membro != usuario)
+      await setDoc(docRef, timeAtualizado, { merge: true});
+    }
+    else{
+      console.error("Jogador não encontrado no time. ")
+    }
+
+    }
+}
+
   public async AdicionarPontuacaoAoTime(nomeTime: string, pontuacao: number) {
     const id = await this.PegarIdTime(nomeTime);
   
