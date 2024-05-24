@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from "../../components/navbar/navbar.component";
@@ -23,6 +23,7 @@ import { ModalQuantidadeComponent } from 'src/app/components/modal-quantidade/mo
 })
 
 export class TimePage implements OnInit {
+  @Output() timeAtualizado = new EventEmitter<void>()
   times: TimeInterface[]=[];
   atualizarTimeNoBackend: any;
   usuarioAtual : string = '';
@@ -43,7 +44,6 @@ ngOnInit() {
   fecharModal() {
     this.ModalController.dismiss();
   }
-  
   public async abrirModalDetalhes(time: TimeInterface){
     const modal = await this.ModalController.create({
       component: ModalDetalhesComponent, 
@@ -66,10 +66,15 @@ async sairDoTime(time: TimeInterface) {
 }
 
 confirmarSaida(time:TimeInterface){
+  this.timesService.RemoverUsuarioDoTime(time,this.usuarioAtual).then(() => { 
+    this.carregarTimes(); 
+    this.mostrarAlerta("Você saiu do time com sucesso!");
+    this.timeAtualizado.emit(); 
+  })
+  .catch((error) => { 
+    console.error("Erro ao sair do time:", error);
+  });
 
-  this.timesService.RemoverUsuarioDoTime(time,this.usuarioAtual); 
-
-  this.mostrarAlerta("Você saiu no time com sucesso!");
 }
 
 async entrarNoTime(time: TimeInterface) {

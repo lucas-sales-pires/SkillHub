@@ -93,6 +93,7 @@ public async AdicionarFotoNoTime(nome: string, foto: string) {
     if(timeAtualizado.membros.includes(usuario)){
       timeAtualizado.membros = timeAtualizado.membros.filter((membro:string)=> membro != usuario)
       await setDoc(docRef, timeAtualizado, { merge: true});
+    
     }
     else{
       console.error("Jogador não encontrado no time. ")
