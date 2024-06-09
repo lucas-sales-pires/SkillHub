@@ -26,7 +26,8 @@ bootstrapApplication(AppComponent, {
             HttpClientModule,
             provideFirebaseApp(() => initializeApp(firebaseConfig)),
             provideFirestore(() => getFirestore()),
-            provideStorage(() => getStorage())
+            provideStorage(() => getStorage()),
                   )
   ],
 });
+

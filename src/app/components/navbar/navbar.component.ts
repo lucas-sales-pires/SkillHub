@@ -2,7 +2,7 @@ import { Component, effect, OnInit, signal } from '@angular/core';
 import {IonHeader,IonButton,IonMenu,IonToolbar,IonTitle,IonContent,IonButtons,IonMenuButton,IonImg,IonIcon,IonSearchbar,IonItem,IonInput,IonLabel,IonGrid,IonRow,IonCol,IonList,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import {search,personCircleOutline,personAddOutline,tabletLandscapeOutline,homeOutline,trophyOutline,settingsOutline,helpOutline,personOutline,informationCircleOutline,arrowUndoOutline,peopleOutline
+import {search,personCircleOutline,personAddOutline,tabletLandscapeOutline,homeOutline,trophyOutline,settingsOutline,helpOutline,personOutline,informationCircleOutline,arrowUndoOutline,peopleOutline,createOutline
 } from 'ionicons/icons';
 import { AuthService } from 'src/app/services/autenticacao/auth.service';
 import { Dados } from 'src/app/services/dados/dados.service';
@@ -44,7 +44,8 @@ export class NavbarComponent implements OnInit {
       personOutline,
       informationCircleOutline,
       arrowUndoOutline,
-      peopleOutline
+      peopleOutline,
+      createOutline
     });
   }
 

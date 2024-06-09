@@ -11,7 +11,7 @@ import {share,trash,lockClosed,mailOutline,lockOpen,
 } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { NavbarComponent } from "../../components/navbar/navbar.component";
-import { Storage } from '@angular/fire/storage';
+import { ModalChatComponent } from 'src/app/components/modal-chat/modal-chat.component';
 
 
 @Component({
@@ -49,6 +49,7 @@ export class AdministracaoPage implements OnInit {
     private dados: Dados,
     private service: AuthService,
     private adm: AdmService,
+    private ModalController: ModalController
     
   ) {
     addIcons({
@@ -65,11 +66,25 @@ export class AdministracaoPage implements OnInit {
     this.adm.usuario = usuario;
   }
   
-  enviarMensagem(usuarioSelecionado: any) {
-    throw new Error('Metodo não implementado.');
+  async enviarMensagem(usuarioSelecionado: any) {
+    const modal = await this.ModalController.create({
+      component: ModalChatComponent,
+      componentProps: {
+        usuarioSelecionado: usuarioSelecionado 
+      }
+    });
+    return await modal.present();
   }
-
-  
+  public async abrirModalDetalhes(remetente: any, mensagem: any) {
+    const modal = await this.ModalController.create({
+      component: ModalChatComponent, 
+      componentProps: {
+        remetente: remetente,
+        mensagem: mensagem
+      }
+    });
+    await modal.present();
+  }
 
 
   async bloquearUsuario(usuarioSelecionado: any) {

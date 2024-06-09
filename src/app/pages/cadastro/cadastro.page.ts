@@ -75,6 +75,8 @@ export class CadastroPage  {
       diaCadastro: new Date().toLocaleDateString(),
       bloqueado: false,
     };
+
+
     
       this.salvarInformacoesUsuario(novoUsuario); 
   

@@ -33,14 +33,14 @@
           {{usuario.status === 'Desbloqueado' ? 'Desbloqueado' :
           'Bloqueado'}}</ion-label
         >
-        } @if(usuario.email == usuarioAtual.email){
+        } @if(usuario.email === usuarioAtual.email){
         <ion-label>Este é você</ion-label>
         }
       </ion-item>
-      @if(usuario.email != usuarioAtual.email){
+      @if(usuario.email !== usuarioAtual.email){
 
       <ion-item-options slot="end">
-        @if(usuario.status == 'Desbloqueado'){
+        @if(usuario.status === 'Desbloqueado'){
         <ion-item-option color="tertiary">
           <ion-icon
             slot="icon-only"
