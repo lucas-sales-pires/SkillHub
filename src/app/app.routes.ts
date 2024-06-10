@@ -62,6 +62,14 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/administracao/administracao.page').then( m => m.AdministracaoPage)
   },
   { path: 'time/cadastro' , loadChildren: () => import('./components/cadastrotime/cadastrotime.component').then( m => m.CadastrotimeComponent) },
+  {
+    path: 'mensagem-servidor',
+    loadComponent: () => import('./pages/mensagem-servidor-usuario/mensagem-servidor.page').then( m => m.MensagemServidorPage)
+  },
+  {
+    path: 'mensagem-servidor-adm',
+    loadComponent: () => import('./pages/mensagem-servidor-adm/mensagem-servidor-adm.page').then( m => m.MensagemServidorAdmPage)
+  },
   
 
 

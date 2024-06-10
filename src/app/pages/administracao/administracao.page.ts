@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
@@ -75,16 +75,7 @@ export class AdministracaoPage implements OnInit {
     });
     return await modal.present();
   }
-  public async abrirModalDetalhes(remetente: any, mensagem: any) {
-    const modal = await this.ModalController.create({
-      component: ModalChatComponent, 
-      componentProps: {
-        remetente: remetente,
-        mensagem: mensagem
-      }
-    });
-    await modal.present();
-  }
+
 
 
   async bloquearUsuario(usuarioSelecionado: any) {

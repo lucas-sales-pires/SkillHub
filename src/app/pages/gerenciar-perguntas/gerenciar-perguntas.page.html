@@ -1,4 +1,4 @@
-<app-navbar></app-navbar>
+<app-navbar/>
 
 <ion-content class="ion-padding w-100" id="main-content">
   <ion-card>
@@ -46,12 +46,12 @@
      
     </ion-card-content>
     <ion-card>
-      @if(pergunta != null  && catSelecionada != '' ){
+      @if(pergunta !== null  && catSelecionada !== '' ){
         
         <ion-card-content>
           <ion-title class="text-white">Perguntas</ion-title>
           @for(item of perguntas; track item) {
-            @if(item.categoria == catSelecionada) {
+            @if(item.categoria === catSelecionada) {
               <ion-item>
                 <ion-label position="stacked">Pergunta</ion-label>
                 <ion-input [(ngModel)]="pergunta" type="text" disabled>{{item.pergunta}}</ion-input>
