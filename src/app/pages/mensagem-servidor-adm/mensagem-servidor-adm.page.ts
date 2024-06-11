@@ -10,8 +10,7 @@ import { NavbarComponent } from "../../components/navbar/navbar.component";
 import { addIcons } from 'ionicons';
 import { trash, share, lockClosed, mailOutline, lockOpen } from 'ionicons/icons';
 import { AlertController } from '@ionic/angular';
-import { interfaceUsuario } from 'src/app/interfaces/interfaceUsuario';
-
+import { ToastController } from '@ionic/angular';
 
 
 @Component({
@@ -31,7 +30,7 @@ export class MensagemServidorAdmPage implements OnInit {
 mensagem: any;
   
 
-  constructor(private chatService: ChatService, private service: AuthService, private dados: Dados,private autenticado:AuthService,private controller:AlertController) {
+  constructor(private chatService: ChatService, private service: AuthService, private dados: Dados,private autenticado:AuthService,private controller:AlertController, private toastController:ToastController) {
     addIcons({
       trash: trash,
       share: share,
@@ -86,9 +85,20 @@ mensagem: any;
             this.usuarios.map(u => u.nome),
             this.mensagem
           );
-          console.log('Mensagens enviadas com sucesso!');
+          this.toastController.create({
+            message: 'Mensagens enviadas com sucesso!',
+            duration: 2000,
+            color: 'success',
+            position: 'top'
+          }).then(toast => toast.present());
         } catch (error) {
           console.error('Ocorreram erros durante o envio das mensagens:', error);
+          this.toastController.create({
+            message: 'Ocorreu um erro ao enviar as mensagens.',
+            duration: 2000,
+            color: 'danger',
+            position: 'top'
+          }).then(toast => toast.present());
         }
       }
       

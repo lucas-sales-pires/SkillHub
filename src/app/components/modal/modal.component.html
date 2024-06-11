@@ -38,7 +38,7 @@
             <ion-input label="Resposta C" placeholder="Resposta3" [(ngModel)]="resposta3"></ion-input>
           </ion-item>
 
-          @if(categoria != '' && resposta1 && resposta2 && resposta3){<ion-item>
+          @if(categoria !== '' && resposta1 && resposta2 && resposta3){<ion-item>
             <ion-label position="stacked">Resposta Certa</ion-label>
           
             <ion-select placeholder="Selecione a Resposta Correta" [(ngModel)]="respostaCerta">
