@@ -10,6 +10,7 @@ import { NavbarComponent } from "../../components/navbar/navbar.component";
 import { addIcons } from 'ionicons';
 import { trash, share, lockClosed, mailOutline, lockOpen } from 'ionicons/icons';
 import { AlertController } from '@ionic/angular';
+import { interfaceUsuario } from 'src/app/interfaces/interfaceUsuario';
 
 
 
@@ -22,10 +23,12 @@ import { AlertController } from '@ionic/angular';
 })
 export class MensagemServidorAdmPage implements OnInit {
 
+
   usuarioAtual: any; 
-  usuarios: any; 
+  usuarios: any[] = []; 
   mensagens: any[] = []; 
   carregando = true;
+mensagem: any;
   
 
   constructor(private chatService: ChatService, private service: AuthService, private dados: Dados,private autenticado:AuthService,private controller:AlertController) {
@@ -50,7 +53,10 @@ export class MensagemServidorAdmPage implements OnInit {
             console.log(this.mensagens);
           });
     
-        this.usuarios = await this.dados.PegarTodosUsuarios();
+          this.usuarios = [...await this.dados.PegarTodosUsuarios()]; 
+
+        console.log(this.usuarios);
+        
     
       }
       
@@ -74,6 +80,21 @@ export class MensagemServidorAdmPage implements OnInit {
         this.chatService.excluirMensagemRecebidaDoUsuario(id).subscribe();
         console.log("Mensagem excluida com sucesso!")
       }
-}
+      async enviarMensagemParaTodos() {
+        try {
+          await this.chatService.enviarMensagensAdministrativasParaTodos(
+            this.usuarios.map(u => u.nome),
+            this.mensagem
+          );
+          console.log('Mensagens enviadas com sucesso!');
+        } catch (error) {
+          console.error('Ocorreram erros durante o envio das mensagens:', error);
+        }
+      }
+      
+
+      
+      }
+
 
 

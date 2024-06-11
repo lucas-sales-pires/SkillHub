@@ -21,9 +21,34 @@ getMensagensAdministrativas(){
   return this.http.get<any[]>(`${this.apiUrl}/buscar-adm`);
 }
 
-enviarMensagemAdministrativa(usuario: string, conteudo: string) {
-  console.log('Enviando mensagem administrativa...')
-  return this.http.post<any>(`${this.apiUrl}/administrativa`, { usuario, conteudo });
+async enviarMensagemAdministrativa(usuario: string, conteudo: string): Promise<any> {
+  console.log('Enviando mensagem administrativa...');
+
+  try {
+    const resposta =  this.http.post<any>(`${this.apiUrl}/adm-enviar-msg`, { usuario, conteudo }).subscribe();
+    return resposta;
+  } catch (error) {
+    console.error(`Erro ao enviar mensagem para ${usuario}:`, error);
+    throw error; 
+  }
+}
+
+
+
+async enviarMensagensAdministrativasParaTodos(usuarios: string[], conteudo: string) {
+  console.log('Enviando mensagens administrativas...');
+
+  await Promise.all(usuarios.map(async (usuario) => {
+    try {
+      const resposta = this.http.post<any>(`${this.apiUrl}/adm-enviar-msg`, { usuario, conteudo }).subscribe();
+      console.log(`Mensagem enviada para ${usuario}: ${conteudo}`);
+      return resposta;
+    } catch (error) {
+      console.error(`Erro ao enviar mensagem para ${usuario}: ${error}`);
+      throw error;
+
+    }
+  }));
 }
 
 excluirMensagemAdministrativa(id: string) {

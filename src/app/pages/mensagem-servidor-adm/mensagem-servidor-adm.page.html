@@ -1,6 +1,13 @@
 <app-navbar />
 
 <ion-content class="ion-padding" id="main-content">
+  
+   <ion-label >Enviar Mensagem para todos</ion-label>
+  <ion-item>
+    <ion-textarea placeholder="Digite a mensagem" [(ngModel)]="mensagem" required></ion-textarea>
+  </ion-item>
+  <ion-button expand="block" (click)="enviarMensagemParaTodos()">Enviar</ion-button>
+  
   @if (carregando) {
     <div>
       <ion-spinner name="crescent"></ion-spinner>

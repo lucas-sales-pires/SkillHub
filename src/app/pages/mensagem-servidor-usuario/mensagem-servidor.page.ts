@@ -3,13 +3,14 @@ import { Component, OnInit } from '@angular/core';
 import { ChatService } from 'src/app/services/chat/chat.service';
 import { Dados } from 'src/app/services/dados/dados.service';
 import { AuthService } from 'src/app/services/autenticacao/auth.service';
-import { IonContent, IonList, IonLabel, IonItem, IonSpinner, IonNav, IonItemSliding, IonItemOption, IonItemOptions, IonIcon } from "@ionic/angular/standalone";
+import { IonContent, IonList, IonLabel, IonItem, IonSpinner, IonNav, IonItemSliding, IonItemOption, IonItemOptions, IonIcon, IonTextarea, IonButton } from "@ionic/angular/standalone";
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from "../../components/navbar/navbar.component";
 import { AlertController } from '@ionic/angular';
 import { addIcons } from 'ionicons';
 import { trash } from 'ionicons/icons';
 import { InterfaceMensagem } from 'src/app/interfaces/interfaceMensagem';
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
@@ -18,7 +19,7 @@ import { InterfaceMensagem } from 'src/app/interfaces/interfaceMensagem';
     styleUrls: ['./mensagem-servidor.page.scss'],
     standalone: true,
     providers: [AuthService, ChatService, Dados],
-    imports: [IonIcon, IonItemOptions, IonItemOption, IonItemSliding, IonNav, IonSpinner, IonItem, CommonModule, IonContent, IonList, IonLabel, NavbarComponent]
+    imports: [IonButton, IonTextarea, IonIcon, IonItemOptions, IonItemOption, IonItemSliding, IonNav, IonSpinner, IonItem, CommonModule, IonContent, IonList, IonLabel, NavbarComponent,FormsModule]
 })
 export class MensagemServidorPage implements OnInit {
   usuarioAtual: any; 
@@ -48,6 +49,7 @@ export class MensagemServidorPage implements OnInit {
     this.usuarios = await this.dados.PegarTodosUsuarios();
   }
 
+  
   async confirmarExclusao(id: string){
     console.log("tentei")
     const confirmar = await this.controller.create({

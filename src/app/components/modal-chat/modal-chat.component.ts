@@ -15,17 +15,20 @@ export class ModalChatComponent {
   @Input() usuarioSelecionado: any; 
   novaMensagem: string = ''; 
 
-  constructor(private chatService: ChatService, private modalController: ModalController) {}
+  constructor( private chat:ChatService,private modalController: ModalController) {}
 
   enviarMensagem() {
-    if (!this.usuarioSelecionado || !this.novaMensagem) return;
+    try{
+      const resposta  = this.chat.enviarMensagemAdministrativa(this.usuarioSelecionado.nome, this.novaMensagem);
+      console.log('Enviando mensagem...');
+      this.novaMensagem = '';
+    }
+    catch (error) {
+      console.error('Erro ao enviar mensagem:', error);
+    }
 
-    this.chatService.enviarMensagemAdministrativa(this.usuarioSelecionado.nome, this.novaMensagem).subscribe(() => {
-      console.log('Mensagem enviada com sucesso!');
-      this.fecharModal();
-    });
   }
-
+  
   fecharModal() {
     this.modalController.dismiss();
   }
