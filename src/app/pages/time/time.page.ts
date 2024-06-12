@@ -92,12 +92,16 @@ async entrarNoTime(time: TimeInterface) {
 
 
 confirmarEntrada(time: TimeInterface) {
+  if(time.membros){
   if(time.membros.includes(this.usuarioAtual)){
     this.mostrarAlerta("Você já está no time!");
     return;
   }
+  }
+
 
   this.timesService.AtualizarTimeNoBackEnd(time,this.usuarioAtual); 
+  
 
   this.mostrarAlerta("Você entrou no time com sucesso!");
 }
