@@ -20,6 +20,11 @@
                 <td><h2>{{time.dataFundacao}}</h2></td>
               </tr>
               <tr>
+                <th scope="row"><h2>Logo</h2></th>
+                @if(time.logo){
+                <td><h2><img src="{{time.logo}}" alt="Escudo do Time" class="escudo max-w-10 rounded-full "></h2></td>
+                }
+              <tr>
                 <th scope="row"><h2>Descrição</h2></th>
                 <td><h2>{{time.descricao}}</h2></td>
               </tr>

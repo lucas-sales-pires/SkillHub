@@ -123,9 +123,6 @@ carregarTimes(){
     });
 }
 
-adicionarFotoNoTime(time: TimeInterface){
-    
-}
 
 usuarioEstaEmAlgumTime(): boolean {
   return this.times.some(time => time.membros && time.membros.includes(this.usuarioAtual));
