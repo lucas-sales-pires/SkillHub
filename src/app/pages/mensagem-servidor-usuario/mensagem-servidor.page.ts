@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ChatService } from 'src/app/services/chat/chat.service';
 import { Dados } from 'src/app/services/dados/dados.service';
 import { AuthService } from 'src/app/services/autenticacao/auth.service';
-import { IonContent, IonList, IonLabel, IonItem, IonSpinner, IonNav, IonItemSliding, IonItemOption, IonItemOptions, IonIcon, IonTextarea, IonButton } from "@ionic/angular/standalone";
+import { IonContent, IonList, IonLabel, IonItem, IonSpinner, IonNav, IonItemSliding, IonItemOption, IonItemOptions, IonIcon, IonTextarea, IonButton, IonInput } from "@ionic/angular/standalone";
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from "../../components/navbar/navbar.component";
 import { AlertController } from '@ionic/angular';
@@ -11,6 +11,7 @@ import { addIcons } from 'ionicons';
 import { trash } from 'ionicons/icons';
 import { InterfaceMensagem } from 'src/app/interfaces/interfaceMensagem';
 import { FormsModule } from '@angular/forms';
+import { ToastController } from '@ionic/angular';
 
 
 @Component({
@@ -19,16 +20,17 @@ import { FormsModule } from '@angular/forms';
     styleUrls: ['./mensagem-servidor.page.scss'],
     standalone: true,
     providers: [AuthService, ChatService, Dados],
-    imports: [IonButton, IonTextarea, IonIcon, IonItemOptions, IonItemOption, IonItemSliding, IonNav, IonSpinner, IonItem, CommonModule, IonContent, IonList, IonLabel, NavbarComponent,FormsModule]
+    imports: [IonInput, IonButton, IonTextarea, IonIcon, IonItemOptions, IonItemOption, IonItemSliding, IonNav, IonSpinner, IonItem, CommonModule, IonContent, IonList, IonLabel, NavbarComponent,FormsModule]
 })
 export class MensagemServidorPage implements OnInit {
   usuarioAtual: any; 
   usuarios: any; 
   mensagens: InterfaceMensagem[] = []; 
   carregando = true;
+
   
 
-  constructor(private chatService: ChatService, private service: AuthService, private dados: Dados,private autenticado:AuthService,private controller:AlertController) {
+  constructor(private chatService: ChatService, private service: AuthService, private dados: Dados,private autenticado:AuthService,private controller:AlertController,private toastController:ToastController) {
     addIcons({
       trash: trash,
       });
@@ -68,6 +70,34 @@ export class MensagemServidorPage implements OnInit {
     this.mensagens = this.mensagens.filter(m => m._id !== id);
     this.chatService.excluirMensagemAdministrativa(id).subscribe();
     console.log("Mensagem excluida com sucesso!")
+  }
+  async mostrarToast(sucesso: boolean) {
+    const toast = await this.toastController.create({
+      message: sucesso ? 'Mensagem enviada com sucesso!' : 'Erro ao enviar mensagem.',
+      duration: 2000,
+      color: sucesso ? 'success' : 'danger',
+      position: 'top',
+      icon: sucesso ? 'checkmark-circle-outline' : 'close-circle-outline', 
+    });
+    toast.present();
+  }
+  
+  
+
+  async enviarMensagem(mensagem: any) {
+    if (mensagem === '') return;
+    let resposta = this.chatService.usuarioEnviarMensagem(this.usuarioAtual.nome,mensagem.value)
+    console.log(this.usuarioAtual.nome,mensagem.value)
+    if(resposta){
+      this.mostrarToast(true);
+    }
+    else{
+      this.mostrarToast(false);
+    }
+
+    mensagem = '';
+
+
   }
 }
 

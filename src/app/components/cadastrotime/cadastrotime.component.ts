@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, ViewChild } from '@angular/core';
-import {IonCard,IonContent,IonLabel,IonItem,IonModal,IonButton,IonIcon,IonButtons,IonInput,IonImg,IonRadio,IonSelect,IonSelectOption, IonProgressBar } from '@ionic/angular/standalone';
+import {IonCard,IonContent,IonLabel,IonItem,IonModal,IonButton,IonIcon,IonButtons,IonInput,IonImg,IonRadio,IonSelect,IonSelectOption, IonProgressBar, IonGrid, IonRow, IonCol } from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
 import { TimeService } from 'src/app/services/time/time.service';
 import { addCircleOutline } from 'ionicons/icons';
@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './cadastrotime.component.html',
   styleUrls: ['./cadastrotime.component.scss'],
   standalone: true,
-  imports: [IonProgressBar, IonRadio,IonImg,IonInput,IonButtons,IonIcon,IonButton,IonItem,IonLabel,IonContent,IonCard,FormsModule,IonModal,IonSelect,IonSelectOption,CommonModule,
+  imports: [IonCol, IonRow, IonGrid, IonProgressBar, IonRadio,IonImg,IonInput,IonButtons,IonIcon,IonButton,IonItem,IonLabel,IonContent,IonCard,FormsModule,IonModal,IonSelect,IonSelectOption,CommonModule,
   ],
 })
 export class CadastrotimeComponent implements OnInit {
@@ -29,6 +29,20 @@ idTimeAtual: any;
 @ViewChild(IonModal) 
 modal!: IonModal;
 private readonly storage: Storage = inject(Storage);
+nomeArquivoLogo: any;
+logoSelecionado: string | null = null;
+logosDisponiveis = [
+  { nome: 'Logo 1', url: '/assets/logos/logo-1.png' },
+  { nome: 'Logo 2', url: '/assets/logos/logo-2.png' },
+  { nome: 'Logo 3', url: '/assets/logos/logo-3.png' },
+  { nome: 'Logo 4', url: '/assets/logos/logo-4.png' },
+  { nome: 'Logo 5', url: '/assets/logos/logo-5.png' },
+  { nome: 'Logo 6', url: '/assets/logos/logo-6.png' },
+  { nome: 'Logo 7', url: '/assets/logos/logo-7.png' },
+  { nome: 'Logo 8', url: '/assets/logos/logo-8.png' },
+
+];
+
 
 ngOnInit() {
   this.gerarId();
@@ -58,6 +72,7 @@ adicionarTime() {
     descricao: this.descricao,
     dataFundacao: dataHoraFormatada,
     pontuacaoTime: this.pontuacaoTime,
+    logo: this.logoSelecionado,
   });
   this.modal.dismiss();
 }
@@ -69,6 +84,11 @@ adicionarTime() {
       await this.carregarFoto();
     }
   }
+
+  selecionarLogo(logoUrl: string) {
+    this.logoSelecionado = logoUrl;
+  }
+
 
 async gerarId() {
   this.idTimeAtual = Math.random().toString(36).substring(2);

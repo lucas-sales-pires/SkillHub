@@ -21,6 +21,7 @@ export class AppComponent {
       auth.onAuthStateChanged(async (user) => {
         if (user) {
           this.autenticacao.setAutenticado(true);
+          
         } else {
           this.autenticacao.setAutenticado(false);
         }

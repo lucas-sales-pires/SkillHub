@@ -21,6 +21,7 @@
                 <th scope="col"><h2>Descrição</h2></th>
                 <th scope="col" class="fundacao"><h2>Fundação</h2></th>
                 <th scope="col"><h2>Pontuação</h2></th>
+                <th scope="col"><h2>Escudo</h2></th>
               </tr>
             </thead>
             <tbody>
@@ -29,6 +30,10 @@
                 <td><h2>{{time.descricao}}</h2></td>
                 <td class="fundacao"><h2>{{time.dataFundacao}}</h2></td>
                 <td><h2>{{time.pontuacaoTime}}</h2></td>
+                @if(time.logo){
+                  <td><img src="{{time.logo}}" alt="Escudo do Time" class="escudo max-w-10 rounded-full "></td>
+                } 
+          
               </tr>
               @if(time.membros && time.membros.length > 0){
                 <tr>

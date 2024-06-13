@@ -12,10 +12,14 @@ export class ChatService {
 
   constructor(private http: HttpClient) { }
 
+usuarioEnviarMensagem(usuario: string, conteudo: string) {
+  return this.http.post<any>(`${this.apiUrl}/enviar-adm`, { usuario, conteudo }).subscribe();
+}
 
-  usuarioBuscarMensagensAdm(nome: string): Observable<InterfaceMensagem[]> {
-    return this.http.get<InterfaceMensagem[]>(`${this.apiUrl}/administrativa/${nome}`);
-  }
+
+usuarioBuscarMensagensAdm(nome: string): Observable<InterfaceMensagem[]> {
+return this.http.get<InterfaceMensagem[]>(`${this.apiUrl}/administrativa/${nome}`);
+}
 
 getMensagensAdministrativas(){
   return this.http.get<any[]>(`${this.apiUrl}/buscar-adm`);

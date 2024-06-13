@@ -70,6 +70,10 @@ export const routes: Routes = [
     path: 'mensagem-servidor-adm',
     loadComponent: () => import('./pages/mensagem-servidor-adm/mensagem-servidor-adm.page').then( m => m.MensagemServidorAdmPage)
   },
+  {
+    path: 'feedbacks',
+    loadComponent: () => import('./pages/feedbacks/feedbacks.page').then( m => m.FeedbacksPage)
+  },
   
 
 

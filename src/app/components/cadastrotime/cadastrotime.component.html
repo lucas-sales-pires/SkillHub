@@ -28,16 +28,23 @@
           ></ion-input>
         </ion-item>
 
-        <ion-item class="ion-padding">
-          <ion-progress-bar [value]="progresso" type="determinate"  id="progressBar"></ion-progress-bar>
-
-          <ion-label position="floating">Logo:</ion-label>
-          <ion-input
-            type="file"
-            id="logo"
-            name="logo"
-            (change)="logo($event)"
-          ></ion-input>
+        <ion-item>
+          <ion-label position="floating">Escudo:</ion-label>
+          <ion-grid>
+            <ion-row>
+              @for( logo of logosDisponiveis; track logo.url){
+                <ion-col size="4" class="pt-4">
+                  <ion-img
+                    [src]="logo.url"
+                    [class.selected]="logoSelecionado === logo.url"
+                    (click)="selecionarLogo(logo.url)"
+                  ></ion-img>
+                </ion-col>
+              }
+            </ion-row>
+              
+              
+          </ion-grid>
         </ion-item>
         <ion-button expand="full" color="primary" (click)="adicionarTime()">Cadastrar</ion-button>
         <ion-button expand="full" color="medium" (click)="fecharModal()">Cancelar</ion-button>

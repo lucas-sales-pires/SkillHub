@@ -15,7 +15,8 @@ import { Ranking } from 'src/app/interfaces/interfaceRanking';
 import { Observable, from } from 'rxjs';
 import { TimeService } from '../time/time.service';
 import { TimeInterface } from 'src/app/interfaces/interfaceTime';
-import { Storage } from '@angular/fire/storage';
+import { InterfaceFeedbacks } from 'src/app/interfaces/intefaceFeedbacks';
+import { InterfaceMensagem } from 'src/app/interfaces/interfaceMensagem';
 
 @Injectable({
   providedIn: 'root',
@@ -24,11 +25,13 @@ export class Dados {
   public adm = signal(false);
   public resultado = signal(false);
   public times: TimeInterface[] = [];
+  public usuarioAtual: any; 
+  public usuarios: any; 
+  public mensagens: InterfaceMensagem[] = []; 
 
   constructor(
     private db: Firestore,
     private time: TimeService,
-    private storage: Storage
   ) {}
 
   public getAdm() {
@@ -58,15 +61,18 @@ export class Dados {
     }
   }
 
-  public async EnviarFeedBack(feedback: {
-    nome: string;
-    email: string;
-    feedback: string;
-    diaFeedback: string;
-  }) {
+  public async EnviarFeedBack(feedback:InterfaceFeedbacks ) {
+
     const feedbackBanco = collection(this.db, 'feedbacks');
     return addDoc(feedbackBanco, feedback);
   }
+
+  public async BuscarFeedbacks() {
+    const dados = query(collection(this.db, 'feedbacks'));
+    const consulta = await getDocs(dados);
+    return !consulta.empty ? consulta.docs.map((doc) => doc.data()) : '';
+  }
+
 
   public async usuarioEstaEmAlgumTime(membro: string) {
     await this.time.PegarTimes().then((resultado: any) => {
@@ -233,4 +239,5 @@ export class Dados {
       await setDoc(docRef, { foto: foto }, { merge: true });
     }
   }
+  
 }

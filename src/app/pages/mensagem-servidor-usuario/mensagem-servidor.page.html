@@ -1,12 +1,16 @@
 <app-navbar /> 
 
 <ion-content class="ion-padding" id="main-content">
-  
+  <ion-label> Enviar Mensagem Para o Adm</ion-label>
+  <ion-item>
+    <ion-input type="text" placeholder="Digite a mensagem" #mensagem></ion-input>
+  </ion-item>
+  <ion-button expand="block" color="primary" (click)="enviarMensagem(mensagem)">Enviar</ion-button>
   @if (carregando) {
-    <div>
-      <ion-spinner name="crescent"></ion-spinner>
+    <div class="flex justify-center items-center h-screen"> 
+      <div class="animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-blue-500"></div>
     </div>
-  } @else if (mensagens.length > 0) {
+  }  @else if (mensagens.length > 0) {
     @for (mensagem of mensagens; track mensagem.usuario) {
       @if(mensagem.usuario === usuarioAtual.nome){
         <ion-list>

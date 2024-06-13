@@ -49,12 +49,10 @@ mensagem: any;
           .pipe(finalize(() => this.carregando = false))
           .subscribe((mensagens) => {
             this.mensagens = mensagens;
-            console.log(this.mensagens);
           });
     
           this.usuarios = [...await this.dados.PegarTodosUsuarios()]; 
 
-        console.log(this.usuarios);
         
     
       }
