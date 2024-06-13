@@ -7,6 +7,7 @@ import {eye,lockClosed,lockClosedOutline,eyeOutline,eyeOffOutline,
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { IonInput, IonButton, IonIcon, IonCardContent, IonCardTitle, IonContent, IonCard, IonCardHeader } from '@ionic/angular/standalone';
 import { Dados } from 'src/app/services/dados/dados.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -26,7 +27,7 @@ export class LoginPage implements OnInit {
   }
 
   
-  constructor(private dados: Dados) {
+  constructor(private dados: Dados, private toast : ToastController) {
     addIcons({ eye, lockClosed, lockClosedOutline, eyeOutline, eyeOffOutline }); 
     
   }
@@ -35,6 +36,7 @@ export class LoginPage implements OnInit {
     const resposta = await  this.dados.VerificarSeEstaBloqueado(this.email)
     if(resposta){
       this.mensagem = 'Usuário bloqueado.';
+      this.mostrarToast(false, 'Usuário bloqueado.');
       setInterval(() => {
         this.mensagem = '';
       }, 3000);
@@ -45,6 +47,7 @@ export class LoginPage implements OnInit {
     await signInWithEmailAndPassword(auth, this.email, this.senha)
       .then(() => {
         this.mensagem = 'Usuário logado com sucesso.';
+        this.mostrarToast(true, 'Usuário logado com sucesso.');
         setInterval(() => {
           this.mensagem = '';
           window.location.href="/perfil"
@@ -57,6 +60,7 @@ export class LoginPage implements OnInit {
         console.log(errorMessage, errorCode);
         if(errorCode === 'auth/invalid-email'){
           this.mensagem = 'E-mail ou Senha inválido.';
+          this.mostrarToast(false, 'E-mail ou Senha inválido.');
           setInterval(() => {
             this.mensagem = '';
           }, 3000);
@@ -65,6 +69,7 @@ export class LoginPage implements OnInit {
         if (errorCode === 'auth/invalid-credential') {
           this.mensagem =
             'Credenciais inválidas. Verifique seu e-mail e senha.';
+          this.mostrarToast(false, 'Credenciais inválidas. Verifique seu e-mail e senha.');
           setInterval(() => {
             this.mensagem = '';
           }, 3000);
@@ -85,5 +90,16 @@ export class LoginPage implements OnInit {
     verificar.type = formato === 'password' ? 'text' : 'password';
     this.valor = formato === 'password' ? 'eye-off-outline' : 'eye-outline';
   }
+
+  async mostrarToast(sucesso: boolean, erro:string) {
+    const toast = await this.toast.create({
+      message: sucesso ? erro : erro,
+      duration: 2000,
+      color: sucesso ? 'success' : 'danger', 
+      position: 'top',
+    });
+    toast.present();
+  }
+  
 
 }

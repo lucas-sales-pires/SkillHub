@@ -53,7 +53,6 @@ export class MensagemServidorPage implements OnInit {
 
   
   async confirmarExclusao(id: string){
-    console.log("tentei")
     const confirmar = await this.controller.create({
       header: 'Confirmar Saida',
       message: `Deseja esta mensagem ?`,
@@ -69,11 +68,11 @@ export class MensagemServidorPage implements OnInit {
 
     this.mensagens = this.mensagens.filter(m => m._id !== id);
     this.chatService.excluirMensagemAdministrativa(id).subscribe();
-    console.log("Mensagem excluida com sucesso!")
+    this.mostrarToast(true,"Mensagem excluida com sucesso!")
   }
-  async mostrarToast(sucesso: boolean) {
+  async mostrarToast(sucesso: boolean,msg:string) {
     const toast = await this.toastController.create({
-      message: sucesso ? 'Mensagem enviada com sucesso!' : 'Erro ao enviar mensagem.',
+      message: sucesso ? msg : msg,
       duration: 2000,
       color: sucesso ? 'success' : 'danger',
       position: 'top',
@@ -87,12 +86,11 @@ export class MensagemServidorPage implements OnInit {
   async enviarMensagem(mensagem: any) {
     if (mensagem === '') return;
     let resposta = this.chatService.usuarioEnviarMensagem(this.usuarioAtual.nome,mensagem.value)
-    console.log(this.usuarioAtual.nome,mensagem.value)
     if(resposta){
-      this.mostrarToast(true);
+      this.mostrarToast(true,'Mensagem enviada com sucesso!');
     }
     else{
-      this.mostrarToast(false);
+      this.mostrarToast(false, 'Erro ao enviar mensagem!');
     }
 
     mensagem = '';

@@ -7,6 +7,7 @@ import { addCircleOutline } from 'ionicons/icons';
 import { QuizService } from 'src/app/services/quiz/quiz.service';
 import { Pergunta } from '../../interfaces/interfacePerguntas';
 import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.component.html',
@@ -28,7 +29,7 @@ export class ModalComponent {
   modal!: IonModal; 
   name: string = '';
 
-  constructor(private quiz: QuizService, private router: Router) {
+  constructor(private quiz: QuizService, private router: Router,private toast: ToastController) {
     addIcons({ addCircleOutline });
   }
 
@@ -47,10 +48,11 @@ export class ModalComponent {
     this.quiz
       .adicionarPergunta(novaPergunta)
       .then(() => {
-        console.log('Pergunta adicionada com sucesso!');
+        this.mostrarToast(true,'Pergunta adicionada com sucesso!');
         this.router.navigateByUrl('/gerenciar-perguntas');
       })
       .catch((error) => {
+        this.mostrarToast(false,'Erro ao adicionar pergunta!'); 
         console.error('Erro ao adicionar pergunta:', error);
       });
   }
@@ -61,6 +63,7 @@ export class ModalComponent {
   async enviarJson() {
     if (!this.arquivoSelecionado) {
       alert('Selecione um arquivo JSON!');
+      this.mostrarToast(false,'Selecione um arquivo JSON!');  
       return;
     }
     const arquivo = this.arquivoSelecionado; 
@@ -75,27 +78,38 @@ export class ModalComponent {
 
         perguntas.forEach((pergunta, index) => {
           if (this.perguntasCadastradas.includes(pergunta.pergunta)) {
-            console.log(`Pergunta ${index + 1} já cadastrada!`);
+            this.mostrarToast(false,`Pergunta ${index + 1} já cadastrada!`);
             return;
           }
 
           this.quiz
             .adicionarPergunta(pergunta)
             .then(() => {
-              console.log(`Pergunta ${index + 1} adicionada com sucesso!`);
+              this.mostrarToast(true,`Pergunta ${index + 1} adicionada com sucesso!`);
               if (index === perguntas.length - 1) {
                 this.router.navigateByUrl('/gerenciar-perguntas');
               }
             })
             .catch((error) => {
-              console.error(`Erro ao adicionar pergunta ${index + 1}:`, error);
+              this.mostrarToast(false,`Erro ao adicionar pergunta ${index + 1}!`);
             });
         });
       } catch (error) {
-        console.error('Erro ao analisar o arquivo JSON:', error);
+        this.mostrarToast(false,'Erro ao analisar o arquivo JSON!');
       }
     };
 
     reader.readAsText(arquivo);
   }
+
+  async mostrarToast(sucesso: boolean,msg:string) {
+    const toast = await this.toast.create({
+      message: sucesso ? msg : msg,
+      duration: 2000,
+      color: sucesso ? 'success' : 'danger', 
+      position: 'top',
+    });
+    toast.present();
+  }
+  
 }

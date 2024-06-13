@@ -32,7 +32,6 @@ async ngOnInit() {
       
     })
   })
-  console.log(this.feedbacks)
 
 
 }

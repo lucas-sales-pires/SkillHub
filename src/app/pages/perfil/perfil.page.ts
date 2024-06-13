@@ -10,6 +10,7 @@ import { FeedbackComponent } from '../../components/feedback/feedback.component'
 import { ModalCertezaComponent } from 'src/app/components/modal-certeza/modal-certeza.component';
 import { ref, Storage } from '@angular/fire/storage';
 import { getDownloadURL, listAll, uploadBytesResumable } from 'firebase/storage';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-perfil',
@@ -56,7 +57,8 @@ export class PerfilPage implements OnInit {
   constructor(
     private dados: Dados,
     private service: AuthService,
-    private modalCerteza: ModalCertezaComponent
+    private modalCerteza: ModalCertezaComponent,
+    private toast: ToastController
   ) {
     effect(() => {
       this.pegarTodasAsFotos().then((res) => {
@@ -107,6 +109,7 @@ async pegarTodasAsFotos() {
     }
   } catch (error) {
     console.error('Erro ao recuperar fotos:', error);
+    this.mostrarToast(false, 'Erro ao recuperar fotos.');
   }
 }
 
@@ -144,7 +147,7 @@ async pegarTodasAsFotos() {
           email: this.email,
         })
         .subscribe(() => {
-          console.log('Usuário atualizado com sucesso');
+          this.mostrarToast(true, 'Usuário atualizado com sucesso');
         });
     } else {
       this.service.deslogar();
@@ -175,13 +178,23 @@ async pegarTodasAsFotos() {
           ),
       ]);
 
-      console.log(
-        'Usuário deletado com sucesso em ambos o Authentication e Firestore'
-      );
+        this.mostrarToast(true, 'Usuário deletado com sucesso')
 
       this.service.deslogar();
     } catch (error) {
       console.error('Erro ao excluir usuário:', error);
+      this.mostrarToast(false, 'Erro ao excluir usuário.');
     }
   }
+
+  async mostrarToast(sucesso: boolean,msg: string) {
+    const toast = await this.toast.create({
+      message: sucesso ? msg : msg,
+      duration: 2000,
+      color: sucesso ? 'success' : 'danger',
+      position: 'top',
+    });
+    toast.present();
+  }
+  
 }

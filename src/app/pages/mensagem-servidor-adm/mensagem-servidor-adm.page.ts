@@ -42,7 +42,6 @@ mensagem: any;
 
       async ngOnInit() {
         this.usuarioAtual = await this.service.buscarUsuario();
-        console.log(this.usuarioAtual)
         this.autenticado.autenticado.set(true);
     
         this.chatService.getMensagensAdministrativas()
@@ -75,7 +74,8 @@ mensagem: any;
     
         this.mensagens = this.mensagens.filter(m => m._id !== id);
         this.chatService.excluirMensagemRecebidaDoUsuario(id).subscribe();
-        console.log("Mensagem excluida com sucesso!")
+        this.mostrarToast(true,"Mensagem excluida com sucesso!")
+
       }
       async enviarMensagemParaTodos() {
         try {
@@ -98,6 +98,16 @@ mensagem: any;
             position: 'top'
           }).then(toast => toast.present());
         }
+      }
+      
+      async mostrarToast(sucesso: boolean, msg:string) {
+        const toast = await this.toastController.create({
+          message: sucesso ? msg : msg,
+          duration: 2000,
+          color: sucesso ? 'success' : 'danger', 
+          position: 'top',
+        });
+        toast.present();
       }
       
 

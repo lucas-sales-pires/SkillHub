@@ -17,6 +17,7 @@ import { TimeService } from '../time/time.service';
 import { TimeInterface } from 'src/app/interfaces/interfaceTime';
 import { InterfaceFeedbacks } from 'src/app/interfaces/intefaceFeedbacks';
 import { InterfaceMensagem } from 'src/app/interfaces/interfaceMensagem';
+import { ToastController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root',
@@ -32,6 +33,7 @@ export class Dados {
   constructor(
     private db: Firestore,
     private time: TimeService,
+    private toast: ToastController
   ) {}
 
   public getAdm() {
@@ -127,6 +129,7 @@ export class Dados {
       }
     } catch (error) {
       console.error('Erro ao atualizar/adicionar ao ranking:', error);
+      this.mostrarToast(false, 'Erro ao atualizar/adicionar ao ranking');
     }
   }
 
@@ -155,9 +158,11 @@ export class Dados {
 
     if (mesmonome) {
       this.resultado.set(true);
+      this.mostrarToast(false, 'O nome já está cadastrado.');
       throw new Error('O nome já está cadastrado.');
     }
     if (usuarioExistente) {
+      this.mostrarToast(false, 'O email já está cadastrado.');  
       throw new Error('O email já está cadastrado.');
     } else {
       const collectionRef = collection(this.db, 'usuarios');
@@ -183,8 +188,10 @@ export class Dados {
       const docRef = doc(this.db, 'usuarios', id);
       await setDoc(docRef, { bloqueado: true }, { merge: true });
       console.log('Usuário bloqueado com sucesso!');
+      this.mostrarToast(true, 'Usuário bloqueado com sucesso!');
     } catch (error) {
       console.error('Erro ao bloquear usuário:', error);
+      this.mostrarToast(false, 'Erro ao bloquear usuário');
     }
   }
 
@@ -193,8 +200,10 @@ export class Dados {
       const docRef = doc(this.db, 'usuarios', id);
       await setDoc(docRef, { bloqueado: false }, { merge: true });
       console.log('Usuário desbloqueado com sucesso!');
+      this.mostrarToast(true, 'Usuário desbloqueado com sucesso!');
     } catch (error) {
       console.error('Erro ao desbloquear usuário:', error);
+      this.mostrarToast(false, 'Erro ao desbloquear usuário');
     }
   }
 
@@ -239,5 +248,16 @@ export class Dados {
       await setDoc(docRef, { foto: foto }, { merge: true });
     }
   }
+
+  async mostrarToast(sucesso: boolean, msg: string) {
+    const toast = await this.toast.create({
+      message: sucesso ? msg : msg,
+      duration: 2000,
+      color: sucesso ? 'success' : 'danger', 
+      position: 'top',
+    });
+    toast.present();
+  }
+  
   
 }
