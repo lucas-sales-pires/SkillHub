@@ -21,13 +21,14 @@
   background: conic-gradient(
     #41b8d5 calc(var(--value) * 1%),
     skyblue 0
-  ); // 60% de azul e 40% de celeste
+  ); 
   border-radius: 50%;
   mask: radial-gradient(white 55%, transparent 0);
   mask-mode: alpha;
   -webkit-mask: radial-gradient(#0000 55%, #000 0);
   -webkit-mask-mode: alpha;
 }
+
 
 
 ion-card{

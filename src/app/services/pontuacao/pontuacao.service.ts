@@ -1,5 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 import { QuizService } from '../quiz/quiz.service';
+import { EfeitosVisuaisService } from '../efeitos/efeitos-visuais.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class PontuacaoService {
   public intervalo2: any;
   public regredir = signal(30);
   
-  constructor(private quiz:QuizService) { }
+  constructor(private quiz:QuizService,private efeitos:EfeitosVisuaisService) { }
   
   contador30segundos() {
     let contador = 0;
@@ -24,10 +25,12 @@ export class PontuacaoService {
         this.cronometro.set(Math.round(contador)); 
         if (contador >= 100) { 
             clearInterval(this.intervalo); 
-            alert("Acabou o tempo!.");
         }
     }, 1000);
 }
+
+
+
 
   regredir30segundos(){
     let contador = 30;
@@ -38,7 +41,7 @@ export class PontuacaoService {
         this.regredir.set(contador);
         if (contador <= 0) {
             clearInterval(this.intervalo2); 
-            alert("acabou o tempo")
+            this.efeitos.mostrarToast(false, "Tempo esgotado!, Passando para a próxima pergunta !")
         }
     }, 1000); 
   }

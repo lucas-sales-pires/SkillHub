@@ -1,7 +1,7 @@
-import { Component, OnInit,effect, signal } from '@angular/core';
+import { Component, OnInit,effect } from '@angular/core';
 import { IonContent,IonIcon, IonCard, IonRadioGroup, IonRadio, IonInput, IonButton } from "@ionic/angular/standalone";
 import { addIcons } from 'ionicons';
-import { closeOutline } from 'ionicons/icons';
+import { close } from 'ionicons/icons';
 import { PerguntasComponent } from '../perguntas/perguntas.component';
 import { PontuacaoService } from 'src/app/services/pontuacao/pontuacao.service';
 import { NavbarComponent } from "../navbar/navbar.component";
@@ -26,12 +26,13 @@ export class ProgressBarComponent  implements OnInit {
   }
   
   constructor(private pontuacao:PontuacaoService,private quiz:QuizService) { 
-    addIcons({closeOutline})
+    addIcons({close})
     effect(()=>{
       this.valorAtual = this.pontuacao.valorAtual() 
       this.porcentagem = this.qntPerguntas === 0 ? 0 : Math.floor((this.valorAtual / this.qntPerguntas) * 100);
       this.cronometro = this.pontuacao.cronometro() 
       this.regredir = this.pontuacao.regredir()
+      
       
     })
   

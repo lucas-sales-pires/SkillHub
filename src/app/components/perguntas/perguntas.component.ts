@@ -34,6 +34,7 @@ export class PerguntasComponent implements OnInit {
   
   ngOnInit() {
     this.obterperguntas();
+    
   }
   
   constructor(
@@ -43,7 +44,7 @@ export class PerguntasComponent implements OnInit {
   ) {
     effect(() => {
       this.categoriaEscolhida = this.quiz.getCategoria();
-      console.log(this.quiz.categoria());
+      this.pontuacaoService.regredir() == 0 ? this.proximaPergunta() : null;
     });
   }
 
@@ -71,7 +72,7 @@ export class PerguntasComponent implements OnInit {
     this.pontuacaoService.regredir30segundos();
     this.pontuacaoService.contador30segundos();
   }
-  async proximaPergunta() {
+   async proximaPergunta() {
     if(this.respostaSelecionada == this.respostacorreta){
       this.pontuacaoService.setPontuacao(); 
     }
@@ -92,7 +93,6 @@ export class PerguntasComponent implements OnInit {
     } else {
       this.router.navigate(['/pagina-pontuacao-quiz']);
     }
-    console.log(this.pontuacaoService.getValorAtual());
   }
 
   async apenasUm() {

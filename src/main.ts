@@ -21,6 +21,7 @@ if (environment.production) {
 
 bootstrapApplication(AppComponent, {
   providers: [
+  
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
     provideIonicAngular(),
     provideRouter(routes), 
