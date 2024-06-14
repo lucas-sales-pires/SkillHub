@@ -82,9 +82,9 @@ export class FeedbackComponent implements OnInit {
       message: sucesso ? 'Mensagem enviada com sucesso!' : 'Erro ao enviar mensagem.',
       duration: 2000,
       color: sucesso ? 'success' : 'danger', 
-      position: 'top',
+     position: "middle",
     });
-    toast.present();
+    await toast.present();
   }
   
 }

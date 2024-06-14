@@ -13,6 +13,7 @@ import { ModalDetalhesComponent } from 'src/app/components/modal-detalhes/modal-
 import { ModalController } from '@ionic/angular';
 import { IonicModule } from '@ionic/angular';
 import { ModalQuantidadeComponent } from 'src/app/components/modal-quantidade/modal-quantidade.component';
+import { EfeitosVisuaisService } from 'src/app/services/efeitos/efeitos-visuais.service';
 @Component({
   selector: 'app-time',
   templateUrl: './time.page.html',
@@ -35,7 +36,7 @@ ngOnInit() {
   });
 
 }
-  constructor(private timesService: TimeService,private controler:AlertController, private usuario: AuthService, private ModalController: ModalController) {
+  constructor(private timesService: TimeService,private controler:AlertController, private usuario: AuthService, private ModalController: ModalController,private efeitos: EfeitosVisuaisService) {
     addIcons({
       'add-circle': addCircle
     });
@@ -68,7 +69,7 @@ async sairDoTime(time: TimeInterface) {
 confirmarSaida(time:TimeInterface){
   this.timesService.RemoverUsuarioDoTime(time,this.usuarioAtual).then(() => { 
     this.carregarTimes(); 
-    this.mostrarAlerta("Você saiu do time com sucesso!");
+    this.efeitos.mostrarAlerta("Você saiu do time com sucesso!");
     this.timeAtualizado.emit(); 
   })
   .catch((error) => { 
@@ -94,7 +95,7 @@ async entrarNoTime(time: TimeInterface) {
 confirmarEntrada(time: TimeInterface) {
   if(time.membros){
   if(time.membros.includes(this.usuarioAtual)){
-    this.mostrarAlerta("Você já está no time!");
+    this.efeitos.mostrarAlerta("Você já está no time!");
     return;
   }
   }
@@ -103,18 +104,8 @@ confirmarEntrada(time: TimeInterface) {
   this.timesService.AtualizarTimeNoBackEnd(time,this.usuarioAtual); 
   
 
-  this.mostrarAlerta("Você entrou no time com sucesso!");
+  this.efeitos.mostrarAlerta("Você entrou no time com sucesso!");
 }
-
-async mostrarAlerta(mensagem: string) {
-  const alert = await this.controler.create({
-    header: 'Aviso',
-    message: mensagem,
-    buttons: ['OK']
-  });
-  await alert.present();
-}
-
 
 
 carregarTimes(){

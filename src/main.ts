@@ -11,6 +11,8 @@ import { environment  } from './environments/environment';
 import { firebaseConfig } from './firebase'
 import { getStorage, provideStorage } from '@angular/fire/storage';
 import { HttpClientModule } from '@angular/common/http';
+import { IonicModule } from '@ionic/angular';
+
 
 
 if (environment.production) {
@@ -24,6 +26,7 @@ bootstrapApplication(AppComponent, {
     provideRouter(routes), 
     importProvidersFrom(
             HttpClientModule,
+            IonicModule.forRoot(),
             provideFirebaseApp(() => initializeApp(firebaseConfig)),
             provideFirestore(() => getFirestore()),
             provideStorage(() => getStorage()),

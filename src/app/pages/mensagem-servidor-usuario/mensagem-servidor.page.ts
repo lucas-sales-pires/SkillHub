@@ -11,7 +11,7 @@ import { addIcons } from 'ionicons';
 import { trash } from 'ionicons/icons';
 import { InterfaceMensagem } from 'src/app/interfaces/interfaceMensagem';
 import { FormsModule } from '@angular/forms';
-import { ToastController } from '@ionic/angular';
+import { EfeitosVisuaisService } from 'src/app/services/efeitos/efeitos-visuais.service';
 
 
 @Component({
@@ -30,7 +30,7 @@ export class MensagemServidorPage implements OnInit {
 
   
 
-  constructor(private chatService: ChatService, private service: AuthService, private dados: Dados,private autenticado:AuthService,private controller:AlertController,private toastController:ToastController) {
+  constructor(private chatService: ChatService, private service: AuthService, private dados: Dados,private autenticado:AuthService,private controller:AlertController,private efeitos: EfeitosVisuaisService) {
     addIcons({
       trash: trash,
       });
@@ -68,32 +68,23 @@ export class MensagemServidorPage implements OnInit {
 
     this.mensagens = this.mensagens.filter(m => m._id !== id);
     this.chatService.excluirMensagemAdministrativa(id).subscribe();
-    this.mostrarToast(true,"Mensagem excluida com sucesso!")
+    this.efeitos.mostrarToast(true,"Mensagem excluida com sucesso!")
   }
-  async mostrarToast(sucesso: boolean,msg:string) {
-    const toast = await this.toastController.create({
-      message: sucesso ? msg : msg,
-      duration: 2000,
-      color: sucesso ? 'success' : 'danger',
-      position: 'top',
-      icon: sucesso ? 'checkmark-circle-outline' : 'close-circle-outline', 
-    });
-    toast.present();
-  }
-  
   
 
   async enviarMensagem(mensagem: any) {
-    if (mensagem === '') return;
-    let resposta = this.chatService.usuarioEnviarMensagem(this.usuarioAtual.nome,mensagem.value)
+    if (mensagem.value === '') return;
+    let resposta = this.chatService.usuarioEnviarMensagemAdm(this.usuarioAtual.nome,mensagem.value)
     if(resposta){
-      this.mostrarToast(true,'Mensagem enviada com sucesso!');
+      this.efeitos.mostrarToast(true,'Mensagem enviada com sucesso!');
+      
+    
     }
     else{
-      this.mostrarToast(false, 'Erro ao enviar mensagem!');
+      this.efeitos.mostrarToast(false, 'Erro ao enviar mensagem!');
     }
 
-    mensagem = '';
+    mensagem.value = '';
 
 
   }

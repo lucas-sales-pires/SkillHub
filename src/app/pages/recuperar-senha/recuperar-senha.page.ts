@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
 import { NavbarComponent } from "../../components/navbar/navbar.component";
+import { EfeitosVisuaisService } from 'src/app/services/efeitos/efeitos-visuais.service';
 
 @Component({
     selector: 'app-recuperar-senha',
@@ -16,7 +17,7 @@ export class RecuperarSenhaPage {
   mensagem = '';
   erro:string =  "";
 
-  constructor() { }
+  constructor(private efeitos:EfeitosVisuaisService) { }
 
 
   recuperarSenha() {
@@ -24,15 +25,15 @@ export class RecuperarSenhaPage {
 sendPasswordResetEmail(auth, this.email)
   .then(() => {
     this.mensagem = 'Email de recuperação de senha enviado.';
+    this.efeitos.mostrarToast(true, 'Email de recuperação de senha enviado.');
+    this.email = '';
     setInterval(() => {
       this.mensagem = '';
     }, 3000);
   })
-  .catch((erro) => {
-    const erroCodigo = erro.code;
-    const erroMensagem = erro.message;
-    console.log(erroMensagem, erroCodigo);
-    this.erro = "Não foi possível enviar o email de recuperação de senha. Verifique se o email foi digitado corretamente."
+  .catch(() => {
+    this.efeitos.mostrarToast(false, 'Não foi possível enviar o email de recuperação de senha. Verifique se o email foi digitado corretamente.');
+    this.email = '';
 
   });
 }

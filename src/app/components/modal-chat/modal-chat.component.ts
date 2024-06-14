@@ -46,7 +46,7 @@ export class ModalChatComponent implements OnInit {
       const toast = await this.toastController.create({
         message: 'Mensagem enviada!',
         duration: 2000, 
-        position: 'top', 
+       position: "middle", 
         color: 'success' 
       });
   

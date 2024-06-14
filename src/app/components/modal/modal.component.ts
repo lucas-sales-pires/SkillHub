@@ -107,9 +107,9 @@ export class ModalComponent {
       message: sucesso ? msg : msg,
       duration: 2000,
       color: sucesso ? 'success' : 'danger', 
-      position: 'top',
+     position: "middle",
     });
-    toast.present();
+    await toast.present();
   }
   
 }

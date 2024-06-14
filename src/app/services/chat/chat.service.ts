@@ -12,7 +12,7 @@ export class ChatService {
 
   constructor(private http: HttpClient) { }
 
-usuarioEnviarMensagem(usuario: string, conteudo: string) {
+usuarioEnviarMensagemAdm(usuario: string, conteudo: string) {
   return this.http.post<any>(`${this.apiUrl}/enviar-adm`, { usuario, conteudo }).subscribe();
 }
 

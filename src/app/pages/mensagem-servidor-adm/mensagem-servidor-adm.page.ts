@@ -11,6 +11,7 @@ import { addIcons } from 'ionicons';
 import { trash, share, lockClosed, mailOutline, lockOpen } from 'ionicons/icons';
 import { AlertController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
+import { EfeitosVisuaisService } from 'src/app/services/efeitos/efeitos-visuais.service';
 
 
 @Component({
@@ -30,7 +31,7 @@ export class MensagemServidorAdmPage implements OnInit {
 mensagem: any;
   
 
-  constructor(private chatService: ChatService, private service: AuthService, private dados: Dados,private autenticado:AuthService,private controller:AlertController, private toastController:ToastController) {
+  constructor(private chatService: ChatService, private service: AuthService, private dados: Dados,private autenticado:AuthService,private controller:AlertController, private toastController:ToastController,private efeitos: EfeitosVisuaisService) {
     addIcons({
       trash: trash,
       share: share,
@@ -74,41 +75,27 @@ mensagem: any;
     
         this.mensagens = this.mensagens.filter(m => m._id !== id);
         this.chatService.excluirMensagemRecebidaDoUsuario(id).subscribe();
-        this.mostrarToast(true,"Mensagem excluida com sucesso!")
+        this.efeitos.mostrarToast(true,"Mensagem excluida com sucesso!")
 
       }
       async enviarMensagemParaTodos() {
         try {
+          if(this.mensagem.value == ""){
+            this.efeitos.mostrarToast(false,"Mensagem vazia, por favor digite uma mensagem!")
+            return;
+          }
           await this.chatService.enviarMensagensAdministrativasParaTodos(
             this.usuarios.map(u => u.nome),
             this.mensagem
           );
-          this.toastController.create({
-            message: 'Mensagens enviadas com sucesso!',
-            duration: 2000,
-            color: 'success',
-            position: 'top'
-          }).then(toast => toast.present());
+        this.efeitos.mostrarToast(true,"Mensagem enviada com sucesso!")
         } catch (error) {
-          console.error('Ocorreram erros durante o envio das mensagens:', error);
-          this.toastController.create({
-            message: 'Ocorreu um erro ao enviar as mensagens.',
-            duration: 2000,
-            color: 'danger',
-            position: 'top'
-          }).then(toast => toast.present());
+          this.efeitos.mostrarToast(false,"Erro ao enviar mensagem!")
         }
       }
       
-      async mostrarToast(sucesso: boolean, msg:string) {
-        const toast = await this.toastController.create({
-          message: sucesso ? msg : msg,
-          duration: 2000,
-          color: sucesso ? 'success' : 'danger', 
-          position: 'top',
-        });
-        toast.present();
-      }
+
+      
       
 
       

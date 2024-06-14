@@ -9,6 +9,7 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { IonInput, IonButton, IonIcon, IonItem, IonLabel, IonCardContent, IonCardTitle, IonCardHeader, IonCard, IonContent } from '@ionic/angular/standalone';
 import { ModalAcordoComponent } from "../../components/modal-acordo/modal-acordo.component";
 import { ToastController } from '@ionic/angular';
+import { EfeitosVisuaisService } from 'src/app/services/efeitos/efeitos-visuais.service';
 
 
 @Component({
@@ -27,7 +28,7 @@ export class CadastroPage  {
   mensagem: any = '';
   termo:any;
 
-  constructor(private cadastro: Dados, private acordo: AcordoService, private toast: ToastController) {
+  constructor(private cadastro: Dados, private acordo: AcordoService, private efeitos: EfeitosVisuaisService) {
     addIcons({ eyeOutline, lockClosedOutline, eyeOffOutline });
     effect(() => {
       this.termo = this.acordo.pegarTermos();
@@ -48,7 +49,7 @@ export class CadastroPage  {
     const auth = getAuth();
     if(this.nome === '' || this.email === '' || this.senha === '' || this.confirmarSenha === ''){
         this.mensagem = 'Preencha todos os campos!';
-        this.mostrarToast(false, 'Preencha todos os campos!');
+        this.efeitos.mostrarToast(false, 'Preencha todos os campos!');
         setTimeout(() => {
             this.mensagem = '';
         }, 3000);
@@ -56,7 +57,7 @@ export class CadastroPage  {
     }
     if(this.acordo.termo() == false){
         this.mensagem = 'Você precisa aceitar os termos de uso!';
-        this.mostrarToast(false, 'Você precisa aceitar os termos de uso!');
+        this.efeitos.mostrarToast(false, 'Você precisa aceitar os termos de uso!');
         setTimeout(() => {
             this.mensagem = '';
         }, 3000);
@@ -64,7 +65,7 @@ export class CadastroPage  {
     }
     if(this.senha !== this.confirmarSenha){
         this.mensagem = 'As senhas não conferem!';
-        this.mostrarToast(false, 'As senhas não conferem!');
+        this.efeitos.mostrarToast(false, 'As senhas não conferem!');
         setTimeout(() => {
             this.mensagem = '';
         }, 3000);
@@ -92,7 +93,7 @@ this.email.toLocaleLowerCase();
     createUserWithEmailAndPassword(auth, this.email, this.senha)
       .then(() => {
         this.mensagem = 'Usuário criado com sucesso!';
-        this.mostrarToast(true, 'Usuário criado com sucesso!');
+        this.efeitos.mostrarToast(true, 'Usuário criado com sucesso!');
         setTimeout(() => {
           this.mensagem = '';
           window.location.href = "/login"
@@ -105,7 +106,7 @@ this.email.toLocaleLowerCase();
     this.cadastro.CriarUsuario(novoUsuario).then( 
       () => {
         console.log('Informações do usuário salvas com sucesso!');
-        
+
       },
     
         (error: any) => { 
@@ -143,16 +144,5 @@ this.email.toLocaleLowerCase();
     );
   }
   
-  async mostrarToast(sucesso: boolean, msg:string) {
-    const toast = await this.toast.create({
-      message: sucesso ? msg : msg,
-      duration: 2000,
-      color: sucesso ? 'success' : 'danger', 
-      position: 'top',
-    });
-    toast.present();
-  }
-  
-
 
 }

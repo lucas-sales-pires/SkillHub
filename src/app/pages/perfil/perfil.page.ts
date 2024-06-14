@@ -10,16 +10,15 @@ import { FeedbackComponent } from '../../components/feedback/feedback.component'
 import { ModalCertezaComponent } from 'src/app/components/modal-certeza/modal-certeza.component';
 import { ref, Storage } from '@angular/fire/storage';
 import { getDownloadURL, listAll, uploadBytesResumable } from 'firebase/storage';
-import { ToastController } from '@ionic/angular';
+import { EfeitosVisuaisService } from 'src/app/services/efeitos/efeitos-visuais.service';
 
 @Component({
-  selector: 'app-perfil',
-  templateUrl: './perfil.page.html',
-  styleUrls: ['./perfil.page.scss'],
-  standalone: true,
-  imports: [IonIcon,IonButton,IonLabel,IonCardContent,IonItem,IonCardTitle,IonCard,IonCardHeader,IonContent,FormsModule,NavbarComponent,IonInput,FeedbackComponent,IonAvatar,IonProgressBar,
-  ],
-  providers: [ModalCertezaComponent],
+    selector: 'app-perfil',
+    templateUrl: './perfil.page.html',
+    styleUrls: ['./perfil.page.scss'],
+    standalone: true,
+    providers: [ModalCertezaComponent],
+    imports: [IonIcon, IonButton, IonLabel, IonCardContent, IonItem, IonCardTitle, IonCard, IonCardHeader, IonContent, FormsModule, NavbarComponent, IonInput, FeedbackComponent, IonAvatar, IonProgressBar]
 })
 export class PerfilPage implements OnInit {
   nome: string = '';
@@ -58,7 +57,7 @@ export class PerfilPage implements OnInit {
     private dados: Dados,
     private service: AuthService,
     private modalCerteza: ModalCertezaComponent,
-    private toast: ToastController
+    private efeitos: EfeitosVisuaisService
   ) {
     effect(() => {
       this.pegarTodasAsFotos().then((res) => {
@@ -66,6 +65,9 @@ export class PerfilPage implements OnInit {
       });
     });
   }
+
+
+
 
 async changeInput(event: Event) {
   const input = event.target as HTMLInputElement;
@@ -109,7 +111,7 @@ async pegarTodasAsFotos() {
     }
   } catch (error) {
     console.error('Erro ao recuperar fotos:', error);
-    this.mostrarToast(false, 'Erro ao recuperar fotos.');
+    this.efeitos.mostrarToast(false, 'Erro ao recuperar fotos.');
   }
 }
 
@@ -147,7 +149,7 @@ async pegarTodasAsFotos() {
           email: this.email,
         })
         .subscribe(() => {
-          this.mostrarToast(true, 'Usuário atualizado com sucesso');
+          this.efeitos.mostrarToast(true, 'Usuário atualizado com sucesso');
         });
     } else {
       this.service.deslogar();
@@ -178,23 +180,15 @@ async pegarTodasAsFotos() {
           ),
       ]);
 
-        this.mostrarToast(true, 'Usuário deletado com sucesso')
+        this.efeitos.mostrarToast(true, 'Usuário deletado com sucesso')
 
       this.service.deslogar();
     } catch (error) {
       console.error('Erro ao excluir usuário:', error);
-      this.mostrarToast(false, 'Erro ao excluir usuário.');
+      this.efeitos.mostrarToast(false, 'Erro ao excluir usuário.');
     }
   }
 
-  async mostrarToast(sucesso: boolean,msg: string) {
-    const toast = await this.toast.create({
-      message: sucesso ? msg : msg,
-      duration: 2000,
-      color: sucesso ? 'success' : 'danger',
-      position: 'top',
-    });
-    toast.present();
-  }
+
   
 }
