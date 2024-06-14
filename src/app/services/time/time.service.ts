@@ -11,15 +11,8 @@ export class TimeService {
   private paises: any[] = [];
 
 
-  constructor(private db : Firestore, private http: HttpClient) { 
-    this.buscarPaises().subscribe((data) => {
-      this.paises = data.map((item: any) => ({
-        nome: item.name.common
-      }));
-    });
-  }
-  private  buscarPaises() {
-    return  this.http.get<any[]>('https://restcountries.com/v3.1/all');
+  constructor(private db : Firestore) { 
+  
   }
 
   getPaises(): any[]{

@@ -57,8 +57,6 @@ export class LoginPage implements OnInit {
 
       .catch((error) => {
         const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorMessage, errorCode);
         if(errorCode === 'auth/invalid-email'){
           this.mensagem = 'E-mail ou Senha inválido.';
           this.efeitos.mostrarToast(false, 'E-mail ou Senha inválido.');
