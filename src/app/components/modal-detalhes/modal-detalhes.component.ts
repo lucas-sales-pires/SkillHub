@@ -24,6 +24,7 @@ export class ModalDetalhesComponent  implements OnInit {
   usuarios: any;
   usuarioSelecionado: interfaceUsuario | undefined;
   @Input() time!: TimeInterface; 
+  
 
   async ngOnInit() {
     this.usuarios = await this.dados.PegarTodosUsuarios();

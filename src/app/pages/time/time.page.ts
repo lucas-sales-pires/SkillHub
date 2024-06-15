@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, effect, EventEmitter, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from "../../components/navbar/navbar.component";
@@ -39,6 +39,11 @@ ngOnInit() {
   constructor(private timesService: TimeService,private controler:AlertController, private usuario: AuthService, private ModalController: ModalController,private efeitos: EfeitosVisuaisService) {
     addIcons({
       'add-circle': addCircle
+    });
+    effect(() => {
+      if (this.timesService.estadoTime() === 'atualizado') {
+        this.carregarTimes();
+      }
     });
   }
   
@@ -111,6 +116,8 @@ confirmarEntrada(time: TimeInterface) {
 carregarTimes(){
     this.timesService.PegarTimes().then((resultado: any) => {
         this.times = resultado;
+        this.timesService.estadoTime.set('estadoInicial'); 
+
     });
 }
 

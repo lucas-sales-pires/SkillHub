@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
 import { addDoc, collection, doc, getDocs, increment, query, setDoc, updateDoc, where } from 'firebase/firestore';
 import { TimeInterface } from 'src/app/interfaces/interfaceTime';
+import { signal } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TimeService {
   private paises: any[] = [];
-
+  public estadoTime = signal('estadoInicial');
 
   constructor(private db : Firestore) { 
   

@@ -82,6 +82,7 @@ adicionarTime() {
     logo: this.logoSelecionado,
   });
   this.efeitos.mostrarToast(true, 'Time cadastrado com sucesso!');
+  this.time.estadoTime.set("atualizado");
   this.modal.dismiss();
 }
 

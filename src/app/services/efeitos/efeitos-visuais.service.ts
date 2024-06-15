@@ -9,7 +9,7 @@ export class EfeitosVisuaisService {
 
 
 
-    constructor(private toast: ToastController, private controler:AlertController) {}
+  constructor(private toast: ToastController, private controler:AlertController) {}
 
 async mostrarToast(sucesso: boolean,msg: string) {
   const toast = await this.toast.create({
