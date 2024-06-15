@@ -1,7 +1,7 @@
 import { Component, OnInit,effect } from '@angular/core';
 import { IonContent,IonIcon, IonCard, IonRadioGroup, IonRadio, IonInput, IonButton } from "@ionic/angular/standalone";
 import { addIcons } from 'ionicons';
-import { close } from 'ionicons/icons';
+import { closeOutline } from 'ionicons/icons';
 import { PerguntasComponent } from '../perguntas/perguntas.component';
 import { PontuacaoService } from 'src/app/services/pontuacao/pontuacao.service';
 import { NavbarComponent } from "../navbar/navbar.component";
@@ -26,7 +26,7 @@ export class ProgressBarComponent  implements OnInit {
   }
   
   constructor(private pontuacao:PontuacaoService,private quiz:QuizService) { 
-    addIcons({close})
+    addIcons({close:closeOutline});
     effect(()=>{
       this.valorAtual = this.pontuacao.valorAtual() 
       this.porcentagem = this.qntPerguntas === 0 ? 0 : Math.floor((this.valorAtual / this.qntPerguntas) * 100);
