@@ -37,7 +37,7 @@ export class PerfilPage implements OnInit {
       this.service.buscarUsuario().then((resultado: any) => {
         this.email = resultado['email'];
         this.carregarUsuario(this.email); 
-        if (this.email === '') {
+        if (this.email === '' || this.nome) {
           this.service.deslogar();
         }
 

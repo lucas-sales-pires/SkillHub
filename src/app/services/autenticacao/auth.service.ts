@@ -44,6 +44,8 @@ export class AuthService {
       await auth.signOut();
       this.autenticado.set(false);
       
+      
+      
     } catch (error) {
       console.error('Erro ao deslogar:', error);
     }

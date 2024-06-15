@@ -17,7 +17,6 @@ import { TimeService } from '../time/time.service';
 import { TimeInterface } from 'src/app/interfaces/interfaceTime';
 import { InterfaceFeedbacks } from 'src/app/interfaces/intefaceFeedbacks';
 import { InterfaceMensagem } from 'src/app/interfaces/interfaceMensagem';
-import { ToastController } from '@ionic/angular';
 import { EfeitosVisuaisService } from '../efeitos/efeitos-visuais.service';
 
 @Injectable({
@@ -147,28 +146,25 @@ export class Dados {
     senha: string;
     diaCadastro: string;
     bloqueado: boolean;
-  }) {
-    const usuarioExistente = await this.PegarUsuarioPorEmail(
-      dadosUsuario.email
-    );
+  }): Promise<boolean> {
+    const usuarioExistente = await this.PegarUsuarioPorEmail(dadosUsuario.email);
     const mesmonome = await this.PegarTodosUsuarios().then((resultado: any) => {
-      return resultado.some(
-        (usuario: any) => usuario.nome === dadosUsuario.nome
-      );
+      return resultado.some((usuario: any) => usuario.nome === dadosUsuario.nome);
     });
-
+  
     if (mesmonome) {
-      this.resultado.set(true);
       this.efeitos.mostrarToast(false, 'O nome já está cadastrado.');
-      throw new Error('O nome já está cadastrado.');
+      return Promise.resolve(false);
     }
+  
     if (usuarioExistente) {
-      this.efeitos.mostrarToast(false, 'O email já está cadastrado.');  
-      throw new Error('O email já está cadastrado.');
-    } else {
-      const collectionRef = collection(this.db, 'usuarios');
-      return addDoc(collectionRef, dadosUsuario);
+      this.efeitos.mostrarToast(false, 'O email já está cadastrado.');
+      return Promise.resolve(false);
     }
+  
+    const collectionRef = collection(this.db, 'usuarios');
+    await addDoc(collectionRef, dadosUsuario);
+    return Promise.resolve(true);
   }
 
   public AtualizarUsuario(
@@ -231,8 +227,8 @@ export class Dados {
     const consulta = await getDocs(dados);
 
     if (!consulta.empty) {
-      const isAdmin = consulta.docs[0].data()['administrador'];
-      return isAdmin === true;
+      const adm = consulta.docs[0].data()['administrador'];
+      return adm === true;
     } else {
       return false;
     }
