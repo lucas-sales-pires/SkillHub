@@ -7,7 +7,6 @@ import { addCircleOutline } from 'ionicons/icons';
 import { QuizService } from 'src/app/services/quiz/quiz.service';
 import { Pergunta } from '../../interfaces/interfacePerguntas';
 import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
 import { EfeitosVisuaisService } from 'src/app/services/efeitos/efeitos-visuais.service';
 @Component({
   selector: 'app-modal',

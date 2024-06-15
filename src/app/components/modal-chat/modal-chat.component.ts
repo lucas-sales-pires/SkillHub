@@ -6,7 +6,6 @@ import { ChatService } from 'src/app/services/chat/chat.service';
 import { Dados } from 'src/app/services/dados/dados.service';
 import { addIcons } from 'ionicons';
 import { send,personCircleOutline,closeOutline } from 'ionicons/icons';
-import { ToastController } from '@ionic/angular';
 import { EfeitosVisuaisService } from 'src/app/services/efeitos/efeitos-visuais.service';
 
 @Component({
@@ -33,9 +32,7 @@ export class ModalChatComponent implements OnInit {
   async ngOnInit() {
     
       this.usuarios = await this.buscar.PegarTodosUsuarios();
-      this.foto = this.usuarioSelecionado.foto;
-      
-    
+      this.foto = this.usuarioSelecionado.foto;  
     
   }
 

@@ -115,7 +115,7 @@ carregarTimes(){
 }
 
 
-usuarioEstaEmAlgumTime(): boolean {
+usuarioEstaEmAlgumTime() {
   return this.times.some(time => time.membros && time.membros.includes(this.usuarioAtual));
 }
 
