@@ -40,7 +40,6 @@ export class PerfilPage implements OnInit {
         if (this.email === '') {
           this.service.deslogar();
         }
-        console.log('Resultado da busca de usuário:', resultado);
 
       }).then(() => {
         this.pegarTodasAsFotos();;
@@ -128,33 +127,57 @@ async pegarTodasAsFotos() {
       this.service.deslogar();
     }
   }
-
   async editarPerfil() {
     const auth = getAuth();
-    let usuarioAtual = auth.currentUser; 
-    this.editando = true;
-
-    if (usuarioAtual?.email === this.email) {
-      const inputs = document.querySelectorAll('ion-input');
-
-      inputs.forEach((input) => {
-        if (input.id !== 'cadastradoDesdeInput') {
-          input.removeAttribute('disabled'); 
-        }
-      });
-      const id = (await this.dados.PegarIdPorEmail(this.email)) || '';
-      this.dados
-        .AtualizarUsuario(id, {
-          nome: this.nome,
-          email: this.email,
-        })
-        .subscribe(() => {
-          this.efeitos.mostrarToast(true, 'Usuário atualizado com sucesso');
-        });
-    } else {
+    const usuarioAtual = auth.currentUser;
+  
+    if (!usuarioAtual || usuarioAtual.email !== this.email) {
       this.service.deslogar();
+      return;
     }
+  
+    this.editando = !this.editando;
+    this.toggleInputs(this.editando);
   }
+  
+  async salvarAlteracoes() {
+    const id = (await this.dados.PegarIdPorEmail(this.email)) || '';
+    if(this.nome === '' || this.email === ''){
+      this.efeitos.mostrarToast(false, 'Preencha todos os campos');
+      return;
+    }
+    if(this.email.includes('@') === false){
+      this.efeitos.mostrarToast(false, 'E-mail inválido');
+      return;
+    }
+    if(this.nome.length < 3){
+      this.efeitos.mostrarToast(false, 'Nome muito curto');
+      return;
+    }
+    this.dados.AtualizarUsuario(id, {
+      nome: this.nome,
+      email: this.email,
+    }).subscribe({
+      next: () => {
+        this.efeitos.mostrarToast(true, 'Usuário atualizado com sucesso');
+        this.editando = false; 
+        this.toggleInputs(false); 
+      },
+      error: (error) => {
+        console.error('Erro ao atualizar usuário:', error);
+        this.efeitos.mostrarToast(false, 'Erro ao atualizar usuário');
+      }
+    });
+  }
+  
+  toggleInputs(habilitar: boolean) { 
+    document.querySelectorAll('ion-input').forEach((input) => {
+      if (input.id !== 'cadastradoDesdeInput') {
+        input[habilitar ? 'removeAttribute' : 'setAttribute']('disabled', 'true');
+      }
+    });
+  }
+  
   async Sair() {
     this.service.deslogar();
   }

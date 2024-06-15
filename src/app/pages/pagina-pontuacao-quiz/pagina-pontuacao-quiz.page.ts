@@ -22,11 +22,6 @@ export class PaginaPontuacaoQuizPage implements OnInit {
   usuario: any;
   rankingComDados: Ranking[]=[];
 
-  constructor(
-    private pontuacaoService: PontuacaoService,
-    private service: AuthService,
-    private ranking: RankingService,
-  ) {}
   async ngOnInit() {
     await this.service.buscarUsuario().then((resultado)=>
       {
@@ -52,6 +47,13 @@ export class PaginaPontuacaoQuizPage implements OnInit {
   this.ranking.adicionarJogadorAoRanking(this.rankingComDados[0]); 
   
   }; 
+
+  constructor(
+    private pontuacaoService: PontuacaoService,
+    private service: AuthService,
+    private ranking: RankingService,
+  ) {}
+
   
 
 

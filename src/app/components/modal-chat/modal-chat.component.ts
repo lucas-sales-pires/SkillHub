@@ -7,6 +7,7 @@ import { Dados } from 'src/app/services/dados/dados.service';
 import { addIcons } from 'ionicons';
 import { send,personCircleOutline,closeOutline } from 'ionicons/icons';
 import { ToastController } from '@ionic/angular';
+import { EfeitosVisuaisService } from 'src/app/services/efeitos/efeitos-visuais.service';
 
 @Component({
   selector: 'app-modal-chat',
@@ -21,7 +22,7 @@ export class ModalChatComponent implements OnInit {
   foto:any ;
   usuarios :any ;
 
-  constructor( private chat:ChatService,private modalController: ModalController, private buscar:Dados, private toastController: ToastController) {
+  constructor( private chat:ChatService,private modalController: ModalController, private buscar:Dados, private efeitos:EfeitosVisuaisService) {
     addIcons({
       send: send,
       personCircleOutline: personCircleOutline,
@@ -40,21 +41,15 @@ export class ModalChatComponent implements OnInit {
 
   async enviarMensagem() {
     try{
-      const resposta  = this.chat.enviarMensagemAdministrativa(this.usuarioSelecionado.nome, this.novaMensagem);
-      console.log('Enviando mensagem...');
+      this.chat.enviarMensagemAdministrativa(this.usuarioSelecionado.nome, this.novaMensagem);
       this.novaMensagem = '';
-      const toast = await this.toastController.create({
-        message: 'Mensagem enviada!',
-        duration: 2000, 
-       position: "middle", 
-        color: 'success' 
-      });
-  
-      toast.present();
+
+      this.efeitos.mostrarToast(true,'Mensagem enviada com sucesso!');
     }
     
     catch (error) {
       console.error('Erro ao enviar mensagem:', error);
+      this.efeitos.mostrarToast(false,'Erro ao enviar mensagem!');
     }
 
   }

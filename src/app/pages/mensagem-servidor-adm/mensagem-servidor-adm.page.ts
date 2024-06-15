@@ -28,10 +28,25 @@ export class MensagemServidorAdmPage implements OnInit {
   usuarios: any[] = []; 
   mensagens: any[] = []; 
   carregando = true;
-mensagem: any;
+  mensagem: any;
+
+  
+  async ngOnInit() {
+    this.usuarioAtual = await this.service.buscarUsuario();
+    this.autenticado.autenticado.set(true);
+
+    this.chatService.getMensagensAdministrativas()
+      .pipe(finalize(() => this.carregando = false))
+      .subscribe((mensagens) => {
+        this.mensagens = mensagens;
+      });
+
+      this.usuarios = [...await this.dados.PegarTodosUsuarios()];         
+
+  }
   
 
-  constructor(private chatService: ChatService, private service: AuthService, private dados: Dados,private autenticado:AuthService,private controller:AlertController, private toastController:ToastController,private efeitos: EfeitosVisuaisService) {
+  constructor(private chatService: ChatService, private service: AuthService, private dados: Dados,private autenticado:AuthService,private controller:AlertController,private efeitos: EfeitosVisuaisService) {
     addIcons({
       trash: trash,
       share: share,
@@ -41,21 +56,6 @@ mensagem: any;
       });
       }
 
-      async ngOnInit() {
-        this.usuarioAtual = await this.service.buscarUsuario();
-        this.autenticado.autenticado.set(true);
-    
-        this.chatService.getMensagensAdministrativas()
-          .pipe(finalize(() => this.carregando = false))
-          .subscribe((mensagens) => {
-            this.mensagens = mensagens;
-          });
-    
-          this.usuarios = [...await this.dados.PegarTodosUsuarios()]; 
-
-        
-    
-      }
       
       
  
@@ -81,7 +81,7 @@ mensagem: any;
       async enviarMensagemParaTodos() {
         try {
           if(this.mensagem.value == ""){
-            this.efeitos.mostrarToast(false,"Mensagem vazia, por favor digite uma mensagem!")
+            this.efeitos.mostrarToast(false,"Preencha o campo de mensagem!")
             return;
           }
           await this.chatService.enviarMensagensAdministrativasParaTodos(

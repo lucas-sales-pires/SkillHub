@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 import { ChatService } from 'src/app/services/chat/chat.service';
 import { Dados } from 'src/app/services/dados/dados.service';
 import { AuthService } from 'src/app/services/autenticacao/auth.service';
@@ -28,15 +27,6 @@ export class MensagemServidorPage implements OnInit {
   mensagens: InterfaceMensagem[] = []; 
   carregando = true;
 
-  
-
-  constructor(private chatService: ChatService, private service: AuthService, private dados: Dados,private autenticado:AuthService,private controller:AlertController,private efeitos: EfeitosVisuaisService) {
-    addIcons({
-      trash: trash,
-      });
-    
-  }
-
   async ngOnInit() {
     this.usuarioAtual = await this.service.buscarUsuario();
     this.autenticado.autenticado.set(true);
@@ -50,6 +40,15 @@ export class MensagemServidorPage implements OnInit {
     
     this.usuarios = await this.dados.PegarTodosUsuarios();
   }
+  
+
+  constructor(private chatService: ChatService, private service: AuthService, private dados: Dados,private autenticado:AuthService,private controller:AlertController,private efeitos: EfeitosVisuaisService) {
+    addIcons({
+      trash: trash,
+      });
+    
+  }
+
 
   
   async confirmarExclusao(id: string){
@@ -73,16 +72,19 @@ export class MensagemServidorPage implements OnInit {
   
 
   async enviarMensagem(mensagem: any) {
-    if (mensagem.value === '') return;
-    let resposta = this.chatService.usuarioEnviarMensagemAdm(this.usuarioAtual.nome,mensagem.value)
-    if(resposta){
+    try{
+      if (mensagem.value === ''){
+        this.efeitos.mostrarToast(false,'Preencha o campo de mensagem!');
+        return;
+      }
+      this.chatService.usuarioEnviarMensagemAdm(this.usuarioAtual.nome,mensagem.value);
       this.efeitos.mostrarToast(true,'Mensagem enviada com sucesso!');
-      
-    
     }
-    else{
-      this.efeitos.mostrarToast(false, 'Erro ao enviar mensagem!');
+    catch (error) {
+      console.error('Erro ao enviar mensagem:', error);
+      this.efeitos.mostrarToast(false,'Erro ao enviar mensagem!');
     }
+  
 
     mensagem.value = '';
 

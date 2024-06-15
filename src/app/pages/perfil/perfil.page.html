@@ -39,11 +39,11 @@
       
       <ion-item>
         <ion-label position="stacked">Nome</ion-label>
-        @if({nome}){<ion-input [(ngModel)]="nome" disabled></ion-input>}
+        @if({nome}){<ion-input [(ngModel)]="nome" disabled required minlength="4"></ion-input>}
       </ion-item>
       <ion-item>
         <ion-label position="stacked">Email</ion-label>
-        @if({email}){<ion-input [(ngModel)]="email" disabled></ion-input>}
+        @if({email}){<ion-input [(ngModel)]="email" disabled required type="email" minlength="15"></ion-input>}
       </ion-item>
       <ion-item>
         <ion-label position="stacked">Cadastrado desde</ion-label>
@@ -51,8 +51,16 @@
       </ion-item>
       
       <ion-button expand="block" color="primary" (click)="editarPerfil()">
-        {{ editando ? 'Pronto' : 'Editar' }}
+        {{ editando ? 'Cancelar' : 'Editar' }}
       </ion-button>
+    
+      @if(editando){
+        <ion-button expand="block" color="success" (click)="salvarAlteracoes()">
+          Pronto
+        </ion-button>
+      }
+ 
+      
       
       <ion-button expand="block" color="danger" (click)="Sair()" >Sair</ion-button>
       <ion-button expand="block" color="warning" (click)="deletarConta()" >Excluir</ion-button>

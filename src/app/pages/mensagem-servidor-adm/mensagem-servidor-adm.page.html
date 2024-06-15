@@ -10,10 +10,10 @@
   <ion-label class="font-semibold text-lg text-gray-800">Mensagens Enviadas ao ADM</ion-label>
 
   @if (carregando) {
-    <div>
-      <ion-spinner name="crescent"></ion-spinner>
+    <div class="flex justify-center items-center h-screen"> 
+      <div class="animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-blue-500"></div>
     </div>
-  } @else if (mensagens.length > 0) {
+  }  @else if (mensagens.length > 0) {
     @for (mensagem of mensagens; track mensagem._id) {
       <ion-list>
         <ion-item-sliding>

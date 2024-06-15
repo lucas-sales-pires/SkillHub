@@ -7,7 +7,6 @@ import {eye,lockClosed,lockClosedOutline,eyeOutline,eyeOffOutline,
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { IonInput, IonButton, IonIcon, IonCardContent, IonCardTitle, IonContent, IonCard, IonCardHeader } from '@ionic/angular/standalone';
 import { Dados } from 'src/app/services/dados/dados.service';
-import { ToastController } from '@ionic/angular';
 import { EfeitosVisuaisService } from 'src/app/services/efeitos/efeitos-visuais.service';
 
 @Component({
@@ -16,11 +15,12 @@ import { EfeitosVisuaisService } from 'src/app/services/efeitos/efeitos-visuais.
   styleUrls: ['./login.page.scss'],
   standalone: true,
   imports: [IonCardHeader, IonCard, IonContent, IonCardTitle, IonCardContent, IonIcon, IonButton, FormsModule, NavbarComponent,IonInput],
-})
-export class LoginPage implements OnInit {
-  email: string = '';
-  senha: string = '';
-  mensagem: string = '';
+  })
+  export class LoginPage implements OnInit {
+    email: string = '';
+    senha: string = '';
+    mensagem: string = '';
+    valor: any = 'eye-outline';
 
   ngOnInit() {
     this.email = '';
@@ -82,7 +82,6 @@ export class LoginPage implements OnInit {
 
   }
 
-  valor: any = 'eye-outline';
 
   mudarVisibilidade(verificar: any) {
     const formato = verificar.type;

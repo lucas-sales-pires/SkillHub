@@ -7,7 +7,7 @@ import { addIcons } from 'ionicons';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { Storage } from '@angular/fire/storage';
 import { CommonModule } from '@angular/common';
-import { ToastController } from '@ionic/angular';
+import { EfeitosVisuaisService } from '../../services/efeitos/efeitos-visuais.service';
 
 @Component({
   selector: 'app-cadastrotime',
@@ -48,7 +48,7 @@ ngOnInit() {
   this.gerarId();
 }
 
-constructor(private time: TimeService, private toast : ToastController) {
+constructor(private time: TimeService, private efeitos : EfeitosVisuaisService) {
   
   addIcons({
     'add-circle-outline': addCircleOutline,
@@ -70,7 +70,7 @@ adicionarTime() {
   let dataHoraFormatada = `${dia}/${mes}/${ano} ${horas}:${minutos}`;
 
   if(this.nome == null || this.descricao == null || this.logoSelecionado == null) {
-    this.mostrarToast(false, 'Preencha todos os campos!');
+    this.efeitos.mostrarToast(false, 'Preencha todos os campos!');
     return;
   }
 
@@ -81,7 +81,7 @@ adicionarTime() {
     pontuacaoTime: this.pontuacaoTime,
     logo: this.logoSelecionado,
   });
-  this.mostrarToast(true, 'Time cadastrado com sucesso!');
+  this.efeitos.mostrarToast(true, 'Time cadastrado com sucesso!');
   this.modal.dismiss();
 }
 
@@ -120,16 +120,6 @@ async carregarFoto(): Promise<void> {
       this.time.AdicionarFotoNoTime(this.nome, downloadURL);
     }
   });
-}
-
-async mostrarToast(sucesso: boolean, msg:string) {
-  const toast = await this.toast.create({
-    message: sucesso ? msg : msg,
-    duration: 2000,
-    color: sucesso ? 'success' : 'danger', 
-   position: "middle",
-  });
-  await toast.present();
 }
 
 
