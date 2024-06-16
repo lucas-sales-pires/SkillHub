@@ -91,55 +91,55 @@ O Aplicativo acessa o banco de dados Firebase para realizar o login e cadastro d
 
 
 - [x] Tela de Login
-<img src="./documentacao/telas/tela-1.jpg" alt="Tela de Login" width="300" height="200">
+<img src="./documentacao/telas/tela-1.jpg" alt="Tela de Login" width="100%" height="200">
 
 - [x] Tela de Cadastro
-<img src="./documentacao/telas/tela-17.jpg" alt="Tela de Cadastro" width="300" height="200">
+<img src="./documentacao/telas/tela-17.jpg" alt="Tela de Cadastro" width="100%" height="200">
 
 - [x] Tela de Recuperação de Senha
-<img src="./documentacao/telas/tela-15.jpg" alt="Tela de Recuperação de Senha" width="300" height="200">
+<img src="./documentacao/telas/tela-15.jpg" alt="Tela de Recuperação de Senha" width="100%" height="200">
 
 - [x] Tela de Home
-<img src="./documentacao/telas/tela-1.jpg" alt="Tela de Home" width="300" height="200">
+<img src="./documentacao/telas/tela-1.jpg" alt="Tela de Home" width="100%" height="200">
 
 - [x] Tela de Quiz
-<img src="./documentacao/telas/tela-14.jpg" alt="Tela de Quiz" width="300" height="200">    
+<img src="./documentacao/telas/tela-14.jpg" alt="Tela de Quiz" width="100%" height="200">    
 
 - [x] Tela de Ranking
-<img src="./documentacao/telas/tela-9.jpg" alt="Tela de Ranking" width="300" height="200">
+<img src="./documentacao/telas/tela-9.jpg" alt="Tela de Ranking" width="100%" height="200">
 
 - [x] Tela de Selecionar Categoria
-<img src="./documentacao/telas/tela-13.jpg" alt="Tela de Selecionar Categoria" width="300" height="200">
+<img src="./documentacao/telas/tela-13.jpg" alt="Tela de Selecionar Categoria" width="100%" height="200">
 
 - [x] Tela de Alteração de Dados
-<img src="./documentacao/telas/tela-5.jpg" alt="Tela de Alteração de Dados" width="300" height="200">
+<img src="./documentacao/telas/tela-5.jpg" alt="Tela de Alteração de Dados" width="100%" height="200">
 
 - [x] Tela de Perfil
-<img src="./documentacao/telas/tela-12.jpg" alt="Tela de Perfil" width="300" height="200">
+<img src="./documentacao/telas/tela-12.jpg" alt="Tela de Perfil" width="100%" height="200">
 
 - [x] Tela de Feedback
-<img src="./documentacao/telas/tela-3.jpg" alt="Tela de Feedback" width="300" height="200">
+<img src="./documentacao/telas/tela-3.jpg" alt="Tela de Feedback" width="100%" height="200">
 
 - [x] Tela de Times
-<img src="./documentacao/telas/tela-10.jpg" alt="Tela de Times" width="300" height="200">
+<img src="./documentacao/telas/tela-10.jpg" alt="Tela de Times" width="100%" height="200">
 
 - [x] Tela de Criar Time
-<img src="./documentacao/telas/tela-18.jpg" alt="Tela de Criar Time" width="300" height="200">
+<img src="./documentacao/telas/tela-18.jpg" alt="Tela de Criar Time" width="100%" height="200">
 
 - [x] Tela do Usuário enviar mensagem para o Admin
-<img src="./documentacao/telas/tela-8.jpg" alt="Tela do Usuário enviar mensagem para o Admin" width="300" height="200">
+<img src="./documentacao/telas/tela-8.jpg" alt="Tela do Usuário enviar mensagem para o Admin" width="100%" height="200">
 
 - [x] Tela do Admin visualizar mensagens enviadas pelo usuáro
-<img src="./documentacao/telas/tela-7.jpg" alt="Tela do Admin visualizar mensagens enviadas pelo usuáro" width="300" height="200">
+<img src="./documentacao/telas/tela-7.jpg" alt="Tela do Admin visualizar mensagens enviadas pelo usuáro" width="100%" height="200">
 
 - [x] Tela de Admin Enviar mesangem para usuários
-<img src="./documentacao/telas/tela-4.jpg" alt="Tela de Admin Enviar mesangem para usuários" width="300" height="200">
+<img src="./documentacao/telas/tela-4.jpg" alt="Tela de Admin Enviar mesangem para usuários" width="100%" height="200">
 
 - [x] Tela de Admin visualizar todos usuários
-<img src="./documentacao/telas/tela-2.jpg" alt="Tela de Admin visualizar todos usuários" width="300" height="200">
+<img src="./documentacao/telas/tela-2.jpg" alt="Tela de Admin visualizar todos usuários" width="100%" height="200">
 
 - [x] Tela de Admiistração
-<img src="./documentacao/telas/tela-6.jpg" alt="Tela de Admiistração" width="300" height="200">
+<img src="./documentacao/telas/tela-6.jpg" alt="Tela de Admiistração" width="100%" height="200">
 
 - [x] Tela de Admin Criar e Gerenciar Perguntas
-<img src="./documentacao/telas/tela-6.jpg" alt="Tela de Admin Criar e Gerenciar Perguntas" width="300" height="200">
+<img src="./documentacao/telas/tela-6.jpg" alt="Tela de Admin Criar e Gerenciar Perguntas" width="100%" height="200">
