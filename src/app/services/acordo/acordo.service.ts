@@ -5,6 +5,7 @@ import { Injectable, signal } from '@angular/core';
 })
 export class AcordoService {
   public termo = signal(false);
+  
 
   constructor() { }
 
