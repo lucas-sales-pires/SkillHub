@@ -8,7 +8,6 @@ import { AcordoService } from '../../services/acordo/acordo.service';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { IonInput, IonButton, IonIcon, IonItem, IonLabel, IonCardContent, IonCardTitle, IonCardHeader, IonCard, IonContent } from '@ionic/angular/standalone';
 import { ModalAcordoComponent } from "../../components/modal-acordo/modal-acordo.component";
-import { ToastController } from '@ionic/angular';
 import { EfeitosVisuaisService } from 'src/app/services/efeitos/efeitos-visuais.service';
 
 
@@ -75,6 +74,7 @@ export class CadastroPage  {
       senha : this.senha,
       bloqueado: false,
     };
+    
   
     this.cadastro.CriarUsuario(novoUsuario).then(resultado => {
       if (resultado) {
